@@ -1,0 +1,82 @@
+:root {
+  --color-primary: #d1861f;
+}
+article {
+  font-family: Georgia, Times, serif;
+}
+article a {
+  color: var(--font-color);
+  text-decoration: underline;
+}
+body > .container {
+  max-width: 720px;
+}
+body.dark {
+  --bg-color: #000;
+  --bg-secondary-color: #262626;
+  --color-darkgrey: #888;
+  --color-error: #ea4f4f;
+  --color-grey: #bbb;
+  --color-primary: #d1861f;
+  --font-color: #f5f5f5;
+  --image-filter: grayscale(50%);
+}
+body.dark .card {
+  box-shadow: 0 1px 3px var(--color-darkGrey);
+}
+body.dark .nav a {
+  color: var(--font-color);
+}
+figure {
+  font-size: small;
+}
+hr {
+  margin: 3rem 0;
+}
+hr.footer {
+  border-top: 1px solid #d1861f;
+}
+/**
+ * Darken images - save for SVGs - in dark mode.
+ * Source: https://web.archive.org/web/20200729172719/https://web.dev/prefers-color-scheme/
+ */
+img:not([src*=".svg"]) {
+  filter: var(--image-filter);
+}
+section {
+  margin: 1rem auto;
+}
+/* To pass https://web.archive.org/web/20200901052543/https://web.dev/tap-targets/ */
+ul {
+  line-height: 1.9em;
+}
+/* https://web.archive.org/web/20200817120428/https://htmldog.com/techniques/dropcaps/ */
+.dropcap::first-letter {
+  float: left;
+  font-size: 45px;
+  font-weight: bold;
+  line-height: 1;
+  margin-right: 9px;
+}
+/* https://web.archive.org/web/20200828113037/https://dev.to/joellehelm/make-your-cards-pop-on-hover-with-css-1i39 */
+.essay-list .card:hover {
+  border: 1px solid #d1861f;
+}
+.essay-list a {
+  color: var(--font-color);
+}
+.logo {
+  flex: 1;
+  flex-direction: column;
+  padding-top: 2rem;
+}
+.no-style-list {
+  list-style-type: none;
+}
+.subtitle {
+  font-size: large;
+  font-style: italic;
+}
+.summary {
+  font-style: italic;
+}

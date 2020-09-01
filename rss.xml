@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+
+<channel>
+  <atom:link href="http://florinungur.com/rss.xml" rel="self" type="application/rss+xml" />
+  <title>Florin Ungur's website</title>
+  <link>https://www.florinungur.com</link>
+  <description>The website of Florin Ungur (pronounced Flo•REEN Un•gur), 
+    a guy that likes computers, philosophy, psychology, and Hunter S. Thompson.</description>
+  <item>
+    <pubDate>September 1, 2020</pubDate>
+    <title>Hello world!</title>
+    <description>Pinning the philosophy of what is to come (when it comes to content on this website).</description>
+    <author>hello@florinungur.com</author>
+    <link>https://florinungur.com/essays/2020/09/01/hello-world</link>
+  </item>
+</channel>
+
+</rss>
