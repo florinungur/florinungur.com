@@ -59,6 +59,9 @@ ul {
   margin-right: 9px;
 }
 /* https://web.archive.org/web/20200828113037/https://dev.to/joellehelm/make-your-cards-pop-on-hover-with-css-1i39 */
+.essay-list {
+  margin-bottom: calc(var(--grid-gutter) / 2);
+}
 .essay-list .card:hover {
   border: 1px solid #d1861f;
 }
