@@ -1,5 +1,12 @@
-name: "CodeQL"
-on: [push, pull_request]
+name: CodeQL
+# Run this action only when JavaScript files are changed.
+on:
+  pull_request:
+    paths:
+      - "**.js"
+  push:
+    paths:
+      - "**.js"
 jobs:
   analyze:
     name: Analyze

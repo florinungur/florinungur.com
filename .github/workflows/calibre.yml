@@ -1,0 +1,27 @@
+name: Calibre
+on: push
+# Run this action only when image files are changed.
+# on:
+#   pull_request:
+#     paths:
+#       - "**.jpg"
+#       - "**.jpeg"
+#       - "**.png"
+#       - "**.webp"
+#   push:
+#     paths:
+#       - "**.jpg"
+#       - "**.jpeg"
+#       - "**.png"
+#       - "**.webp"
+jobs:
+  compress:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+
+      - name: Compress Images
+        uses: calibreapp/image-actions@master
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
