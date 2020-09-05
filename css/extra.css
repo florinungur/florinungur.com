@@ -28,7 +28,8 @@ body.dark .card {
 body.dark .nav a {
   color: var(--font-color);
 }
-figure {
+figure,
+.datetime {
   font-size: small;
 }
 hr {
@@ -78,9 +79,5 @@ ul {
   list-style-type: none;
 }
 .subtitle {
-  font-size: large;
-  font-style: italic;
-}
-.summary {
-  font-style: italic;
+  font-size: x-large;
 }
