@@ -15,4 +15,4 @@ jobs:
       - name: Optimize SVGs
         uses: ericcornelissen/svgo-action@master
         with:
-          githubTokenn: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
