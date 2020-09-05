@@ -4,7 +4,8 @@
 article {
   font-family: Georgia, Times, serif;
 }
-article a {
+article a,
+.summary a {
   color: var(--font-color);
   text-decoration: underline;
 }
