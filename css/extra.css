@@ -5,7 +5,7 @@ article {
   font-family: Georgia, Times, serif;
 }
 article a,
-.summary a {
+.datetime a {
   color: var(--font-color);
   text-decoration: underline;
 }
