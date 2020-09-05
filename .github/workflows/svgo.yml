@@ -1,0 +1,10 @@
+name: SVGOptimizer
+on:
+  - push
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ericcornelissen/svgo-action@v1.1.0
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
