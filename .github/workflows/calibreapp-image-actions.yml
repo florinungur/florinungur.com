@@ -7,14 +7,11 @@ on:
       - "**.png"
       - "**.webp"
 jobs:
-  build:
+  compress:
     name: calibreapp/image-actions
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@master
-
-      - name: Compress Images
+      - name: Compress images
         uses: calibreapp/image-actions@master
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}

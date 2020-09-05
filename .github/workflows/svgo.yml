@@ -1,10 +1,13 @@
-name: SVGOptimizer
+name: SVG Optimizer
 on:
-  - push
+  push:
+    paths:
+      - "**.svg"
 jobs:
-  triage:
+  optimize:
     runs-on: ubuntu-latest
     steps:
-      - uses: ericcornelissen/svgo-action@v1.1.0
+      - name: Compress SVGs
+        uses: ericcornelissen/svgo-action@master
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
