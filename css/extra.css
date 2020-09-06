@@ -12,22 +12,6 @@ article a,
 body > .container {
   max-width: 720px;
 }
-body.dark {
-  --bg-color: #000;
-  --bg-secondary-color: #262626;
-  --color-darkgrey: #888;
-  --color-error: #ea4f4f;
-  --color-grey: #bbb;
-  --color-primary: #d1861f;
-  --font-color: #f5f5f5;
-  --image-filter: grayscale(50%);
-}
-body.dark .card {
-  box-shadow: 0 1px 3px var(--color-darkGrey);
-}
-body.dark .nav a {
-  color: var(--font-color);
-}
 figure,
 .datetime {
   font-size: small;
@@ -37,13 +21,6 @@ hr {
 }
 hr.footer {
   border-top: 1px solid #d1861f;
-}
-/**
- * Darken images - save for SVGs - in dark mode.
- * Source: https://web.archive.org/web/20200729172719/https://web.dev/prefers-color-scheme/
- */
-img:not([src*=".svg"]) {
-  filter: var(--image-filter);
 }
 section {
   margin: 1rem auto;
