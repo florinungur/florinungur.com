@@ -1,13 +1,14 @@
 name: SVGOptimizer
-on: push
-# Run this action only when SVG files are changed.
-# on:
-#   pull_request:
-#     paths:
-#       - "**.svg"
-#   push:
-#     paths:
-#       - "**.svg"
+# Run this action only when SVG files are changed and every Saturday.
+on:
+  pull_request:
+    paths:
+      - "**.svg"
+  push:
+    paths:
+      - "**.svg"
+  schedule:
+    - cron: "* * * * SAT"
 jobs:
   optimize:
     runs-on: ubuntu-latest
