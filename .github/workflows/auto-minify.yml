@@ -11,9 +11,9 @@ on:
     - cron: "* * * * SAT"
 jobs:
   minify:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
-
       - name: Auto minify
         uses: nizarmah/auto-minify@v1.9
