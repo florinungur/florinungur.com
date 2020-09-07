@@ -450,7 +450,7 @@ img {
   -ms-flex-align: center;
   align-items: center;
   padding: 1rem 2rem;
-  color: var(--color-darkGrey);
+  color: var(--font-color);
 }
 .card {
   padding: 1rem 2rem;
