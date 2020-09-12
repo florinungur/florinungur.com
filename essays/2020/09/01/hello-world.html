@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Florin Ungur - Hello world!</title>
+    <title>Florin Ungur - Hello, World!</title>
 
     <!-- Going meta -->
     <meta name="author" content="Florin Ungur" />
@@ -13,7 +13,7 @@
     <meta charset="utf-8" />
 
     <!-- Open Graph Data -->
-    <meta property="og:title" content="Florin Ungur - Hello world!" />
+    <meta property="og:title" content="Florin Ungur - Hello, World!" />
     <meta
       property="og:description"
       content="Pinning the philosophy of what is to come (when it comes to content on this website)."
@@ -35,29 +35,21 @@
 
     <!-- Extra resources -->
     <link rel="canonical" href="https://florinungur.com/essays/2020/09/01/hello-world" />
-    <link rel="stylesheet" href="../../../../main.css" />
+    <link rel="stylesheet" href="../../../../css/main-min.css" />
+    <link rel="stylesheet" href="../../../../css/essays-min.css" />
     <link rel="alternate" type="application/rss+xml" title="Florin Ungur" href="https://florinungur.com/rss.xml" />
   </head>
 
   <body>
     <main class="container">
-      <div class="logo is-center is-vertical-align">
+      <div class="logo is-center">
         <a href="/"><img src="../../../../img/logo/logo.svg" alt="florinungur.com site logo" /></a>
       </div>
-      <nav class="nav border">
-        <div class="nav-center">
-          <a href="../../../../webmarks">Webmarks</a>
-          <a href="../../../../ideas">Ideas</a>
-          <a href="../../../../essays">Essays</a>
-          <a href="http://users.smartgb.com/g/g.php?a=s&i=g18-84651-bd" rel="noopener noreferrer" target="_blank"
-            >Guestbook</a
-          >
-        </div>
-      </nav>
+      <a href="/essays">← Essays</a>
 
       <article>
         <header>
-          <h1>Hello world!</h1>
+          <h1>Hello, World!</h1>
           <p class="subtitle">Or: How I finally decided to create my website</p>
           <p>
             This website will have mostly philosophy-, psychology-, and technology-related content. I aim to display
@@ -69,7 +61,7 @@
             <time datetime="2020-09-06">September 6, 2020</time> (see
             <a
               href="https://github.com/ungurflorin/florinungur.com/commits/master/essays/2020/09/01/hello-world.html"
-              rel="noopener noreferrer"
+              rel="noopener"
               target="_blank"
               >update history</a
             >)
@@ -77,14 +69,15 @@
         </header>
 
         <figure>
-          <img src="img1.png" alt="AI-generated abstract painting" />
+          <picture>
+            <source type="image/webp" srcset="img1.webp" />
+            <source type="image/png" srcset="img1.png" />
+            <img src="img1.png" alt="AI-generated abstract painting" />
+          </picture>
           <figcaption class="text-center">
             AI-generated abstract painting, courtesy of
             <cite
-              ><a
-                href="https://1secondpainting.com/wp-content/uploads/2020/07/6191.png"
-                rel="noopener noreferrer"
-                target="_blank"
+              ><a href="https://1secondpainting.com/wp-content/uploads/2020/07/6191.png" rel="noopener" target="_blank"
                 >1SecondPainting</a
               ></cite
             >
@@ -95,24 +88,21 @@
           Welcome! Welcome to my humble digital abode, to my corner of the internet, to another website with a
           forgettable name that you will bookmark but will seldomly return to.
         </p>
-
         <p>
           I have several essays lined up and ready to go, but this one seems the most difficult. Maybe because it is the
           first one, maybe because this essay is meant to explicate the implicit assumptions of my website... maybe
           both. So, to achieve the goal of this essay, I will talk about:
         </p>
-
         <ul>
           <li>what I write about,</li>
           <li>how the website is built, and</li>
           <li>why the website is built.</li>
         </ul>
-
         <p>
           Why am I writing about this? It feels like a cliché by now, but, as
           <a
             href="https://web.archive.org/web/20200722020956/https://alexnixon.github.io/2019/12/10/writing.html"
-            rel="noopener noreferrer"
+            rel="noopener"
             target="_blank"
             >Alex Nixon said</a
           >, it is to justify to myself why I made this website and how.
@@ -136,7 +126,7 @@
           The styling was VERY HARD. I love art but I suffer from choice anxiety. There are so many different CSS
           frameworks to choose from and so many website styles that I like (more on this below). I settled on making my
           own CSS which I based on
-          <a href="https://jenil.github.io/chota/" rel="noopener noreferrer" target="_blank">chota</a>.
+          <a href="https://jenil.github.io/chota/" rel="noopener" target="_blank">chota</a>.
         </p>
         <p>
           This site is for reading, so I did not add a lot of padding — no wasted space in my layout! No animated
@@ -144,75 +134,59 @@
         </p>
         <p>
           I created the favicon using
-          <a href="https://www.photopea.com/" rel="noopener noreferrer" target="_blank">Photopea</a>
+          <a href="https://www.photopea.com/" rel="noopener" target="_blank">Photopea</a>
           and converted it to multiple formats using
-          <a href="https://realfavicongenerator.net" rel="noopener noreferrer" target="_blank"
-            >realfavicongenerator.net</a
-          >. (You can grab the <a href="../../../../img/favicon/favicon.psd" target="_blank">.PSD file</a>.)
+          <a href="https://realfavicongenerator.net" rel="noopener" target="_blank">realfavicongenerator.net</a>. (You
+          can grab the <a href="../../../../img/favicon/favicon.psd" target="_blank">.PSD file</a>.)
         </p>
         <p>
           The logo (my name + the favicon) was created by my friend
-          <a href="https://www.instagram.com/alexandra_argh/" rel="noopener noreferrer" target="_blank"
-            >Alex Arghiriade</a
-          >, because I am definitely not a web designer. I did a previous iteration myself but it did not click as much
-          as the current logo does. The font is Segoe UI SemiLight.
+          <a href="https://www.instagram.com/alexandra_argh/" rel="noopener" target="_blank">Alex Arghiriade</a>,
+          because I am definitely not a web designer. I did a previous iteration myself but it did not click as much as
+          the current logo does. The font is Segoe UI SemiLight.
         </p>
-
         <p>
           I found the artwork at the top of this essay on
           <a
             href="https://web.archive.org/web/20200901035747/https://news.ycombinator.com/item?id=23919590"
-            rel="noopener noreferrer"
+            rel="noopener"
             target="_blank"
             >Hacker News</a
           >. There are more AI artists out there:
-          <a href="https://art42.net/" rel="noopener noreferrer" target="_blank">art42.net</a>
+          <a href="https://art42.net/" rel="noopener" target="_blank">art42.net</a>
           and
-          <a href="https://thisartworkdoesnotexist.com/" rel="noopener noreferrer" target="_blank"
-            >thisartworkdoesnotexist.com</a
-          >, for example.
+          <a href="https://thisartworkdoesnotexist.com/" rel="noopener" target="_blank">thisartworkdoesnotexist.com</a>,
+          for example.
         </p>
 
         <h2>Inspirations</h2>
         <p>I was inspired by these websites:</p>
         <ul>
           <li>
-            <a
-              href="https://web.archive.org/web/20200901035834/https://brandur.org/"
-              rel="noopener noreferrer"
-              target="_blank"
+            <a href="https://web.archive.org/web/20200901035834/https://brandur.org/" rel="noopener" target="_blank"
               >brandur.org</a
             >
           </li>
           <li>
             <a
               href="https://web.archive.org/web/20200901035910/https://thebestmotherfucking.website/"
-              rel="noopener noreferrer"
+              rel="noopener"
               target="_blank"
               >thebestmotherfucking.website</a
             >
           </li>
           <li>
-            <a
-              href="https://web.archive.org/web/20200901035932/https://tonsky.me/"
-              rel="noopener noreferrer"
-              target="_blank"
+            <a href="https://web.archive.org/web/20200901035932/https://tonsky.me/" rel="noopener" target="_blank"
               >tonsky.me</a
             >
           </li>
           <li>
-            <a
-              href="https://web.archive.org/web/20200901035957/https://fingers.today/"
-              rel="noopener noreferrer"
-              target="_blank"
+            <a href="https://web.archive.org/web/20200901035957/https://fingers.today/" rel="noopener" target="_blank"
               >fingers.today</a
             >
           </li>
           <li>
-            <a
-              href="https://web.archive.org/web/20200901040029/https://jmduke.com/"
-              rel="noopener noreferrer"
-              target="_blank"
+            <a href="https://web.archive.org/web/20200901040029/https://jmduke.com/" rel="noopener" target="_blank"
               >jmduke.com</a
             >
           </li>
@@ -225,25 +199,25 @@
           long-lasting, free, and fun internet, beliefs which, I think, are shared by people like
           <a
             href="https://web.archive.org/web/20200724092502/https://solar.lowtechmagazine.com/2018/09/how-to-build-a-lowtech-website/"
-            rel="noopener noreferrer"
+            rel="noopener"
             target="_blank"
             >the guys at LOW←TECH MAGAZINE</a
           >,
           <a
             href="https://web.archive.org/web/20200621074025/https://neustadt.fr/essays/the-small-web/"
-            rel="noopener noreferrer"
+            rel="noopener"
             target="_blank"
             >Parimal Satyal</a
           >,
           <a
             href="https://web.archive.org/web/20200708045446/https://jeffhuang.com/designed_to_last/"
-            rel="noopener noreferrer"
+            rel="noopener"
             target="_blank"
             >Jeff Huang</a
           >,
           <a
             href="https://web.archive.org/web/20200724093257/https://tinyprojects.dev/posts/tiny_websites_are_great"
-            rel="noopener noreferrer"
+            rel="noopener"
             target="_blank"
             >and Ben</a
           >.
@@ -253,7 +227,7 @@
           accessibility standards (like, for example,
           <a
             href="https://web.archive.org/web/20200901061821/https://sourcehut.org/blog/2020-05-27-accessibility-through-simplicity/"
-            rel="noopener noreferrer"
+            rel="noopener"
             target="_blank"
             >SourceHut</a
           >), and why I will probably translate the content into several languages later.
@@ -266,32 +240,30 @@
         <ul>
           <li>the VSCode IDE with the Prettier, ESLint, and Live Server extensions for writing the content;</li>
           <li>
-            <a href="https://github.com/ungurflorin/florinungur.com" rel="noopener noreferrer" target="_blank"
-              >GitHub</a
-            >
-            and <a href="https://soverin.net/" rel="noopener noreferrer" target="_blank">Soverin</a> for hosting said
-            content;
+            <a href="https://github.com/ungurflorin/florinungur.com" rel="noopener" target="_blank">GitHub</a>
+            and <a href="https://soverin.net/" rel="noopener" target="_blank">Soverin</a> for hosting said content;
+          </li>
+          <li><a href="https://cssnano.co/" rel="noopener" target="_blank">cssnano</a> for minifying the CSS;</li>
+          <li>
+            <a href="https://developers.google.com/speed/webp/docs/cwebp" rel="noopener" target="_blank">cwebp</a> for
+            compressing images into WebP files;
           </li>
           <li>
             Microsoft's
-            <a href="https://accessibilityinsights.io/en/" rel="noopener noreferrer" target="_blank"
-              >Accessibility Insights</a
-            >
+            <a href="https://accessibilityinsights.io/en/" rel="noopener" target="_blank">Accessibility Insights</a>
             and IBM's
-            <a href="https://github.com/IBMa/equal-access" rel="noopener noreferrer" target="_blank">Equal Access</a>
+            <a href="https://github.com/IBMa/equal-access" rel="noopener" target="_blank">Equal Access</a>
             for accessibility testing;
           </li>
           <li>
-            <a href="https://www.checkbot.io/" rel="noopener noreferrer" target="_blank">Checkbot</a>
+            <a href="https://www.checkbot.io/" rel="noopener" target="_blank">Checkbot</a>
             for assessing the SEO, speed, and security of my website; and, finally
           </li>
           <li>
             Mozilla's
-            <a href="https://observatory.mozilla.org/" rel="noopener noreferrer" target="_blank">Observatory</a>
+            <a href="https://observatory.mozilla.org/" rel="noopener" target="_blank">Observatory</a>
             and Google Chrome's
-            <a href="https://developers.google.com/web/tools/lighthouse" rel="noopener noreferrer" target="_blank"
-              >Lighthouse</a
-            >
+            <a href="https://developers.google.com/web/tools/lighthouse" rel="noopener" target="_blank">Lighthouse</a>
             for a holistic assessment.
           </li>
         </ul>
@@ -299,14 +271,14 @@
           (I found some of these tools on Shawn Wang's
           <a
             href="https://web.archive.org/web/20200831180535/https://www.swyx.io/writing/webperf-tests/"
-            rel="noopener noreferrer"
+            rel="noopener"
             target="_blank"
             >website</a
           >
           which, in turn, I stumbled upon in the comments of an
           <a
             href="https://web.archive.org/web/20200831180606/https://news.ycombinator.com/item?id=23119701"
-            rel="noopener noreferrer"
+            rel="noopener"
             target="_blank"
             >HN article</a
           >. And I say that this is a minimal tooling overhead because I will use all tools only at the beggining, to
@@ -314,7 +286,6 @@
           with those included I will not be affected if any/all of these tools will disappear or, worse, be
           discontinued. I will just change to an alternative.)
         </p>
-
         <p>
           Not to be clickbaity and get to the subtitle of this essay last, but... I finally decided to make this website
           because I no longer feel that my ideas, poems, and essays are trash. Secondly, publishing these things pushes
@@ -322,27 +293,20 @@
         </p>
       </article>
 
-      <hr class="footer" />
+      <hr />
 
-      <footer class="is-text-center">
+      <footer>
         <p>
-          Liked my writing? Follow it on
-          <img src="../../../../img/icons/feed.svg" alt="RSS SVG logo" />
-          <a href="../../../../rss.xml" target="_blank">RSS</a>, sign my
-          <img src="../../../../img/icons/guestbook.svg" alt="Guestbook SVG logo" />
-          <a href="http://users.smartgb.com/g/g.php?a=s&i=g18-84651-bd" rel="noopener noreferrer" target="_blank"
-            >guestbook</a
-          >, send me an <img src="../../../../img/icons/email.svg" alt="Email SVG logo" />
-          <a href="mailto:hello@florinungur.com">email</a>, or hit me up on
-          <img src="../../../../img/icons/linkedin.svg" alt="LinkedIn SVG logo" />
-          <a href="https://www.linkedin.com/in/florinungur" rel="noopener noreferrer" target="_blank">LinkedIn</a>.
+          Liked my writing? Follow it on <a href="../../../../rss.xml" target="_blank">RSS</a>, sign my
+          <a href="http://users.smartgb.com/g/g.php?a=s&i=g18-84651-bd" rel="noopener" target="_blank">guestbook</a>,
+          send me an <a href="mailto:hello@florinungur.com">email</a>, or hit me up on
+          <a href="https://www.linkedin.com/in/florinungur" rel="noopener" target="_blank">LinkedIn</a>.
         </p>
         <p>
           Did I make a mistake? Please consider sending a
-          <img src="../../../../img/icons/github.svg" alt="GitHub SVG logo" />
           <a
             href="https://github.com/ungurflorin/florinungur.com/edit/master/essays/2020/09/01/hello-world.html"
-            rel="noopener noreferrer"
+            rel="noopener"
             target="_blank"
             >pull request</a
           >.

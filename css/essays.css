@@ -1,0 +1,11 @@
+/* https://web.archive.org/web/20200817120428/https://htmldog.com/techniques/dropcaps/ */
+.dropcap::first-letter {
+  float: left;
+  font-size: 45px;
+  font-weight: bold;
+  line-height: 1;
+  margin-right: 9px;
+}
+.subtitle {
+  font-size: x-large;
+}
