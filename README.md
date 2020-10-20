@@ -29,5 +29,5 @@ If you like having small WebP files:
 
 ## svgo
 If you don't like having uncompressed SVGs:
-1. Download svgo: `npm install --save-dev svgo`
-2. Compress: `svgo uncompressed.svg -o compressed.svg`
+1. Download [svgo](https://github.com/svg/svgo): `npm install --save-dev svgo`
+2. Compress SVGs: `svgo uncompressed.svg -o compressed.svg`
