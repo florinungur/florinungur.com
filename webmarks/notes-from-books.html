@@ -70,7 +70,7 @@
 
       <h1>My notes from books</h1>
       <p class="datetime">
-        Last updated on <time datetime="2020-10-22">October 22, 2020</time> (see
+        Last updated on <time datetime="2020-11-11">November 11, 2020</time> (see
         <a
           href="https://github.com/ungurflorin/florinungur.com/commits/master/webmarks/notes-from-books.html"
           rel="noopener"
@@ -84,6 +84,7 @@
         of big ideas.
       </p>
 
+      <h2>Philosophy</h2>
       <details>
         <summary>Almost all of Nietzsche's books (save for the ones about Wagner)</summary>
         <ul>
@@ -779,6 +780,36 @@
         </ul>
       </details>
 
+      <h2>Technology</h2>
+      <details>
+        <summary>Bilgin Ibryam and Roland Huß - Kubernetes Patterns</summary>
+        <ul>
+          <li>The microservices architecture trades development complexity for operational complexity.</li>
+          <li>
+            Kubernetes needs a lot of info up front so it can manage the resources automatically and make intelligent
+            decisions.
+          </li>
+          <li>
+            You can check the liveness and readiness of a Pod by sending an HTTP GET request and checking for a 200-399
+            response code, or by sending a TCP Socket probe and expecting a successful connection, or by executing
+            arbitrary code and expecting a 0 exit code. The corrective action of the liveness probe is a Pod restart and
+            that of a readiness probe is the removal from the Service endpoint so the Pod will not be accessed if it's
+            not ready.
+          </li>
+          <li>
+            Containerized apps don't control their lifecycle. This was handed over to Kubernetes. This abstraction
+            removes the need for application-specific lifecycle management. Less code to take care of.
+          </li>
+          <li>Watch out for Defer containers, the opposite of Init containers. Coming soon to a cluster near you.</li>
+          <li>
+            At the moment, Cluster Autoscaling is very experimental. Even its concept still implies manual configuration
+            of nodes that may be used later for scaling up; a form of hot stand-by. I'm curious if this Kubernetes
+            feature can be extended with a meta, self-aware agent that will search for potential nodes to assimilate.
+          </li>
+        </ul>
+      </details>
+
+      <h2>Fiction</h2>
       <details>
         <summary>Yukio Mishima - The Temple of the Golden Pavilion</summary>
         <ul>
