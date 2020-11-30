@@ -226,21 +226,6 @@ body {
   color: #fff;
   color: rgba(255, 255, 255, var(--text-opacity));
 }
-.text-gray-550 {
-  --text-opacity: 1;
-  color: #8e9cb4;
-  color: rgba(141.77999999999997, 155.618, 179.52, var(--text-opacity));
-}
-.text-gray-600 {
-  --text-opacity: 1;
-  color: #718096;
-  color: rgba(113, 128, 150, var(--text-opacity));
-}
-.text-gray-650 {
-  --text-opacity: 1;
-  color: #68778d;
-  color: rgba(104.04, 118.72800000000001, 140.76, var(--text-opacity));
-}
 .text-gray-700 {
   --text-opacity: 1;
   color: #4a5568;
