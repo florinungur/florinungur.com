@@ -235,7 +235,8 @@ figure,
   font-size: small;
 }
 /* To pass https://web.archive.org/web/20200901052543/https://web.dev/tap-targets/ */
-ol, ul {
+ol,
+ul {
   line-height: 1.9em;
 }
 /* https://web.archive.org/web/20200828113037/https://dev.to/joellehelm/make-your-cards-pop-on-hover-with-css-1i39 */
