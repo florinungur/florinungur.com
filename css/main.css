@@ -96,7 +96,8 @@ tfoot {
   border-top: 2px solid var(--color-lightGrey);
 }
 img {
-  max-width: 100%;
+  width: 100%;
+  height: auto;
 }
 .container {
   max-width: 720px;
