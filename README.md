@@ -12,7 +12,7 @@ To have the same styling in local development:
 2. Install ESLint and Prettier: `npm install --save-dev eslint prettier`
 3. [Integrate Prettier with ESLint](https://prettier.io/docs/en/integrating-with-linters.html) [[archived link](https://web.archive.org/web/20200523074325/https://prettier.io/docs/en/integrating-with-linters.html)]: `npm install --save-dev eslint-config-prettier eslint-plugin-prettier`
 4. Install the [ESLint shareable config](https://github.com/google/eslint-config-google) for the Google JavaScript style guide (ES2015+ version): `npm install --save-dev eslint eslint-config-google`
-5. Use (or modify) [.editorconfig](.editorconfig), [.eslintrc](.eslintrc), and [.prettierrc](.prettierrc)
+5. Use (or modify) [.eslintrc](.eslintrc) and [.prettierrc](.prettierrc)
 
 ## cssnano
 To minify CSS the same way I do:
