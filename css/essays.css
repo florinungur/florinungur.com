@@ -1,7 +1,7 @@
 /* https://web.archive.org/web/20200817120428/https://htmldog.com/techniques/dropcaps/ */
 .dropcap::first-letter {
   float: left;
-  font-size: xxx-large;
+  font-size: 48px; /* xxx-large when Safari will support it */
   font-weight: bold;
   line-height: 0.8em; /* https://web.archive.org/web/20201223145243/https://boyet.com/blog/css3-line-height-is-important-for-drop-caps/ */
   margin-right: 0.15em;
