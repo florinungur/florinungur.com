@@ -1,11 +1,9 @@
 :root {
-  --bg-color: #f2f2f2;
-  --bg-secondary-color: #f3f3f6;
+  --bg-secondary-color: #fcfcfc;
   --color-primary: #d1861f;
   --color-lightGrey: #d2d6dd;
   --color-grey: #747681;
   --grid-gutter: 2rem;
-  --font-color: #333333;
 }
 html {
   -webkit-box-sizing: border-box;
@@ -22,10 +20,8 @@ html {
   box-sizing: inherit;
 }
 body {
-  background-color: var(--bg-color);
   line-height: 1.6;
   font-size: 1.6rem;
-  color: var(--font-color);
   font-family: sans-serif;
   margin: 0;
   padding: 0;
@@ -111,9 +107,7 @@ img {
   }
 }
 .card {
-  padding: 1rem 2rem;
-  border-radius: 4px;
-  background: var(--bg-color);
+  padding: 10px;
   -webkit-box-shadow: 0 1px 3px var(--color-grey);
   box-shadow: 0 1px 3px var(--color-grey);
 }
@@ -246,10 +240,11 @@ ul {
 }
 .content-list a {
   text-decoration: none;
-  color: var(--font-color);
+  color: #000000;
 }
 .content-list .card:hover {
   border: 1px solid var(--color-primary);
+  padding: 9px;
 }
 .logo {
   flex: 1;
