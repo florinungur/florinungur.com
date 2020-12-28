@@ -115,10 +115,6 @@ img {
 .card p:last-child {
   margin: 0;
 }
-.card header > * {
-  margin-top: 0;
-  margin-bottom: 1rem;
-}
 .pull-right {
   float: right !important;
 }
