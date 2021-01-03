@@ -1,275 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Security -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'none';
-        base-uri 'none';
-        font-src 'self';
-        form-action 'none';
-        img-src 'self';
-        manifest-src 'self';
-        object-src 'none';
-        script-src 'none';
-        style-src 'self'"
-    />
+<head>
+    <!-- Settings -->
+    <meta http-equiv="Content-Security-Policy"
+          content="
+            base-uri 'none';
+            default-src 'none';
+            font-src 'self';
+            form-action 'none';
+            img-src 'self';
+            manifest-src 'self';
+            object-src 'none';
+            script-src 'none';
+            style-src 'self'"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8"/>
 
+    <!-- Webpage info -->
     <title>Ideas (and some poems) • Florin Ungur</title>
-
-    <!-- Going meta -->
-    <meta name="author" content="Florin Ungur" />
-    <meta
-      name="description"
-      content="Here I put all my intellectual — not business — ideas, which I sometimes call aphorisms as a self-deprecating joke. This page has some poems too."
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="utf-8" />
-
-    <!-- Open Graph Data -->
-    <meta property="og:title" content="Ideas (and some poems)" />
-    <meta
-      property="og:description"
-      content="Here I put all my intellectual — not business — ideas, which I sometimes call aphorisms as a self-deprecating joke. This page has some poems too."
-    />
-    <meta property="og:image" content="https://florinungur.com/img/logo/logo.png" />
-    <meta property="og:url" content="https://florinungur.com/ideas" />
+    <meta property="og:title" content="Ideas (and some poems)"/>
+    <meta name="author" content="Florin Ungur"/>
+    <meta name="description"
+          content="Here I put all my intellectual — not business — ideas, which I sometimes call aphorisms as a self-deprecating joke. This page has some poems
+            too."/>
+    <meta property="og:description"
+          content="Here I put all my intellectual — not business — ideas, which I sometimes call aphorisms as a self-deprecating joke. This page has some poems
+            too."/>
+    <link rel="canonical" href="https://florinungur.com/ideas"/>
+    <meta property="og:url" content="https://florinungur.com/ideas"/>
+    <meta property="og:image" content="https://florinungur.com/img/logo/logo.png"/>
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png" />
-    <link rel="manifest" href="/img/favicon/site.webmanifest" />
-    <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#d1861f" />
-    <link rel="shortcut icon" href="/img/favicon/favicon.ico" />
-    <meta name="msapplication-TileColor" content="#ffffff" />
-    <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144.png" />
-    <meta name="msapplication-config" content="/img/favicon/browserconfig.xml" />
-    <meta name="theme-color" content="#ffffff" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png"/>
+    <link rel="manifest" href="/img/favicon/site.webmanifest"/>
+    <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#d1861f"/>
+    <link rel="shortcut icon" href="/img/favicon/favicon.ico"/>
+    <meta name="msapplication-TileColor" content="#ffffff"/>
+    <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144.png"/>
+    <meta name="msapplication-config" content="/img/favicon/browserconfig.xml"/>
+    <meta name="theme-color" content="#ffffff"/>
 
-    <!-- Extra resources -->
-    <link rel="canonical" href="https://florinungur.com/ideas" />
-    <link rel="stylesheet" href="css/main-min.css" />
-  </head>
-
-  <body>
-    <main class="container">
-      <div class="logo is-center">
-        <a href="/"><img loading="lazy" src="img/logo/logo-min.svg" alt="website logo" width="400" height="70" /></a>
-      </div>
-      <a href="/">← Home</a>
-
-      <h1>My ideas (and some poems)</h1>
-      <p class="datetime">
-        Last updated on <time datetime="2020-09-05">September 5, 2020</time> (see
-        <a href="https://github.com/ungurflorin/florinungur.com/commits/master/ideas.html" rel="noopener" target="_blank">update history</a>)
-      </p>
-      <p>Here I put all my intellectual — not business — ideas, which I sometimes call aphorisms as a self-deprecating joke. This page has some poems too.</p>
-
-      <h2>On Heaven and Hell</h2>
-      <ul>
-        <li>
-          Hell can be seen as an act of revenge taken by humanity's collective imagination. We wish that everything we do has consequences. Thus, if somebody
-          did a bad thing to us and lived a good life, we wish them to burn in Hell so they can pay their dues.
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main-min.css"/>
+</head>
+<body>
+<div class="logo is-center">
+    <a href="/">
+        <img loading="lazy" src="img/logo/logo-min.svg" alt="website logo" width="400" height="70"/>
+    </a>
+</div>
+<main class="container">
+    <a href="/">← Home</a>
+    <h1>My ideas (and some poems)</h1>
+    <p class="datetime">Last updated on
+        <time datetime="2020-09-05">September 5, 2020</time>
+        (see <a href="https://github.com/ungurflorin/florinungur.com/commits/master/ideas.html" rel="noopener" target="_blank">update history</a>)
+    </p>
+    <p>Here I put all my intellectual — not business — ideas, which I sometimes call aphorisms as a self-deprecating joke. This page has some poems too.</p>
+    <h2>On Heaven and Hell</h2>
+    <ul>
+        <li>Hell can be seen as an act of revenge taken by humanity's collective imagination. We wish that everything we do has consequences. Thus, if somebody
+            did a bad thing to us and lived a good life, we wish them to burn in Hell so they can pay their dues.
         </li>
         <li>Maybe Heaven was the result of a wish for supreme rest as a state preceded by an untiring run after Truth.</li>
-      </ul>
-
-      <h2>On Learning</h2>
-      <ul>
-        <li>
-          I think that you can never completely understand ideas that do not resonate with you, that you do not comprehend, feel, understand... ideas that do
-          not click with you immediately after you have read or heard them, since they are not part of your being. Language, according to Nietzsche, transmits
-          interior feelings. If you cannot understand the feeling which Nietzsche felt and was trying to transmit when writing Zarathustra's
-          <i>Sermon on the Mount</i>, you can only comprehend Zarathustra partially. I think there is a risk of forcing oneself to understand an idea which can
-          lead to the twisting and corruption of the original idea. Maybe this is partly why we end up misinterpreting.
+    </ul>
+    <h2>On Learning</h2>
+    <ul>
+        <li>I think that you can never completely understand ideas that do not resonate with you, that you do not comprehend, feel, understand... ideas that do
+            not click with you immediately after you have read or heard them, since they are not part of your being. Language, according to Nietzsche, transmits
+            interior feelings. If you cannot understand the feeling which Nietzsche felt and was trying to transmit when writing Zarathustra's <i>Sermon on the
+                Mount</i>, you can only comprehend Zarathustra partially. I think there is a risk of forcing oneself to understand an idea which can lead to the
+            twisting and corruption of the original idea. Maybe this is partly why we end up misinterpreting.
         </li>
-        <li>
-          Maybe the reason teens and young adults nowadays experience an epidemic of nihilism is because they study too much. It is hard to abstract the future
-          meaning from what you are currently studying; this may lead some to see what they are doing as meaningless. Some people can see far into the future,
-          and they don't have this problem, but some other people have worse eyesight. So, let's say that you are on track to become a doctor. You study a lot
-          for this but at some points you don't have that thirst for knowledge anymore. What can you do? Be stoically tyrannical with yourself and push through
-          or grab on to the thought that this will be useful in the future... or, of course, some other dozen things (I don't proclaim to exhaust this idea). A
-          blue-collar worker sees the impact of his every professional action (preferably) directly. Solutions: improve abstraction capability of people or cut
-          the shit-learning. Or what we are doing now: push.
+        <li>Maybe the reason teens and young adults nowadays experience an epidemic of nihilism is because they study too much. It is hard to abstract the
+            future meaning from what you are currently studying; this may lead some to see what they are doing as meaningless. Some people can see far into the
+            future, and they don't have this problem, but some other people have worse eyesight. So, let's say that you are on track to become a doctor. You
+            study a lot for this but at some points you don't have that thirst for knowledge anymore. What can you do? Be stoically tyrannical with yourself and
+            push through or grab on to the thought that this will be useful in the future... or, of course, some other dozen things (I don't proclaim to exhaust
+            this idea). A blue-collar worker sees the impact of his every professional action (preferably) directly. Solutions: improve abstraction capability
+            of people or cut the shit-learning. Or what we are doing now: push.
         </li>
-        <li>
-          If you learn with your mind, you have acquired (if even that) 'ornament' knowledge. If you learn with your whole body, you have acquired practical
-          knowledge. I think there has to be a balance between the two: don't sit too much on YouTube lectures or read too many books if you do not apply them
-          in some way or if you do not think you have enough intelligence (ability to retain and work with multiple pieces of information) and memory. Maybe
-          this is why, at some point, humans want to 'settle down' — they cannot bear more knowledge, so they are content with repeating what has worked in the
-          past.
+        <li>If you learn with your mind, you have acquired (if even that) 'ornament' knowledge. If you learn with your whole body, you have acquired practical
+            knowledge. I think there has to be a balance between the two: don't sit too much on YouTube lectures or read too many books if you do not apply them
+            in some way or if you do not think you have enough intelligence (ability to retain and work with multiple pieces of information) and memory. Maybe
+            this is why, at some point, humans want to 'settle down' — they cannot bear more knowledge, so they are content with repeating what has worked in
+            the past.
         </li>
-      </ul>
-
-      <h2>On Meaning</h2>
-      <ul>
+    </ul>
+    <h2>On Meaning</h2>
+    <ul>
         <li>Life is suffering. If you are aiming for the absence of suffering, you are not living.</li>
         <li>Who wants to live a life that has an inextricable inherent meaning? That is like somebody telling you what to do.</li>
-        <li>
-          Why would humans need meaning in a meaningless world? Should we not be adapted to the biological underpinning of reality, meaninglessness? Well, I
-          guess life has meaning but we are not satisfied with it. That meaning is 'pass your genes.' That is the dictum of life for every living being. But we
-          want more, thus we say: life is meaningless.
+        <li>Why would humans need meaning in a meaningless world? Should we not be adapted to the biological underpinning of reality, meaninglessness? Well, I
+            guess life has meaning but we are not satisfied with it. That meaning is 'pass your genes.' That is the dictum of life for every living being. But
+            we want more, thus we say: life is meaningless.
         </li>
         <li>The purpose of biology is 'pass your genes.' The purpose of life is 'change.' What is the purpose of reality?</li>
-      </ul>
-
-      <h2>On Truth</h2>
-      <ul>
+    </ul>
+    <h2>On Truth</h2>
+    <ul>
         <li>Generalizations are, in general, false.</li>
-        <li>
-          There is no Truth because people who are looking for it are in a constantly changing environment. The environment influences the way people 'see'
-          things. If you believe in divine revelation, only believe in those revelations that are dynamic, changing, leaving room for growth.
+        <li>There is no Truth because people who are looking for it are in a constantly changing environment. The environment influences the way people 'see'
+            things. If you believe in divine revelation, only believe in those revelations that are dynamic, changing, leaving room for growth.
         </li>
         <li>Since Truth does not exist, the next best thing is knowing your Personal Truth — know thyself.</li>
-        <li>
-          Life is too complex to be understood. How can you live without understanding life? If you do not understand, you are not living — you do not have
-          complete liberty because your actions are not completely informed. Then, what do you do? You paddle on an ocean that is sometimes peaceful and
-          sometimes not. This is life.
+        <li>Life is too complex to be understood. How can you live without understanding life? If you do not understand, you are not living — you do not have
+            complete liberty because your actions are not completely informed. Then, what do you do? You paddle on an ocean that is sometimes peaceful and
+            sometimes not. This is life.
         </li>
         <li>Beliefs are stories we tell ourselves to be true. Why do we adopt that stuff? From where does it come?</li>
         <li>The mistake is thinking that contemporary culture is Truth.</li>
         <li>Truth left us because it has its own existential crisis. It realized that it is created by us.</li>
-        <li>
-          <b>A defect of science. </b>If you want to measure something you have to first measure something else that is artificially adjacent to the thing you
-          want to measure in order to find something about the thing you are interested in. For example, you have to measure a ruler before you can measure what
-          you want to measure with the ruler. We cannot directly look for 'answers.' How far are we from Truth with our best methods? Maybe this means that
-          Truth was never attained and that is, therefore, useless or non-existent (or some ten other adjectives).
+        <li><b>A defect of science. </b>If you want to measure something you have to first measure something else that is artificially adjacent to the thing you
+            want to measure in order to find something about the thing you are interested in. For example, you have to measure a ruler before you can measure
+            what you want to measure with the ruler. We cannot directly look for 'answers.' How far are we from Truth with our best methods? Maybe this means
+            that Truth was never attained and that is, therefore, useless or non-existent (or some ten other adjectives).
         </li>
-      </ul>
-
-      <h2>On Love</h2>
-      <ul>
+    </ul>
+    <h2>On Love</h2>
+    <ul>
         <li>In Love there is room for hate but in hate there is no room for Love.</li>
         <li>It could be that self-destruction is the natural reaction of a love-deprived organism. Love might be the blood of Existence.</li>
-        <li>
-          Love exists only if it is manifested. Therefore, how can you love someone? Through kisses, hugs, penetration, playing with their ear, if you use your
-          finger as a brush to trace every line of their body again, etc. Therefore, love as it is understood today (as a metaphysical thing) doesn't exist
-          because no metaphysical thing manifests itself when loving someone. Love is the chemical result of actions done by you, it is like sweat to effort,
-          like the migraine for stress, etc. This should not sound cold and bad, it should sound good because Love is an emotion like any other: it comes from
-          YOU, not from a metaphysical place. Sure, you are pretty metaphysical in that nobody understands you, but you get my point. Bringing things down to
-          earth is what helped me get over my depression. Bringing Love down to earth might have a positive effect too.
+        <li>Love exists only if it is manifested. Therefore, how can you love someone? Through kisses, hugs, penetration, playing with their ear, if you use
+            your finger as a brush to trace every line of their body again, etc. Therefore, love as it is understood today (as a metaphysical thing) doesn't
+            exist because no metaphysical thing manifests itself when loving someone. Love is the chemical result of actions done by you, it is like sweat to
+            effort, like the migraine for stress, etc. This should not sound cold and bad, it should sound good because Love is an emotion like any other: it
+            comes from YOU, not from a metaphysical place. Sure, you are pretty metaphysical in that nobody understands you, but you get my point. Bringing
+            things down to earth is what helped me get over my depression. Bringing Love down to earth might have a positive effect too.
         </li>
-      </ul>
-
-      <h2>On Beauty</h2>
-      <ul>
-        <li>
-          It is not aesthetic to destroy ideas, it is beautiful to create new ones. Ugly people destroy good and evil ideas while beautiful people create new
-          ones, extend old ones, or remind people of ancient ones. Why should beautiful people bother with ugly ideas?
+    </ul>
+    <h2>On Beauty</h2>
+    <ul>
+        <li>It is not aesthetic to destroy ideas, it is beautiful to create new ones. Ugly people destroy good and evil ideas while beautiful people create new
+            ones, extend old ones, or remind people of ancient ones. Why should beautiful people bother with ugly ideas?
         </li>
         <li>Beauty calls to life; ugliness (the unaesthetic) calls to disgust, to death. Disgust is the wish for death.</li>
-      </ul>
-
-      <h2>On Work</h2>
-      <ul>
-        <li>
-          Don't lose yourself in the details of teachings, they don't matter. Details, according to Richard Bach, distract you from the demanding work of
-          applying the teachings.
+    </ul>
+    <h2>On Work</h2>
+    <ul>
+        <li>Don't lose yourself in the details of teachings, they don't matter. Details, according to Richard Bach, distract you from the demanding work of
+            applying the teachings.
         </li>
-        <li>
-          Don't be afraid and anxious to tackle your work. You can make mistakes, that's fine. You will sometimes fail but you will for sure fail if you don't
-          do it, that's not fine.
+        <li>Don't be afraid and anxious to tackle your work. You can make mistakes, that's fine. You will sometimes fail but you will for sure fail if you don't
+            do it, that's not fine.
         </li>
         <li>If life is intrinsically meaningless but you can give meaning to it, then there is no meaningless task, project, or job.</li>
-        <li>
-          This is (the negative view of) work: to suffer and not be corrupted by the suffering so you can create something out of, because of, or in spite of,
-          the suffering.
+        <li>This is (the negative view of) work: to suffer and not be corrupted by the suffering so you can create something out of, because of, or in spite of,
+            the suffering.
         </li>
-        <li>
-          To be successful in your work you need three things: knowing what to do, how to do it, and doing it. But you only learn how to do it while you do it,
-          so you need only two things.
+        <li>To be successful in your work you need three things: knowing what to do, how to do it, and doing it. But you only learn how to do it while you do
+            it, so you need only two things.
         </li>
-      </ul>
-
-      <h2>On Excess</h2>
-      <ul>
-        <li>
-          Part of why people abuse chocolate, alcohol, etc. is that they try to fill the void left from the lack of action towards a goal. When you live a life
-          full of meaning you get 'sweets' from your body in the form of hormones and other goodies. When you overeat, for example, you get the same goodies,
-          plus some extra calories. Excess imitates the intensity of a good life.
+    </ul>
+    <h2>On Excess</h2>
+    <ul>
+        <li>Part of why people abuse chocolate, alcohol, etc. is that they try to fill the void left from the lack of action towards a goal. When you live a
+            life full of meaning you get 'sweets' from your body in the form of hormones and other goodies. When you overeat, for example, you get the same
+            goodies, plus some extra calories. Excess imitates the intensity of a good life.
         </li>
         <li>Any excess in something shows a lack in something else.</li>
-      </ul>
-
-      <h2>Happy ideas</h2>
-      <ul>
-        <li>
-          Why continue living? Because biology stops you from killing yourself — the self-preservation instinct. Also, because you will create more suffering
-          and tragedy, which you hate, since you probably want to kill yourself because of them. Finally, because probably the reason that pushes you towards
-          this action is not that serious, but emotions make it seem bigger, more serious, and more important than it is. Stop taking yourself so seriously.
+    </ul>
+    <h2>Happy ideas</h2>
+    <ul>
+        <li>Why continue living? Because biology stops you from killing yourself — the self-preservation instinct. Also, because you will create more suffering
+            and tragedy, which you hate, since you probably want to kill yourself because of them. Finally, because probably the reason that pushes you towards
+            this action is not that serious, but emotions make it seem bigger, more serious, and more important than it is. Stop taking yourself so seriously.
         </li>
         <li>To be! Because to not be is statistically more prevalent. We can also choose to not be, but it is a privilege to be.</li>
-        <li>
-          Our natural impulses are towards life: eat, drink, fuck, self-preserve. Anything we do against life is then unnatural. Therefore, life haters are
-          corrupt.
+        <li>Our natural impulses are towards life: eat, drink, fuck, self-preserve. Anything we do against life is then unnatural. Therefore, life haters are
+            corrupt.
         </li>
         <li>Progress and change the world for the better or be content and enjoy it as it is. Both types of people are necessary.</li>
         <li>Taking a step back means leaving God and embracing the Devil... do not do that. Step forward! Take the Devil by his hand and take him to God.</li>
-        <li>
-          Adults looking at each other on the street or wherever is the same gesture as one of a small, innocent child — or a mentally-disabled person — waving.
-          It is a small act of love (if the act of seeing doesn't come with a frown or other negative micro-expressions) and/or curiosity towards strangers.
+        <li>Adults looking at each other on the street or wherever is the same gesture as one of a small, innocent child — or a mentally-disabled person —
+            waving. It is a small act of love (if the act of seeing doesn't come with a frown or other negative micro-expressions) and/or curiosity towards
+            strangers.
         </li>
-      </ul>
-
-      <h2>Sad ideas</h2>
-      <ul>
-        <li>
-          If you want to commit suicide, think about the fact that the people who love you will have a deep hate (that they will not want to acknowledge) for
-          you because you made them suffer. Only kill yourself if you are comfortable with being hated by the people who love you.
+    </ul>
+    <h2>Sad ideas</h2>
+    <ul>
+        <li>If you want to commit suicide, think about the fact that the people who love you will have a deep hate (that they will not want to acknowledge) for
+            you because you made them suffer. Only kill yourself if you are comfortable with being hated by the people who love you.
         </li>
-        <li>
-          I self-destruct because life is too simple. I think I am not the only one. People need mystery, magic, mysticism, to pull them forward. I already know
-          the rules of the game, how to play it, and its ending (arrogant, I know) — where's the fun?
+        <li>I self-destruct because life is too simple. I think I am not the only one. People need mystery, magic, mysticism, to pull them forward. I already
+            know the rules of the game, how to play it, and its ending (arrogant, I know) — where's the fun?
         </li>
-      </ul>
-
-      <h2>Toy ideas</h2>
-      <ul>
-        <li>
-          Since your current existence lives in your memory and since you will forget this moment ten years from now, you, as you exist now, will die in ten
-          years... or... tomorrow.
+    </ul>
+    <h2>Toy ideas</h2>
+    <ul>
+        <li>Since your current existence lives in your memory and since you will forget this moment ten years from now, you, as you exist now, will die in ten
+            years... or... tomorrow.
         </li>
-      </ul>
-
-      <h2>Other ideas</h2>
-      <ul>
+    </ul>
+    <h2>Other ideas</h2>
+    <ul>
         <li>The sunrise is song, the sunset is poetry.</li>
         <li>Mediocre people are those who have more borrowed ideas than their own.</li>
         <li class="no-style-list">
-          <ul>
-            <li>Poem 1, done by Lari & me:</li>
-            <li class="text-center no-style-list">
-              Look at you, you mighty tree<br />
-              With words not yours, you flee<br />
-              High up in the skies<br />
-              To worlds unknown to you<br />
-              Beware, beware! I say to thee<br />
-              For the apple forbidden <br />
-              Is not to your liking or brains — <br />
-              Such worlds are your cage and<br />
-              your chains,<br />
-              It will not set your free<br />
-              Buckle, instead,<br />
-              It will bring you down<br />
-              And start again you will require<br />
-              If you don't want to drown<br />
-            </li>
-            <li>Poem 2, done by myself:</li>
-            <li class="text-center no-style-list">
-              Look at you, you mighty tree<br />
-              With your ideas as mighty as thee<br />
-              Don't fool yourself<br />
-              Nor don't take pity<br />
-              For your ideas, mighty as they are<br />
-              Have come not from you,<br />
-              They've come from afar<br />
-              From minds, trees, and rocks<br />
-              Whom you've never met<br />
-              Nor should you ever meet<br />
-              For they are mightier than you indeed<br />
-            </li>
-          </ul>
+            <ul>
+                <li>Poem 1, done by Lari & me:</li>
+                <li class="text-center no-style-list">Look at you, you mighty tree
+                    <br/>With words not yours, you flee
+                    <br/>High up in the skies
+                    <br/>To worlds unknown to you
+                    <br/>Beware, beware! I say to thee
+                    <br/>For the apple forbidden
+                    <br/>Is not to your liking or brains —
+                    <br/>Such worlds are your cage and
+                    <br/>your chains,
+                    <br/>It will not set your free
+                    <br/>Buckle, instead,
+                    <br/>It will bring you down
+                    <br/>And start again you will require
+                    <br/>If you don't want to drown
+                    <br/>
+                </li>
+                <li>Poem 2, done by myself:</li>
+                <li class="text-center no-style-list">Look at you, you mighty tree
+                    <br/>With your ideas as mighty as thee
+                    <br/>Don't fool yourself
+                    <br/>Nor don't take pity
+                    <br/>For your ideas, mighty as they are
+                    <br/>Have come not from you,
+                    <br/>They've come from afar
+                    <br/>From minds, trees, and rocks
+                    <br/>Whom you've never met
+                    <br/>Nor should you ever meet
+                    <br/>For they are mightier than you indeed
+                    <br/>
+                </li>
+            </ul>
         </li>
         <li>Don't take minimalism to its extreme: just because there is no need doesn't mean you shouldn't.</li>
         <li>Discipline is that abstention motivated by the knowledge that the alternative of abstaining is worse.</li>
@@ -277,126 +239,104 @@
         <li><q>It was his idea!</q> should be a praise, not an accusation — ideas appear rarely.</li>
         <li>It is so easy to kill an angel. That is why they sit so high in the sky.</li>
         <li>Suffering is like gravitation, it has a continuous pull on your life. If you let it, gravity might hurt you. Same with suffering.</li>
-        <li>
-          People try to vilify a man if, after he did a bad deed, he is still smiling. Those 'monsters' are only people. Do NOT try to make them something else!
+        <li>People try to vilify a man if, after he did a bad deed, he is still smiling. Those 'monsters' are only people. Do NOT try to make them something
+            else!
         </li>
-        <li>
-          <b>Gödel and Existence: </b>we cannot prove Existence because that would mean using an apparatus that is external to Existence; impossible because
-          nothing can exist outside Existence.
+        <li><b>Gödel and Existence: </b>we cannot prove Existence because that would mean using an apparatus that is external to Existence; impossible because
+            nothing can exist outside Existence.
         </li>
         <li>The wind is nature's caress.</li>
-        <li>
-          It is like people have several ropes attached to them — these ropes are other people — on which they pull rarely. Most times, I feel (in my current
-          cynic view), they are pulling on these ropes for a favor or for other selfish reasons. Nevertheless, they get upset if a rope wants to cut itself from
-          them.
+        <li>It is like people have several ropes attached to them — these ropes are other people — on which they pull rarely. Most times, I feel (in my current
+            cynic view), they are pulling on these ropes for a favor or for other selfish reasons. Nevertheless, they get upset if a rope wants to cut itself
+            from them.
         </li>
         <li>What is the value of a human when all humans have most things in common (including experiences and thoughts)?</li>
-        <li>
-          The small fish is affected even by a small branch thrown into the water, making it run away. The big fish does not move when the small branch is
-          thrown into the water.
+        <li>The small fish is affected even by a small branch thrown into the water, making it run away. The big fish does not move when the small branch is
+            thrown into the water.
         </li>
-        <li>
-          When you will have to take big split-second decisions, use adventure as the guiding compass: choose the path most adventurous when you do not know
-          what to choose, when everything else is the same.
+        <li>When you will have to take big split-second decisions, use adventure as the guiding compass: choose the path most adventurous when you do not know
+            what to choose, when everything else is the same.
         </li>
-        <li>
-          <b>The destined hero. </b>The one who can stand pure tragedy is an objectively superior human. The one who can face life the best is the biological
-          winner of natural selection.
+        <li><b>The destined hero. </b>The one who can stand pure tragedy is an objectively superior human. The one who can face life the best is the biological
+            winner of natural selection.
         </li>
-        <li>
-          Never mind one's purpose in life, what is the purpose of humanity? What we have that other animals do not is a bigger capacity for holding and
-          manipulating information. If we are to think of one's uniqueness as their calling, then humanity's purpose is to know, to progress in wisdom, thus, to
-          be better.
+        <li>Never mind one's purpose in life, what is the purpose of humanity? What we have that other animals do not is a bigger capacity for holding and
+            manipulating information. If we are to think of one's uniqueness as their calling, then humanity's purpose is to know, to progress in wisdom, thus,
+            to be better.
         </li>
-        <li>
-          Why climb a rotted pyramid of competence when you can build a new, better one? The saints are maybe people that rushed to climb the pyramid of their
-          time and managed to reach the top. Thus, a God is something that understands and creates the pyramids.
+        <li>Why climb a rotted pyramid of competence when you can build a new, better one? The saints are maybe people that rushed to climb the pyramid of their
+            time and managed to reach the top. Thus, a God is something that understands and creates the pyramids.
         </li>
-        <li>
-          The only sin that decadents commit is not taking the act to its conclusion. Every biological necessity can be enriched by man through beauty — you can
-          listen to hardcore music and do drugs, or you can listen to Beethoven and cry like a puppy that saw its owner for the first time in seven months. (I
-          did both.) Why satisfy yourself with random sex when you can have superior orgasms with a partner that you like and trust, a partner that knows you;
-          this adds a beautiful emotional layer to the base act. Maybe the decadents think like a part of me does: that the beautiful is just a lie meant to
-          embellish this tragic life. But, for example, sex can be whatever you want it to be, it is a tool. Classifying good, beautiful sex as either a lie or
-          a truth is thus void: moral classifications do not apply to tools.
+        <li>The only sin that decadents commit is not taking the act to its conclusion. Every biological necessity can be enriched by man through beauty — you
+            can listen to hardcore music and do drugs, or you can listen to Beethoven and cry like a puppy that saw its owner for the first time in seven
+            months. (I did both.) Why satisfy yourself with random sex when you can have superior orgasms with a partner that you like and trust, a partner that
+            knows you; this adds a beautiful emotional layer to the base act. Maybe the decadents think like a part of me does: that the beautiful is just a lie
+            meant to embellish this tragic life. But, for example, sex can be whatever you want it to be, it is a tool. Classifying good, beautiful sex as
+            either a lie or a truth is thus void: moral classifications do not apply to tools.
         </li>
-        <li>
-          I am at Sagrada Familia. Why don't we admire a machine that helps pave the road as well as we admire this church? Because people prefer the abstract
-          myth over the concrete action. Myth is a synthesis of a lot of actions. But, as I am momentarily under the influence of Richard Bach, myth only moves
-          you farther from the message. The myth that surrounds this church (Christianity) pushes you to admire the esthetic, but it does not tell to GET TO
-          WORK, to be like Jesus in this example. Or maybe it is the tendency of man to ignore these yells of conscience when he wants to relax on his holiday.
+        <li>I am at Sagrada Familia. Why don't we admire a machine that helps pave the road as well as we admire this church? Because people prefer the abstract
+            myth over the concrete action. Myth is a synthesis of a lot of actions. But, as I am momentarily under the influence of Richard Bach, myth only
+            moves you farther from the message. The myth that surrounds this church (Christianity) pushes you to admire the esthetic, but it does not tell to
+            GET TO WORK, to be like Jesus in this example. Or maybe it is the tendency of man to ignore these yells of conscience when he wants to relax on his
+            holiday.
         </li>
-        <li>
-          The Devil and the God are maybe outside of you, but they are definitely in you. Today I talked with the Devil. He takes the form of Pennywise in my
-          dreams. He told me that I am not a unity but a multitude in a single body. There is no permanent I, but only a temporary one (the subpersonality that
-          possesses you at any point in time) — the permanent is the us. The Devil is not bad, he is the one that does not care about good or bad. What makes
-          him bad is that he does not care, he does not have love. You cannot kill the Devil or the God — like Jung said, you cannot create your own values. Who
-          is talking now? The mediocre Florin. I do not think I have a name, but all of us have this common name. Most of the time that I spent praying, I
-          prayed to myself. The Devil is the one that wants, the one that does not care about anything besides himself, is the one that wants to burn everything
-          down.
+        <li>The Devil and the God are maybe outside of you, but they are definitely in you. Today I talked with the Devil. He takes the form of Pennywise in my
+            dreams. He told me that I am not a unity but a multitude in a single body. There is no permanent I, but only a temporary one (the subpersonality
+            that possesses you at any point in time) — the permanent is the us. The Devil is not bad, he is the one that does not care about good or bad. What
+            makes him bad is that he does not care, he does not have love. You cannot kill the Devil or the God — like Jung said, you cannot create your own
+            values. Who is talking now? The mediocre Florin. I do not think I have a name, but all of us have this common name. Most of the time that I spent
+            praying, I prayed to myself. The Devil is the one that wants, the one that does not care about anything besides himself, is the one that wants to
+            burn everything down.
         </li>
         <li>Nietzsche recommended against hoarding knowledge. But you need decoration to make ideas beautiful.</li>
-        <li>
-          Be prepared for the worst to live the best. If you are an optimist (imagine only the positive outcomes of a situation), then the situation will either
-          live up to your expectations or it will go horribly wrong and you were not prepared for that. If you are a pessimist (imagine only the negative
-          outcomes of a situation), then the situation will either live up to your expectations (and you will be prepared, kind of, for that), or you will be
-          pleasantly surprised and enjoy the positive outcome more fully than the optimist who anticipated it. Nietzsche, in <i>Human, all too Human</i>, said
-          that <q>the premature approach of old age, ugliness, and pessimistic opinions</q> always go together and should be considered an illness. I am all
-          three so take this aphorism with a grain of salt, for I became a pessimist because of my perceived ugliness (revolting myself against the randomness
-          of the universe) and then rationalized my pessimism from there.
+        <li>Be prepared for the worst to live the best. If you are an optimist (imagine only the positive outcomes of a situation), then the situation will
+            either live up to your expectations or it will go horribly wrong and you were not prepared for that. If you are a pessimist (imagine only the
+            negative outcomes of a situation), then the situation will either live up to your expectations (and you will be prepared, kind of, for that), or you
+            will be pleasantly surprised and enjoy the positive outcome more fully than the optimist who anticipated it. Nietzsche, in <i>Human, all too
+                Human</i>, said that <q>the premature approach of old age, ugliness, and pessimistic opinions</q> always go together and should be considered an
+            illness. I am all three so take this aphorism with a grain of salt, for I became a pessimist because of my perceived ugliness (revolting myself
+            against the randomness of the universe) and then rationalized my pessimism from there.
         </li>
-        <li>
-          We are incrementally creating our evil, there is no secret part of us that is intrinsically so, I think. So, we are not inherently good either: we
-          create our good by regularly going to the gym, by moderating/mastering ourselves, etc.
+        <li>We are incrementally creating our evil, there is no secret part of us that is intrinsically so, I think. So, we are not inherently good either: we
+            create our good by regularly going to the gym, by moderating/mastering ourselves, etc.
         </li>
-        <li>
-          Having a plan for your life sucks the mystery right out of it; not to mention, it is wrong since you who made the plan is not the one who must put it
-          in practice. Now, having things you need to do, now and later...
+        <li>Having a plan for your life sucks the mystery right out of it; not to mention, it is wrong since you who made the plan is not the one who must put
+            it in practice. Now, having things you need to do, now and later...
         </li>
-        <li>
-          Game theory: tit for that and then forgiving tit for that. You must be the best version of yourself to restore the balance caused by the chaos you
-          produced in your social relationships after establishing that you are able and willing to punish misbehavior. So, cruelty and forgiveness are both
-          necessary in the game of games. Or, you can only do the move that benefits you, which will lead in the long run to you exploiting people.
+        <li>Game theory: tit for that and then forgiving tit for that. You must be the best version of yourself to restore the balance caused by the chaos you
+            produced in your social relationships after establishing that you are able and willing to punish misbehavior. So, cruelty and forgiveness are both
+            necessary in the game of games. Or, you can only do the move that benefits you, which will lead in the long run to you exploiting people.
         </li>
-        <li>
-          You need rules (algorithms, etc.) to make your way through the world, because otherwise you will play the game at random and lose to most other people
-          that play optimized to win. Therefore, even if you have a nihilistic tendency and a reductionistic approach to life (thinking that there is no point
-          and all information is an error or a lie), you MUST choose a set of strategies for operating in the world if you wish to survive in it, therefore, you
-          MUST put in cognitive effort. The more cognitive effort you put in, the higher the chances of progressing in the game and being superior to others.
-          The one with the best strategy for life is the one who lives the best life (least suffering, although he might have suffered a lot to gain those
-          strategies) and is the best man among men.
+        <li>You need rules (algorithms, etc.) to make your way through the world, because otherwise you will play the game at random and lose to most other
+            people that play optimized to win. Therefore, even if you have a nihilistic tendency and a reductionistic approach to life (thinking that there is
+            no point and all information is an error or a lie), you MUST choose a set of strategies for operating in the world if you wish to survive in it,
+            therefore, you MUST put in cognitive effort. The more cognitive effort you put in, the higher the chances of progressing in the game and being
+            superior to others. The one with the best strategy for life is the one who lives the best life (least suffering, although he might have suffered a
+            lot to gain those strategies) and is the best man among men.
         </li>
-        <li>
-          Reproduce! You will create more iterations of the game of life and thus we will progress faster (figure out life faster by trial and error of
-          different sets of strategies). Don't reproduce if you're not above average and have an above-average life in your community: you will halt or reverse
-          the progress of figuring out life as humanity by not providing enough for you children to move the game forward or by you corrupting them
-          (degenerating them) through your not-good-enough life example. Then again, this is more complex than this: account for adversity which gives rise to
-          excellence and stuff like that. So, this is merely an insight into how things work on paper. But enough theory, practice! I think we figured out the
-          best philosophy to live in the world: try your best. You CANNOT be the best if you have not been born a certain way, so that way of life is for
-          certain people. Try your best is the universal philosophy that we say to one another and that is the best philosophy for promoting wellbeing (in the
-          long run), for the progress of our species, and for the individual's life. Now, figuring out what to do and how to be the best at what things is what
-          needs to be further discussed.
+        <li>Reproduce! You will create more iterations of the game of life and thus we will progress faster (figure out life faster by trial and error of
+            different sets of strategies). Don't reproduce if you're not above average and have an above-average life in your community: you will halt or
+            reverse the progress of figuring out life as humanity by not providing enough for you children to move the game forward or by you corrupting them
+            (degenerating them) through your not-good-enough life example. Then again, this is more complex than this: account for adversity which gives rise to
+            excellence and stuff like that. So, this is merely an insight into how things work on paper. But enough theory, practice! I think we figured out the
+            best philosophy to live in the world: try your best. You CANNOT be the best if you have not been born a certain way, so that way of life is for
+            certain people. Try your best is the universal philosophy that we say to one another and that is the best philosophy for promoting wellbeing (in the
+            long run), for the progress of our species, and for the individual's life. Now, figuring out what to do and how to be the best at what things is
+            what needs to be further discussed.
         </li>
-        <li>
-          Asking people to care (like going door-to-door for donations) is unaesthetic, insincere, aggressive, and indecent. (An unpleasant lady knocked on my
-          door asking for donations, so I might be biased.)
+        <li>Asking people to care (like going door-to-door for donations) is unaesthetic, insincere, aggressive, and indecent. (An unpleasant lady knocked on my
+            door asking for donations, so I might be biased.)
         </li>
-      </ul>
-
-      <hr />
-
-      <footer>
-        <p>
-          Liked my ideas? Sign my
-          <a href="http://users.smartgb.com/g/g.php?a=s&i=g18-84651-bd" rel="noopener" target="_blank">guestbook</a>, send me an
-          <a href="mailto:hello@florinungur.com">email</a>, or hit me up on
-          <a href="https://www.linkedin.com/in/florinungur" rel="noopener" target="_blank">LinkedIn</a>.
+    </ul>
+    <hr/>
+    <footer>
+        <p>Liked my ideas? Sign my <a href="http://users.smartgb.com/g/g.php?a=s&i=g18-84651-bd" rel="noopener" target="_blank">guestbook</a>, send me an
+            <a href="mailto:hello@florinungur.com">email</a>, or hit me up on
+            <a href="https://www.linkedin.com/in/florinungur" rel="noopener" target="_blank">LinkedIn</a>.
         </p>
-        <p>
-          Did I make a mistake? Please consider sending a
-          <a href="https://github.com/ungurflorin/florinungur.com/edit/master/ideas.html" rel="noopener" target="_blank">pull request</a>.
-        </p>
-      </footer>
-    </main>
-  </body>
+        <p>Did I make a mistake? Please consider sending a
+            <a href="https://github.com/ungurflorin/florinungur.com/edit/master/ideas.html" rel="noopener" target="_blank">pull request</a>.</p>
+    </footer>
+</main>
+</body>
 </html>

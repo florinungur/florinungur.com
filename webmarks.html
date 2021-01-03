@@ -1,115 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Security -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'none';
-        base-uri 'none';
-        font-src 'self';
-        form-action 'none';
-        img-src 'self';
-        manifest-src 'self';
-        object-src 'none';
-        script-src 'none';
-        style-src 'self'"
-    />
+<head>
+    <!-- Settings -->
+    <meta http-equiv="Content-Security-Policy"
+          content="
+            base-uri 'none';
+            default-src 'none';
+            font-src 'self';
+            form-action 'none';
+            img-src 'self';
+            manifest-src 'self';
+            object-src 'none';
+            script-src 'none';
+            style-src 'self'"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8"/>
 
+    <!-- Webpage info -->
     <title>Webmarks • Florin Ungur</title>
-
-    <!-- Going meta -->
-    <meta name="author" content="Florin Ungur" />
-    <meta
-      name="description"
-      content="A webmark (pronounced web•maark) is a record of a piece of information (e.g. a website, a song, a poem, a book quote, etc.) found online. 
-        It is a thing you found on the web, liked, and decided to keep."
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="utf-8" />
-
-    <!-- Open Graph Data -->
-    <meta property="og:title" content="Webmarks" />
-    <meta
-      property="og:description"
-      content="A webmark (pronounced web•maark) is a record of a piece of information (e.g. a website, a song, a poem, a book quote, etc.) found online. 
-        It is a thing you found on the web, liked, and decided to keep."
-    />
-    <meta property="og:image" content="https://florinungur.com/img/logo/logo.png" />
-    <meta property="og:url" content="https://florinungur.com/webmarks" />
+    <meta property="og:title" content="Webmarks"/>
+    <meta name="author" content="Florin Ungur"/>
+    <meta name="description"
+          content="A webmark (pronounced web•maark) is a record of a piece of information (e.g. a website, a song, a poem, a book quote, etc.) found online. It
+            is a thing you found on the web, liked, and decided to keep."/>
+    <meta property="og:description"
+          content="A webmark (pronounced web•maark) is a record of a piece of information (e.g. a website, a song, a poem, a book quote, etc.) found online. It
+            is a thing you found on the web, liked, and decided to keep."/>
+    <link rel="canonical" href="https://florinungur.com/webmarks"/>
+    <meta property="og:url" content="https://florinungur.com/webmarks"/>
+    <meta property="og:image" content="https://florinungur.com/img/logo/logo.png"/>
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png" />
-    <link rel="manifest" href="/img/favicon/site.webmanifest" />
-    <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#d1861f" />
-    <link rel="shortcut icon" href="/img/favicon/favicon.ico" />
-    <meta name="msapplication-TileColor" content="#ffffff" />
-    <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144.png" />
-    <meta name="msapplication-config" content="/img/favicon/browserconfig.xml" />
-    <meta name="theme-color" content="#ffffff" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png"/>
+    <link rel="manifest" href="/img/favicon/site.webmanifest"/>
+    <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#d1861f"/>
+    <link rel="shortcut icon" href="/img/favicon/favicon.ico"/>
+    <meta name="msapplication-TileColor" content="#ffffff"/>
+    <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144.png"/>
+    <meta name="msapplication-config" content="/img/favicon/browserconfig.xml"/>
+    <meta name="theme-color" content="#ffffff"/>
 
-    <!-- Extra resources -->
-    <link rel="canonical" href="https://florinungur.com/webmarks" />
-    <link rel="stylesheet" href="css/main-min.css" />
-    <link rel="stylesheet" href="css/webmarks-min.css" />
-  </head>
+    <!-- Favicons -->
+    <link rel="stylesheet" href="css/main-min.css"/>
+    <link rel="stylesheet" href="css/webmarks-min.css"/>
+</head>
 
-  <body>
-    <main class="container">
-      <div class="logo is-center">
-        <a href="/"><img loading="lazy" src="../img/logo/logo-min.svg" alt="website logo" width="400" height="70" /></a>
-      </div>
-      <a href="/">← Home</a>
-
-      <h1>My webmarks</h1>
-      <p>
-        A webmark (pronounced web•maark) is a record of a piece of information (e.g. a website, a song, a poem, a book quote, etc.) found online. It is a thing
-        you found on the web, liked, and decided to keep.
-      </p>
-      <p>
-        I made this word myself, hope it sticks. If you like it, you can help by submitting the word to
+<body>
+<div class="logo is-center">
+    <a href="/">
+        <img loading="lazy" src="img/logo/logo-min.svg" alt="website logo" width="400" height="70"/>
+    </a>
+</div>
+<main class="container">
+    <a href="/">← Home</a>
+    <h1>My webmarks</h1>
+    <p>A webmark (pronounced web•maark) is a record of a piece of information (e.g. a website, a song, a poem, a book quote, etc.) found online. It is a thing
+        you found on the web, liked, and decided to keep.</p>
+    <p>I made this word myself, hope it sticks. If you like it, you can help by submitting the word to
         <a href="https://public.oed.com/contribute-to-the-oed/submission-form/" rel="noopener" target="_blank">Oxford English Dictionary's submission form</a>.
-      </p>
-      <p>These webmarks, like my <a href="ideas" target="_blank">ideas</a>, are always-updating.</p>
-
-      <div class="row">
+    </p>
+    <p>These webmarks, like my <a href="ideas" target="_blank">ideas</a>, are always-updating.</p>
+    <div class="row">
         <div class="col-6 content-list">
-          <a href="webmarks/article-notes">
-            <div class="card">
-              <h2 class="is-marginless text-center">Article notes</h2>
-            </div>
-          </a>
+            <a href="webmarks/article-notes">
+                <div class="card">
+                    <h2 class="is-marginless text-center">Article notes</h2>
+                </div>
+            </a>
         </div>
         <div class="col-6 content-list">
-          <a href="webmarks/book-notes">
-            <div class="card">
-              <h2 class="is-marginless text-center">Book notes</h2>
-            </div>
-          </a>
+            <a href="webmarks/book-notes">
+                <div class="card">
+                    <h2 class="is-marginless text-center">Book notes</h2>
+                </div>
+            </a>
         </div>
         <div class="col-6 content-list">
-          <a href="webmarks/poems">
-            <div class="card">
-              <h2 class="is-marginless text-center">Poems</h2>
-            </div>
-          </a>
+            <a href="webmarks/poems">
+                <div class="card">
+                    <h2 class="is-marginless text-center">Poems</h2>
+                </div>
+            </a>
         </div>
         <div class="col-6 content-list">
-          <a href="webmarks/quotes">
-            <div class="card">
-              <h2 class="is-marginless text-center">Quotes</h2>
-            </div>
-          </a>
+            <a href="webmarks/quotes">
+                <div class="card">
+                    <h2 class="is-marginless text-center">Quotes</h2>
+                </div>
+            </a>
         </div>
         <div class="col-6 content-list">
-          <a href="webmarks/video-notes">
-            <div class="card">
-              <h2 class="is-marginless text-center">Video notes</h2>
-            </div>
-          </a>
+            <a href="webmarks/video-notes">
+                <div class="card">
+                    <h2 class="is-marginless text-center">Video notes</h2>
+                </div>
+            </a>
         </div>
-      </div>
-    </main>
-  </body>
+    </div>
+</main>
+</body>
 </html>
