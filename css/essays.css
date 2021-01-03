@@ -4,8 +4,8 @@
   font-size: 48px; /* xxx-large when Safari will support it */
   font-weight: bold;
   line-height: 0.8em; /* https://web.archive.org/web/20201223145243/https://boyet.com/blog/css3-line-height-is-important-for-drop-caps/ */
-  margin-right: 0.15em;
-  padding: 0.17em;
+  margin-right: 0.16em;
+  padding: 0.16em 0em;
 }
 .subtitle {
   font-size: x-large;
