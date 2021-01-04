@@ -71,11 +71,9 @@ blockquote {
 dl dt {
   font-weight: bold;
 }
-hr {
-  border: none;
-  background-color: var(--color-primary);
-  height: 1px;
-  margin: 1rem 0;
+footer {
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-primary);
 }
 table {
   width: 100%;
