@@ -95,14 +95,14 @@ img {
   width: 100%;
   height: auto;
 }
-.container {
+main {
   max-width: 720px;
   margin: 0 auto;
   width: 96%;
   padding: 0 calc(var(--grid-gutter) / 2);
 }
 @media screen and (max-width: 599px) {
-  .container {
+  main {
     width: 100%;
   }
 }
