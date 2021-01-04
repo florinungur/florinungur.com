@@ -23,8 +23,15 @@ body {
   line-height: 1.6;
   font-size: 1.6rem;
   font-family: sans-serif;
-  margin: 0;
-  padding: 0;
+  max-width: 720px;
+  margin: 0 auto;
+  width: 96%;
+  padding: 0 calc(var(--grid-gutter) / 2);
+}
+@media screen and (max-width: 599px) {
+  body {
+    width: 100%;
+  }
 }
 h1,
 h2,
@@ -94,17 +101,6 @@ tfoot {
 img {
   width: 100%;
   height: auto;
-}
-main {
-  max-width: 720px;
-  margin: 0 auto;
-  width: 96%;
-  padding: 0 calc(var(--grid-gutter) / 2);
-}
-@media screen and (max-width: 599px) {
-  main {
-    width: 100%;
-  }
 }
 .card {
   padding: 1rem 2rem;
