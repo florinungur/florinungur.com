@@ -234,6 +234,10 @@ body {
     letter-spacing: 0.1em;
 }
 
+.uppercase {
+    text-transform: uppercase;
+}
+
 @-webkit-keyframes spin {
     to {
         transform: rotate(1turn);
@@ -322,7 +326,8 @@ body {
     h2,
     h3,
     li,
-    p {
+    p,
+    time {
         color: #000 !important;
     }
 
