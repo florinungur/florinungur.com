@@ -218,18 +218,6 @@ body {
     padding-bottom: 0.375rem;
 }
 
-.text-gray-700 {
-    --text-opacity: 1;
-    color: #4a5568;
-    color: rgba(74, 85, 104, var(--text-opacity));
-}
-
-.text-gray-750 {
-    --text-opacity: 1;
-    color: #44505f;
-    color: rgba(67.728, 79.75039999999998, 95.47200000000001, var(--text-opacity));
-}
-
 .tracking-widest {
     letter-spacing: 0.1em;
 }
