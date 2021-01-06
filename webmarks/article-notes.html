@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <!-- Settings -->
     <meta http-equiv="Content-Security-Policy"
@@ -56,7 +56,7 @@
 <main>
     <h1>Article notes</h1>
     <p class="datetime">Last updated on
-        <time datetime="2020-12-17">December 17, 2020</time>
+        <time datetime="2021-01-06">January 6, 2020</time>
         (see <a href="https://github.com/ungurflorin/florinungur.com/commits/master/webmarks/article-notes.html" rel="noopener" target="_blank">update
             history</a>)
     </p>
@@ -86,6 +86,8 @@
                 <li><a href="#Technology1">Catherine Buni & Soraya Chemaly - The secret rules of the internet</a></li>
                 <li><a href="#Technology2">Brandur Leach - In Pursuit of Production Minimalism</a></li>
                 <li><a href="#Technology3">Paul Graham - Fashionable Problems</a></li>
+                <li><a href="#Technology4">David Both - An introduction to Linux filesystems</a></li>
+                <li><a href="#Technology5">LSB Workgroup, The Linux Foundation - Filesystem Hierarchy Standard</a></li>
             </ol>
         </ol>
     </nav>
@@ -289,6 +291,32 @@
         <li>If you love what you do you'll either help to support the same thing as other people or go into a niche that, for others, is too marginal to
             matter.
         </li>
+    </ul>
+    <h3 id="Technology4">
+        <a href="https://opensource.com/life/16/10/introduction-linux-filesystems" rel="noopener" target="_blank">David Both - An introduction to Linux
+            filesystems</a>
+        [<a href="https://web.archive.org/web/20201116033826/https://opensource.com/life/16/10/introduction-linux-filesystems" rel="noopener" target="_blank">archived
+        link</a>]
+    </h3>
+    <ul>
+        <li>The filesystem hierarchy described in the FHS is independent from the filesystem type (e.g. ext4, btrfs).</li>
+        <li>In Windows, <code>C:</code> and <code>D:</code> drives have separate root directories and directory trees, as opposed to Linux and other UNIX
+            systems which have all drives share the same root.
+        </li>
+        <li>You can mount different filesystem types under the same root filesystem.</li>
+        <li><q>To mount</q> a filesystem refers back to when a tape would need to be physically mounted on a drive device. A mount point is just a directory
+            under <code>/</code>.
+        </li>
+        <li><code>/etc/fstab</code> = file system table</li>
+    </ul>
+    <h3 id="Technology5">
+        <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs-3.0.pdf" rel="noopener" target="_blank">LSB Workgroup, The Linux Foundation - Filesystem
+            Hierarchy Standard</a>
+        [<a href="https://web.archive.org/web/20210106175917/https://refspecs.linuxfoundation.org/FHS_3.0/fhs-3.0.pdf" rel="noopener" target="_blank">archived
+        link</a>]
+    </h3>
+    <ul>
+        <li>Use <code>echo *</code> when you can't access <code>ls</code>.</li>
     </ul>
 </main>
 <footer>
