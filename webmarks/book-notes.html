@@ -60,7 +60,7 @@
 <main>
     <h1>Book notes</h1>
     <p class="datetime">Last updated on
-        <time datetime="2021-01-07">January 7, 2021</time>
+        <time datetime="2021-01-11">January 11, 2021</time>
         (see <a href="https://github.com/ungurflorin/florinungur.com/commits/master/webmarks/book-notes.html" rel="noopener" target="_blank">update history</a>)
     </p>
     <p>This is a "living" webpage in which I jot down notes from some of the books that I have read. These notes are things I consider worthy to remember and
@@ -547,6 +547,36 @@
         <ul>
             <li>Use <code>visudo</code>, not <code>vim</code>, when editing <code>/etc/sudoers</code> because <code>visudo</code> includes error checking and
                 validation for this special file.
+            </li>
+            <li>Vim has 3 modes: command (the default mode; used for entering commands), insert (text manipulation), and last-line (saving files and exiting).
+                To enter insert, press <kbd>a</kbd> (append) or <kbd>i</kbd> (insert). To enter last-line, use <code>:key</code> where <code>key</code> = <code>w,
+                    q, wq, q!</code>.
+            </li>
+            <li>The C <code>volatile</code> keyword tells the compiler to not optimize that variable and the code operating on it.</li>
+            <li>Each <code>struct</code> member has a unique memory area. Each <code>union</code> member shares the same memory area.
+                <pre><code>
+                    struct node {
+                        int i;
+                        char c[32];
+                    } x;
+                    union node {
+                        int i;
+                        char c[32];
+                    } y;
+                </code></pre>
+                So <code>node x</code> is (usually) 36 bytes and <code>node y</code> is 32 bytes. You can see unions as a flag value. You can have multiple
+                variables in the union but the union can store only as much as the largest variable. You can cram the variables in a <code>struct</code> using
+                <code>__attribute__((packed, aligned(X)))</code>.
+            </li>
+            <li>In ext2/3, directory contents are <code>dir_entry</code> objects:
+                <pre><code>
+                    struct dir_entry {
+                        int ino; // index node number (stores file metadata)
+                        int entry_len;
+                        int name_len;
+                        char name[];
+                    }
+                </code></pre>
             </li>
         </ul>
     </details>
