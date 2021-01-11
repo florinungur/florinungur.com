@@ -82,6 +82,31 @@ blockquote {
     border-left: 3px solid var(--color-lightGrey);
 }
 
+code,
+kbd {
+    font-size: 90%;
+}
+
+pre {
+    border: 1px solid var(--color-lightGrey);
+    counter-reset: line;
+    line-height: 1.6; /* body value */
+    padding: .6em;
+    white-space: pre-wrap;
+}
+
+pre code::before {
+    content: counter(line, decimal-leading-zero);
+    counter-increment: line;
+    display: inline-block;
+    border-right: 1px solid #ddd;
+    padding: 0 .5em;
+    margin-right: .5em;
+    color: #888;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
 dl dt {
     font-weight: bold;
 }

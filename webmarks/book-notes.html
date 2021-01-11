@@ -558,13 +558,13 @@
                 variables in a <code>struct</code> using <code>__attribute__((packed, aligned(X)))</code>.
             </li>
             <li>In ext2/3, directory contents are <code>dir_entry</code> objects:
-                <pre><code>struct dir_entry {
-    int ino; // index node number (stores file metadata)
-    int entry_len;
-    int name_len;
-    char name[];
-}</code></pre>
-                Where <code>ino</code> is the index node number, which stores file metadata.
+                <pre>
+<code>struct dir_entry {</code>
+<code>  int ino; // index node number (stores file metadata)</code>
+<code>  int entry_len;</code>
+<code>  int name_len;</code>
+<code>  char name[];</code>
+<code>}</code></pre>
             </li>
         </ul>
     </details>
