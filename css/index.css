@@ -6,4 +6,5 @@
 .fake-pre {
     font-size: 1.6rem; /* Same as the body font-size from main.css */
     font-family: sans-serif;
+    border: none; /* To remove the default one */
 }
