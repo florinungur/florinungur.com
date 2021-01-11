@@ -559,7 +559,7 @@
             </li>
             <li>In ext2/3, directory contents are <code>dir_entry</code> objects:
                 <pre><code>struct dir_entry {
-    int ino;
+    int ino; // index node number (stores file metadata)
     int entry_len;
     int name_len;
     char name[];
