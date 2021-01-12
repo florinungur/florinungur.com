@@ -5,19 +5,19 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
         <loc>https://florinungur.com/</loc>
-        <lastmod>2020-12-28</lastmod>
+        <lastmod>2021-01-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1.00</priority>
     </url>
     <url>
         <loc>https://florinungur.com/webmarks</loc>
-        <lastmod>2020-12-28</lastmod>
+        <lastmod>2021-01-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>https://florinungur.com/ideas</loc>
-        <lastmod>2020-12-28</lastmod>
+        <lastmod>2021-01-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
@@ -29,43 +29,43 @@
     </url>
     <url>
         <loc>https://florinungur.com/resume</loc>
-        <lastmod>2020-12-28</lastmod>
+        <lastmod>2021-01-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>https://florinungur.com/webmarks/article-notes</loc>
-        <lastmod>2020-12-28</lastmod>
+        <lastmod>2021-01-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.64</priority>
     </url>
     <url>
         <loc>https://florinungur.com/webmarks/book-notes</loc>
-        <lastmod>2020-12-28</lastmod>
+        <lastmod>2021-01-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.64</priority>
     </url>
     <url>
         <loc>https://florinungur.com/webmarks/collected-poems</loc>
-        <lastmod>2020-12-28</lastmod>
+        <lastmod>2021-01-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.64</priority>
     </url>
     <url>
         <loc>https://florinungur.com/webmarks/collected-quotes</loc>
-        <lastmod>2020-12-28</lastmod>
+        <lastmod>2021-01-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.64</priority>
     </url>
     <url>
         <loc>https://florinungur.com/webmarks/video-notes</loc>
-        <lastmod>2020-12-28</lastmod>
+        <lastmod>2020-12-17</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.64</priority>
     </url>
     <url>
         <loc>https://florinungur.com/essays/2020/09/01/hello-world</loc>
-        <lastmod>2020-12-28</lastmod>
+        <lastmod>2021-01-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.64</priority>
     </url>
