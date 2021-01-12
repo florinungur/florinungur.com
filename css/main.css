@@ -1,5 +1,4 @@
 :root {
-    --bg-secondary-color: #fcfcfc;
     --color-primary: #d1861f;
     --color-lightGrey: #dddddd;
     --color-grey: #747681;
@@ -77,9 +76,8 @@ p {
 }
 
 blockquote {
-    background-color: var(--bg-secondary-color);
-    padding: 1.5rem 2rem;
-    border-left: 3px solid var(--color-lightGrey);
+    border: 1px solid var(--color-lightGrey);
+    padding: 1rem 2rem;
 }
 
 code,
@@ -126,7 +124,7 @@ table {
 }
 
 table.striped tr:nth-of-type(2n) {
-    background-color: var(--bg-secondary-color);
+    background-color: var(--color-lightGrey);
 }
 
 td,
