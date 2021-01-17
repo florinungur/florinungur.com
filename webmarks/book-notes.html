@@ -60,7 +60,7 @@
 <main>
     <h1>Book notes</h1>
     <p class="datetime">Last updated on
-        <time datetime="2021-01-11">January 11, 2021</time>
+        <time datetime="2021-01-17">January 17, 2021</time>
         (see <a href="https://github.com/ungurflorin/florinungur.com/commits/master/webmarks/book-notes.html" rel="noopener" target="_blank">update history</a>)
     </p>
     <p>This is a "living" webpage in which I jot down notes from some of the books that I have read. These notes are things I consider worthy to remember and
@@ -543,7 +543,7 @@
         </ul>
     </details>
     <details>
-        <summary>K.C. Wang - Systems Programming in Unix/Linux</summary>
+        <summary>K.C. Wang - Systems Programming in Unix/Linux (only partly read)</summary>
         <ul>
             <li>Use <code>visudo</code>, not <code>vim</code>, when editing <code>/etc/sudoers</code> because <code>visudo</code> includes error checking and
                 validation for this special file.
@@ -567,6 +567,16 @@
 <!--             --><code>  char name[];</code>
 <!--             --><code>}</code><!--
             --></pre>
+            </li>
+            <li>The <code>PATH</code> environment variable is a list of directories Linux checks for commands.</li>
+            <li>A named pipe (e.g. <code>mkfifo named-pipe-piper; ls -al > named-pipe-piper; cat named-pipe-piper</code>) differs from a regular pipe (e.g.
+                <code>some-command | grep pattern</code>) in the following ways:
+                <ul>
+                    <li>it has a name</li>
+                    <li>it's on the filesystem (i.e. persistent)</li>
+                    <li>allows for two-way communication</li>
+                    <li>allows for access control</li>
+                </ul>
             </li>
         </ul>
     </details>
