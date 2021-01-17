@@ -9,6 +9,10 @@ details.dropdown > :last-child {
     white-space: nowrap;
 }
 
+.quote-explanation {
+    padding-left: 5em;
+}
+
 .row {
     display: -webkit-box;
     display: -ms-flexbox;
