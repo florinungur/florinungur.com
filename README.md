@@ -17,9 +17,8 @@ If you like having small WebP files:
 
 1. Download [cwebp](https://developers.google.com/speed/webp/download)
 2. (If you are on Windows 10) place `cwebp.exe` in `C:\Windows`
-3. Have fun: `cwebp input.png -o output.webp` (see
-   the [docs](https://developers.google.com/speed/webp/docs/cwebp) [[archived link]](https://web.archive.org/web/20201020225626/https://developers.google.com/speed/webp/docs/cwebp) for
-   more info)
+3. Have fun: `cwebp input.png -o output.webp` (see the [docs](https://developers.google.com/speed/webp/docs/cwebp)
+   [[archived link]](https://web.archive.org/web/20201020225626/https://developers.google.com/speed/webp/docs/cwebp) for more info)
 
 ## svgo
 
