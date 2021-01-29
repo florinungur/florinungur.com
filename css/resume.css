@@ -21,7 +21,8 @@ a {
     background-color: transparent;
 }
 
-time {
+time,
+footer {
     float: right;
 }
 
