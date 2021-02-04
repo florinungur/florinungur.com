@@ -49,7 +49,7 @@
 </nav>
 <main>
     <h1>Video notes</h1>
-    <div class="datetime">Updated on <time datetime="2020-12-17">Dec 17, 2020</time>: added all the videos</div>
+    <div class="datetime">Updated on <time datetime="2021-02-04">Feb 4, 2021</time>: added Michael Bryzek's talk</div>
     <p>Here lies most of the stuff I consider worthy to remember from the videos I stumbled upon on the web.</p>
     <nav>
         <ol>
@@ -175,6 +175,30 @@
     </h3>
     <ul>
         <li><b>An argument for in-house software</b>: you can't fix Windows' problems, you must pressure Windows to fix it, which takes more time.</li>
+    </ul>
+    <h3 id="Technology2">
+        <a href="https://www.youtube.com/watch?v=j6ow-UemzBc" rel="noopener" target="_blank">Michael Bryzek - Design Microservice Architectures the Right
+            Way</a>
+        [<a href="https://web.archive.org/web/20210204170301/https://www.youtube.com/watch?v=j6ow-UemzBc" rel="noopener" target="_blank">archived link</a>]
+    </h3>
+    <ul>
+        <li>Code generation can be used to set strict standards across systems.</li>
+        <li><q>One programming language for every 4000 engineers.</q></li>
+        <li>Starting with the API definition — which is seen as the backbone of the entire software system (excluding infrastructure) that a company provides
+            and/or uses — allows for major system modifications (e.g. incorporating GDPR regulation) with a few language-neutral JSON/YAML/etc. line changes.
+        </li>
+        <li>If you start with the entire system being defined as an API you can store that API definition in Git (so you can revert back changes that would
+            otherwise take more time to fix, collaborate, etc.) and do CI tasks on it: run linters, test the API, etc. For sure there are more pros and cons on
+            this, like being able to understand how your system works without needing to look at MBs of code written in different programming languages (that
+            you might not know). Cons? Not really a con, but: you still need to enforce code to only use defined interfaces to communicate with other
+            services.
+        </li>
+        <li>The scenario described above defines the API specification as the (single?) source of truth for the system design. If, then, the system
+            specification passes your tests (e.g. querying for a random user returns an error), you can also be sure that the system code passes those tests.
+        </li>
+        <li>It's language studies 101: the language you learn shapes how you think. In this case: the communication protocol you implement (the API definition)
+            shapes your code.
+        </li>
     </ul>
     <h2 id="Speaking">Speaking</h2>
     <h3 id="Speaking1">
