@@ -290,6 +290,7 @@ img {
 figure,
 .datetime {
     font-size: small;
+    margin-block-end: 1em;
 }
 
 /* To pass https://web.archive.org/web/20200901052543/https://web.dev/tap-targets/ */
