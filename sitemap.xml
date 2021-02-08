@@ -4,14 +4,14 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
-        <loc>https://florinungur.com/</loc>
+        <loc>https://florinungur.com</loc>
         <lastmod>2021-02-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.00</priority>
     </url>
     <url>
         <loc>https://florinungur.com/webmarks</loc>
-        <lastmod>2021-02-04</lastmod>
+        <lastmod>2021-02-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
@@ -23,7 +23,7 @@
     </url>
     <url>
         <loc>https://florinungur.com/essays</loc>
-        <lastmod>2021-02-04</lastmod>
+        <lastmod>2021-02-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
@@ -53,7 +53,7 @@
     </url>
     <url>
         <loc>https://florinungur.com/webmarks/collected-quotes</loc>
-        <lastmod>2021-02-04</lastmod>
+        <lastmod>2021-02-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.64</priority>
     </url>
