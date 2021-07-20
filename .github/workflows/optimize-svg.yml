@@ -1,8 +1,8 @@
 name: Optimize SVG
 on:
   push:
-    branches:
-      - master
+    paths:
+      - '**.svg'
 jobs:
   optimize:
     runs-on: ubuntu-latest
