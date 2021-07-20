@@ -14,9 +14,7 @@ jobs:
       - name: Install svgo
         run: npm install svgo --global
       - name: Optimize SVG files
-        run: |
-          svgo --help
-          svgo -f $GITHUB_WORKSPACE -o $GITHUB_WORKSPACE
+        run: svgo --folder $GITHUB_WORKSPACE --recursive --multipass --pretty
       - name: Commit optimized SVG files
         run: |
           git config --global user.name 'Florin Ungur'
