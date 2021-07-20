@@ -1,8 +1,7 @@
 name: Minify CSS
 on:
   push:
-    paths:
-      - '**.css'
+    branches: [ master ]
 jobs:
   minify:
     runs-on: ubuntu-latest
