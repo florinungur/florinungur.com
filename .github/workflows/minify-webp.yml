@@ -13,11 +13,10 @@ jobs:
       - name: Minify WebP files
         run: |
           find $GITHUB_WORKSPACE -type f -and -iname "*.webp"
-          bash -c '
           webp_path=$(sed 's/\.[^.]*$/.webp/' <<< "$0");
           if [ ! -f "$webp_path" ]; then
             cwebp "$0" -o "$webp_path" -v;
-          fi;' {} \;
+          fi;
           echo WEB_PATH is "$webp_path"
       - name: Commit minified WebP files
         run: |
