@@ -1,0 +1,25 @@
+name: Optimize SVG
+on:
+  push:
+    branches:
+      - master
+jobs:
+  minify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install svgo
+        run: npm install svgo --global
+      - name: Optimize SVG files
+        run: |
+          svgo --help
+          svgo -f $GITHUB_WORKSPACE -o $GITHUB_WORKSPACE
+      - name: Commit optimized SVG files
+        run: |
+          git config --global user.name 'Florin Ungur'
+          git config --global user.email 'hello@florinungur.com'
+          git commit --all --message "Optimize SVG files"
+          git push
