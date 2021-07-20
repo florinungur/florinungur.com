@@ -1,8 +1,8 @@
 name: Minify WebP
 on:
   push:
-    branches:
-      - master
+    paths:
+      - '**.webp'
 jobs:
   minify:
     runs-on: ubuntu-latest
