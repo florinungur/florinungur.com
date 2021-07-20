@@ -13,7 +13,7 @@ jobs:
       - name: Globally install cssnano, postcss, and postcss-cli
         run: npm install --global cssnano postcss postcss-cli
       - name: Minify css files
-        run: postcss "css/" --replace --verbose --dir "css/"
+        run: postcss "css/" --verbose --dir "css/"
       - name: Commit minified CSS files
         run: |
           git config --global user.name 'Florin Ungur'
