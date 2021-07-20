@@ -1,6 +1,9 @@
 name: Minify CSS files
 on:
   push:
+    branches:
+      - main
+      - master
     paths:
       - '**.css'
 jobs:

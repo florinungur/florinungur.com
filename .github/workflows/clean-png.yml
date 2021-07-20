@@ -1,6 +1,9 @@
 name: Clean PNG files
 on:
   push:
+    branches:
+      - main
+      - master
     paths:
       - '**.png'
 jobs:

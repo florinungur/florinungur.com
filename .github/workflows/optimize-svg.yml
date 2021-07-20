@@ -1,6 +1,9 @@
 name: Optimize SVG files
 on:
   push:
+    branches:
+      - main
+      - master
     paths:
       - '**.svg'
 jobs:

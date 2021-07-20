@@ -1,6 +1,9 @@
 name: Compress WebP files
 on:
   push:
+    branches:
+      - main
+      - master
     paths:
       - '**.webp'
 jobs:
