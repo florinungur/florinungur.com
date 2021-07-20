@@ -1,7 +1,8 @@
 name: Minify CSS
 on:
   push:
-    branches: [ master ]
+    paths:
+      - '**.css'
 jobs:
   minify:
     runs-on: ubuntu-latest
@@ -12,7 +13,7 @@ jobs:
           node-version: '14'
       - name: Install cssnano, postcss, and postcss-cli
         run: npm install cssnano postcss postcss-cli --save-dev
-      - name: Minify css files
+      - name: Minify CSS files
         run: npx postcss "css/" --verbose --dir "css/" --use cssnano
       - name: Commit minified CSS files
         run: |
