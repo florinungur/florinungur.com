@@ -13,14 +13,10 @@ jobs:
       - name: Globally install cssnano, postcss, and postcss-cli
         run: npm install --global cssnano postcss postcss-cli
       - name: Minify css files
-        run: postcss $GITHUB_WORKSPACE/css/ --dir $GITHUB_WORKSPACE/css/ --replace --verbose
-  push:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
+        run: postcss "$GITHUB_WORKSPACE/css/" --dir "$GITHUB_WORKSPACE/css/" --replace --verbose
       - name: Commit minified CSS files
         run: |
-          git config --global user.name 'Florin Ungur'
-          git config --global user.email 'hello@florinungur.com'
-          git commit --all --message "Minify CSS files"
-          git push
+            git config --global user.name 'Florin Ungur'
+            git config --global user.email 'hello@florinungur.com'
+            git commit --all --message "Minify CSS files"
+            git push
