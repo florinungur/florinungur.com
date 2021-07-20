@@ -1,4 +1,4 @@
-name: Minify WebP
+name: Compress WebP
 on:
   push:
     paths:
@@ -10,16 +10,15 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install webp
         run: sudo apt-get install webp
-      - name: Minify WebP files
+      - name: Compress WebP files
         run: |
           mapfile -t UncrompressedFiles < <( find $GITHUB_WORKSPACE -type f -and -iname "*.webp" )
           for File in $UncrompressedFiles; do
             cwebp "$File" -o "$File" -v;
-            echo File is "$File";
           done
-      - name: Commit minified WebP files
+      - name: Commit compressed WebP files
         run: |
           git config --global user.name 'Florin Ungur'
           git config --global user.email 'hello@florinungur.com'
-          git commit --all --message "Minify WebP files"
+          git commit --all --message "Compress WebP files"
           git push
