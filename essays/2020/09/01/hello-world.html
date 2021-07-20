@@ -54,8 +54,12 @@
 <main>
     <h1>Hello, World!</h1>
     <div class="subtitle">Or: How I finally decided to create my website</div>
-    <div class="datetime"><time datetime="2020-09-01">Sep 1, 2020</time> | <i>Updated on <time datetime="2021-02-06">Feb 6, 2021</time>: simplified first
-        sentence</i></div>
+    <div class="datetime">
+        <time datetime="2020-09-01">Sep 1, 2020</time>
+        | <i>Updated on
+        <time datetime="2021-07-20">Jul 20, 2021</time>
+        : changed tooling</i>
+    </div>
     <p>This website will have mostly philosophy-, psychology-, and technology-related content. I aim to display this content on a simple yet beautiful website
         that is designed to last and to be accessible to as many types of people as possible throughout its lifetime.</p>
     <figure>
@@ -146,9 +150,15 @@
             <a href="https://github.com/ungurflorin/florinungur.com" rel="noopener" target="_blank">GitHub</a> and
             <a href="https://soverin.net/" rel="noopener" target="_blank">Soverin</a> for hosting the content;
         </li>
-        <li><a href="https://cssnano.co/" rel="noopener" target="_blank">cssnano</a> for minifying the CSS;</li>
-        <li><a href="https://developers.google.com/speed/webp/docs/cwebp" rel="noopener" target="_blank">cwebp</a> for compressing images into WebP files;</li>
-        <li><a href="https://github.com/svg/svgo" rel="noopener" target="_blank">svgo</a> for optimizing SVG files;</li>
+        <li><a href="https://github.com/ungurflorin/florinungur.com/tree/add-azure-article/.github/workflows" rel="noopener" target="_blank">GitHub Actions</a>
+            for building the website; they use:
+        </li>
+        <ul>
+            <li><a href="https://cssnano.co/" rel="noopener" target="_blank">cssnano</a> for minifying the CSS;</li>
+            <li><a href="https://developers.google.com/speed/webp/docs/cwebp" rel="noopener" target="_blank">cwebp</a> for compressing WebP files;</li>
+            <li><a href="https://github.com/svg/svgo" rel="noopener" target="_blank">svgo</a> for optimizing SVG files;</li>
+            <li>and <a href="https://www.npmjs.com/package/optipng-bin" rel="noopener" target="_blank">optipng-bin</a> for cleaning PNG images.</li>
+        </ul>
         <li>
             Microsoft's <a href="https://accessibilityinsights.io/en/" rel="noopener" target="_blank">Accessibility Insights</a>, IBM's
             <a href="https://github.com/IBMa/equal-access" rel="noopener" target="_blank">Equal Access Accessibility Checker</a>, and Toptal's
@@ -169,8 +179,6 @@
         <a href="https://news.ycombinator.com/item?id=23119701" rel="noopener" target="_blank">HN article</a>
         [<a href="https://web.archive.org/web/20200831180606/https://news.ycombinator.com/item?id=23119701" rel="noopener" target="_blank">archived hacker
             link</a>].)</p>
-    <p>The <a href="https://github.com/ungurflorin/florinungur.com" rel="noopener" target="_blank">GitHub README</a> of this website has some instructions on
-        how I used and configured cssnano, cwebp, and svgo.</p>
     <h2>Philosophy</h2>
     <p>I finally decided to make this website because I no longer feel that my ideas, poems, and essays are trash. Secondly, publishing these things pushes me
         to get rid of the trash. Lastly, I want an email address with a custom domain. That is it.</p>
