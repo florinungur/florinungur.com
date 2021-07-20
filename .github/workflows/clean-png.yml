@@ -19,9 +19,8 @@ jobs:
 
           mapfile -t DirtyFiles < <( find $GITHUB_WORKSPACE -type f -and -iname "*.png" )
 
-
-          for File in $DirtyFiles; do
-            echo DirtyFile is "$DirtyFiles"
+          for File in "${DirtyFiles[@]}"; do
+            echo DirtyFile is "$File"
             optipng "$File" -out "$File" -v -clobber;
           done
       - name: Commit cleaned PNG files
