@@ -12,8 +12,8 @@ jobs:
         run: sudo apt-get install webp
       - name: Minify WebP files
         run: |
-          find $GITHUB_WORKSPACE -type f -and -iname "*.png"
-          -exec bash -c '
+          find $GITHUB_WORKSPACE -type f -and -iname "*.webp"
+          bash -c '
           webp_path=$(sed 's/\.[^.]*$/.webp/' <<< "$0");
           if [ ! -f "$webp_path" ]; then
             cwebp "$0" -o "$webp_path" -v;
