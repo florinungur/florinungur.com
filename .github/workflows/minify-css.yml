@@ -11,7 +11,7 @@ jobs:
         with:
           node-version: '14'
       - name: Install cssnano, postcss, and postcss-cli
-        run: npm install cssnano postcss postcss-cli
+        run: npm install cssnano postcss postcss-cli --save-dev
       - name: Minify css files
         run: postcss "css/" --verbose --dir "css/"
       - name: Commit minified CSS files
