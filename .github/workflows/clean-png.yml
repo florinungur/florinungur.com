@@ -15,11 +15,11 @@ jobs:
         run: npm install optipng-bin --global
       - name: Clean PNG files
         run: |
-          optipng --help
-
           mapfile -t DirtyFiles < <( find $GITHUB_WORKSPACE -type f -and -iname "*.png" )
+
+          echo DirtyFile is "$DirtyFiles"
           for File in $DirtyFiles; do
-            optipng "$File" -o "$File" -v;
+            optipng "$File" -out "$File" -v -clobber;
           done
       - name: Commit cleaned PNG files
         run: |
