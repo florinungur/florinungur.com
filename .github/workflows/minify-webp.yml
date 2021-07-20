@@ -1,0 +1,27 @@
+name: Minify WebP
+on:
+  push:
+    paths:
+      - '**.webp'
+jobs:
+  minify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install webp
+        run: sudo apt-get install webp
+      - name: Minify WebP files
+        run: |
+          find / -type f -and -iname "*.png"
+          -exec bash -c '
+          webp_path=$(sed 's/\.[^.]*$/.webp/' <<< "$0");
+          if [ ! -f "$webp_path" ]; then
+            cwebp "$0" -o "$webp_path" -v;
+          fi;' {} \;
+          echo WEB_PATH is "$webp_path"
+      - name: Commit minified CSS files
+        run: |
+          git config --global user.name 'Florin Ungur'
+          git config --global user.email 'hello@florinungur.com'
+          git commit --all --message "Minify CSS files"
+          git push
