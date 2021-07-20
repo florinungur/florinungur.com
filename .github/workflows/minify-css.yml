@@ -10,10 +10,8 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-      - name: Locally install cssnano
-        run: npm install --save-dev cssnano
-      - name: Globally install postcss and postcss-cli
-        run: npm install --global postcss postcss-cli
+      - name: Install cssnano, postcss, and postcss-cli
+        run: npm install cssnano postcss postcss-cli
       - name: Minify css files
         run: postcss "css/" --verbose --dir "css/"
       - name: Commit minified CSS files
