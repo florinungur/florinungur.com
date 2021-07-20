@@ -80,7 +80,7 @@
             times of high usage to ensure availability. Similarly, at times of low usage you want your resource to scale down, so you can realize cost
             savings.</p>
     </blockquote>
-    <p>What this paragraph doesn't say is that if you have a scale condition that looks like:</p>
+    <p>What this paragraph doesn't say is that if you have a scale condition like:</p>
     <!-- @formatter:off Until the 'white-space' CSS property improves ... -->
     <pre>
 <!-- --><code>Scale out</code>
@@ -96,36 +96,35 @@
         you can avoid spending one week with a Microsoft representative trying to diagnose the same behavior.</p>
     <p>I also added this finding to the official documentation.</p>
     <h2>Work item</h2>
-    <p>On the 17th of June, 2021, I picked up a task from the backlog which read like:</p>
+    <p>On the 17th of June, 2021, I picked up a task from the backlog which read:</p>
     <blockquote>
-        <p class="is-marginless">Our App Service Plan is set to scale automatically, but that leads to some errors while the ASP is scaling (it seems mostly
-            HTTP calls that call an instance which is starting or already shutting down?). For prod we set the ASP to 4 S2 instances, without autoscaling. Could
-            you have a look at our ASP to see what we need there; if it's better to disable autoscaling, and how many instances would we need?</p>
+        <p class="is-marginless">Our App Service Plan is set to scale automatically, but that leads to some errors while the ASP is scaling: (it seems) mostly
+            HTTP calls that call an instance which is starting or shutting down. For prod we set the ASP to 4 S2 instances, without autoscaling. Please
+            investigate if it's better to disable autoscaling and, if so, how many instances would we need?</p>
     </blockquote>
     <p>Please note that the issue in the ticket doesn't really matter; the HTTP errors could have easily been caused because the apps in the ASP didn't have
         health checks, leading to services hitting unhealthy instances. The only interesting part (of this essay) is the realization that Azure autoscaling is a
-        blackbox service that you can use but not
-        perfectly tune because you don't have all the information, only results and correlations.</p>
+        black box service that you can use but not perfectly tune because you don't have all the information, only results, metrics, logs, and the correlations
+        you can make.</p>
     <p>With that in mind, I looked at the metrics of each individual app and of the ASP. In total, 6 apps had the pattern of a stable instance which gets
-        replaced by another
-        stable instance; each instance lasted for about 4 days. All apps had ephemeral instances (i.e. which had a 1-2 day lifespan). This was because of the
-        sub-optimal scaling condition. The average CPU utilization per app slot was between 23% - 30% while the average memory usage was between
-        63% - 78%. The scale in and scale out rules were based on the <code>CpuPercentage</code> metric, which was fine, but the values of
-        the metric were too close to each other, which lead to flapping (the phenomenon in which instances scale up/down rapidly and repetitively) and to the
-        HTTP error calls.</p>
+        replaced by another stable instance; each instance lasted for about 4 days. All apps had ephemeral instances (i.e. with a 1-2 day lifespan). This was
+        because of the sub-optimal scaling condition. The average CPU utilization per app slot was between 23% - 30% while the average memory usage was between
+        63% - 78%. The scale in and scale out rules were based on the <code>CpuPercentage</code> metric, which was fine, but the scale in and scale out
+        thresholds were too close to each other, which lead to flapping (the phenomenon in which instances scale up/down rapidly and repetitively) and,
+        possibly, to the HTTP error calls.</p>
     <p>After some tweaking, I arrived at the scale condition mentioned above, which eliminated the HTTP errors but not the flapping. Flapping should have no
         longer occurred, but, instead, the ASP was stuck with 2 instances.</p>
-    <p>The autoscale engine has a formula for when to scale in:</p>
+    <p>The autoscale engine determines when to scale in based on the following formula:</p>
     <!-- @formatter:off Until the 'white-space' CSS property improves ... -->
     <pre>
 <!-- --><code>metric x current instance count / final number of instances when scaled down</code><!--
  --></pre>
     <!-- @formatter:on -->
-    <p>The reasoning behind this formula is simple: if you have a workload that is divided across N instances that is to be moved to N-1 instances, then the N-1
-        instances should be able to handle the workload that was present on the N instances.</p>
+    <p>The reasoning behind this equation is simple: if you have a workload that is divided across N instances that is to be moved to N-1 instances, then the
+        N-1 instances should be able to handle the workload that was present on the N instances.</p>
     <p>For the ASP in question, the formula then should be: <code>30 (average CPU usage) x 2 (current number of instances) / 1 (desired number of instances) =
-        60</code>. This is 30% below the scale out threshold, yet the ASP was stuck in
-        endless flapping. Only if the outcome of the equation would've been 90% (the scale out threshold) or more should flapping occur.</p>
+        60</code>. This is 30% below the scale out threshold, yet the ASP was stuck in endless flapping. Only if the outcome of the equation would've been 90%
+        (the scale out threshold) or more should flapping occur.</p>
     <p>After depleting the available information on the subject (i.e. the official docs, a
         <a href="https://stackoverflow.com/questions/49760213/azure-app-service-autoscale-fails-to-scale-in" rel="noopener" target="_blank">StackOverflow
             post</a>
@@ -151,12 +150,13 @@
         <li>The way the CPU usage increases in the ASP (i.e. rare spikes that go from 30% straight to 90% - 95% in under 1 minute) makes it so that reducing the
             scale out threshold by 10% would have no positive impact and one negative impact; that is
         </li>
-        <li>Lowering the scale out threshold would require me lowering the scale in threshold too (for example, to 30%). This would result in an inefficient use
-            of computing resources because the average CPU utilization is 30%, meaning that the instance count would never scale in to 1. I would have to lower
-            the scale in threshold because of the way Azure determines when to scale in. If the CPU usage is 44% (slightly below the current scale in threshold)
-            averaged across 2 instances, Azure would perform the following calculation: <code>44 x 2 / 1 = 88</code>. The result is above the recommended scale
-            out threshold of 80. Thus, Azure will produce a flapping event and refrain from scaling in because the ASP would have to scale out again immediately
-            afterwards.
+        <li>Lowering the scale out threshold would require me lowering the scale in threshold too (for example, to 40%). This would result in an inefficient use
+            of computing resources because the average CPU utilization is 30% (with the occasional idling at 40%-50%%), meaning that the autoscale engine would
+            perform more autoscale events than necessary, which might cause the original problem (HTTP errors) to reoccur. I would have to lower the scale in
+            threshold because of the way the engine determines when to scale in. If the CPU usage is 44% (slightly below the current scale in threshold)
+            averaged across 2 instances, the Azure autoscaler would perform the following calculation: <code>44 x 2 / 1 = 88</code>. The result is above the
+            recommended scale out threshold of 80. Thus, the autoscaler would produce a flapping event and refrain from scaling in because the ASP would have to
+            scale out again immediately afterwards.
         </li>
     </ol>
     <p>But the issue was closed. The only reason I'm explaining myself is to give context for the questions I am still left with.</p>
