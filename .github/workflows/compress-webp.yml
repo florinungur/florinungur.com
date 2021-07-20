@@ -1,4 +1,4 @@
-name: Compress WebP
+name: Compress WebP files
 on:
   push:
     paths:

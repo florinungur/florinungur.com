@@ -1,0 +1,29 @@
+name: Clean PNG files
+on:
+  push:
+    branches:
+      - master
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install optipng
+        run: npm install optipng-bin --global
+      - name: Clean PNG files
+        run: |
+          optipng --help "$File" -o "$File" -v;
+
+          mapfile -t DirtyFiles < <( find $GITHUB_WORKSPACE -type f -and -iname "*.png" )
+          for File in $DirtyFiles; do
+            optipng "$File" -o "$File" -v;
+          done
+      - name: Commit cleaned PNG files
+        run: |
+          git config --global user.name 'Florin Ungur'
+          git config --global user.email 'hello@florinungur.com'
+          git commit --all --message "Clean PNG files"
+          git push

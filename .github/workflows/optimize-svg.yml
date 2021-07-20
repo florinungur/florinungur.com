@@ -1,4 +1,4 @@
-name: Optimize SVG
+name: Optimize SVG files
 on:
   push:
     paths:

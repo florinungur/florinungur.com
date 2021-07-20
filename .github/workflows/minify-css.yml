@@ -1,4 +1,4 @@
-name: Minify CSS
+name: Minify CSS files
 on:
   push:
     paths:
