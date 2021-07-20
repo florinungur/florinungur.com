@@ -2,15 +2,6 @@
 
 This is the source code for my personal website located at https://florinungur.com.
 
-## cssnano
-
-To minify CSS the same way I do:
-
-1. Download the [cssnano](https://cssnano.co/) npm package: `npm install --save-dev cssnano`
-2. cssnano also needs a PostCSS runner: `npm install --global postcss postcss-cli`
-3. Use (or modify) [postcss.config.js](postcss.config.js)
-4. Try it out: `postcss input.css > output.css`
-
 ## cwebp
 
 If you like having small WebP files:
