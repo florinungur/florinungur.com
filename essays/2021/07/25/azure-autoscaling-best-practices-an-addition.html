@@ -57,8 +57,8 @@
     <p>If you don't use a scale-out and scale-in rule combination, then you might get flapping.</p>
     <figure>
         <picture>
-            <source type="image/webp" srcset="img1.webp"/>
-            <source type="image/png" srcset="img1.png"/>
+            <source type="image/webp" srcset="img1-abstract-painting.webp"/>
+            <source type="image/png" srcset="img1-abstract-painting.png"/>
             <img loading="lazy" src="img1.png" alt="AI-generated abstract painting" width="742" height="742"/>
         </picture>
         <figcaption class="text-center">AI-generated abstract painting, courtesy of
@@ -107,11 +107,28 @@
         information, only metrics, logs, and correlations.</p>
     <p>With that in mind, I looked at the metrics of each individual app and of the ASP. In total, 6 apps had the pattern of a stable instance which got
         replaced by another stable instance; each instance lasted for about 4 days. All apps had ephemeral instances (i.e. with a 1-2 day lifespan). This was
-        because of the sub-optimal scaling condition. The average CPU utilization per app slot was between 23% - 30% while the average memory usage was between
-        63% - 78%. The scale in and scale out rules were based on the <code>CpuPercentage</code> metric, which was fine, but the scale in and scale out
-        thresholds were too close to each other, which lead to flapping and, possibly, to the HTTP error calls.</p>
-    <p>After some tweaking, I arrived at the scale condition mentioned above, which eliminated the HTTP errors but not the flapping. Flapping should have no
-        longer occurred, but, instead, the ASP was stuck with 2 instances.</p>
+        because of the sub-optimal scaling condition.</p>
+    <p>The average CPU utilization of the ASP was between 23% - 30% while the average memory usage was between 63% - 78%.</p>
+    <figure>
+        <picture>
+            <source type="image/webp" srcset="img2-average-cpu-percentage-june-17.webp"/>
+            <source type="image/png" srcset="img2-average-cpu-percentage-june-17.png"/>
+            <img loading="lazy" src="img1.png" alt="ASP average CPU percentage by instance in June 17" width="2127" height="740"/>
+        </picture>
+        <figcaption class="text-center">ASP average CPU percentage by instance in June 17</figcaption>
+    </figure>
+    <figure>
+        <picture>
+            <source type="image/webp" srcset="img3-average-memory-percentage-june-17.webp"/>
+            <source type="image/png" srcset="img3-average-memory-percentage-june-17.png"/>
+            <img loading="lazy" src="img1.png" alt="ASP average memory percentage by instance in June 17" width="2105" height="742"/>
+        </picture>
+        <figcaption class="text-center">ASP average memory percentage by instance in June 17</figcaption>
+    </figure>
+    <p>The scale in and scale out rules were based on the <code>CpuPercentage</code> metric, which was fine, but the scale in and scale out thresholds were too
+        close to each other, which lead to flapping and, possibly, to the HTTP error calls. After some tweaking, I arrived at the scale condition mentioned
+        above, which eliminated the HTTP errors but not the flapping. Flapping should have no longer occurred, but, instead, the ASP was stuck with 2 instances.
+    </p>
     <p>The autoscale engine determines when to scale in based on the following formula:</p>
     <!-- @formatter:off Until the 'white-space' CSS property improves ... -->
     <pre>
@@ -157,7 +174,24 @@
             scale out again immediately afterwards.
         </li>
     </ol>
-    <p>But the issue was closed. The only reason I'm explaining myself is to give context for the questions I am still left with.</p>
+    <p>But the issue was closed:</p>
+    <figure>
+        <picture>
+            <source type="image/webp" srcset="img4-average-cpu-percentage-july-17.webp"/>
+            <source type="image/png" srcset="img4-average-cpu-percentage-july-17.png"/>
+            <img loading="lazy" src="img1.png" alt="ASP average CPU percentage by instance in July 17" width="2127" height="736"/>
+        </picture>
+        <figcaption class="text-center">ASP average CPU percentage by instance in July 17</figcaption>
+    </figure>
+    <figure>
+        <picture>
+            <source type="image/webp" srcset="img5-average-memory-percentage-july-17.webp"/>
+            <source type="image/png" srcset="img5-average-memory-percentage-july-17.png"/>
+            <img loading="lazy" src="img1.png" alt="ASP average memory percentage by instance in July 17" width="2108" height="745"/>
+        </picture>
+        <figcaption class="text-center">ASP average memory percentage by instance in July 17</figcaption>
+    </figure>
+    <p>The only reason I'm explaining myself is to give context for the questions I am still left with.</p>
     <h2>Questions</h2>
     <ul>
         <li>How does the autoscale engine (a.k.a. the Azure Monitor autoscale feature/service) evaluate the scaling condition? I would love to see the
