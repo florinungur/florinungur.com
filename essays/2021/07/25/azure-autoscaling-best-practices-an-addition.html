@@ -167,8 +167,8 @@
         <li>The way the CPU usage increases in the ASP (i.e. rare spikes that go from 30% straight to 90% - 95% in under 1 minute) makes it so that reducing the
             scale out threshold by 10% would have no positive impact and one negative impact; that is...
         </li>
-        <li>Lowering the scale out threshold would require lowering the scale in threshold too (for example, to 40%). This would result in an inefficient use
-            of computing resources because the average CPU utilization is 30% (with the occasional idling at 40%-50%%), meaning that the autoscale engine would
+        <li>Lowering the scale out threshold would require lowering the scale in threshold too (for example, to 40%). This would result in an inefficient use of
+            computing resources because the average CPU utilization is 30% (with the occasional idling at 40%-50%%), meaning that the autoscale engine would
             perform more autoscale events than necessary, which might cause the original problem (HTTP errors) to reoccur. I would have to lower the scale in
             threshold because of the way the engine determines when to scale in. If the CPU usage is 44% (slightly below the current scale in threshold)
             averaged across 2 instances, the Azure autoscaler would perform the following calculation: <code>44 x 2 / 1 = 88</code>. The result is above the
