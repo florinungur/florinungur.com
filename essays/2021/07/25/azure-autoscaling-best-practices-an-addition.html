@@ -101,11 +101,11 @@
             HTTP calls that call an instance which is starting or shutting down. For prod we set the ASP to 4 S2 instances, without autoscaling. Please
             investigate if it's better to disable autoscaling and, if so, how many instances would we need?</p>
     </blockquote>
-    <p>Please note that the issue in the ticket doesn't really matter; the HTTP errors could have easily been caused because the apps in the ASP didn't have
-        health checks, leading to services hitting unhealthy instances. The only interesting part (of this essay) is the realization that Azure autoscaling is a
-        black box service that you can use but not perfectly tune because you don't have all the information, only results, metrics, logs, and the correlations
-        you can make.</p>
-    <p>With that in mind, I looked at the metrics of each individual app and of the ASP. In total, 6 apps had the pattern of a stable instance which gets
+    <p>Please note that this task only provides context, it is not essential for understanding the topic at hand. The HTTP errors could have easily been caused
+        by services hitting unhealthy instances because the apps in the ASP didn't have health checks. But, investigating the problem from the ticket lead me to
+        the core issue of this essay: Azure autoscaling is a black box service that you can use but not perfectly tune because you don't have all the
+        information, only metrics, logs, and correlations.</p>
+    <p>With that in mind, I looked at the metrics of each individual app and of the ASP. In total, 6 apps had the pattern of a stable instance which got
         replaced by another stable instance; each instance lasted for about 4 days. All apps had ephemeral instances (i.e. with a 1-2 day lifespan). This was
         because of the sub-optimal scaling condition. The average CPU utilization per app slot was between 23% - 30% while the average memory usage was between
         63% - 78%. The scale in and scale out rules were based on the <code>CpuPercentage</code> metric, which was fine, but the scale in and scale out
