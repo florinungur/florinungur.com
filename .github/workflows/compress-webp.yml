@@ -2,7 +2,7 @@ name: Compress WebP files
 on:
   push:
     branches:
-      - master
+      - add-azure-article
 jobs:
   compress:
     runs-on: ubuntu-latest
