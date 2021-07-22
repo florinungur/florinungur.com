@@ -76,7 +76,7 @@
     <blockquote>
         <h3>Always use a scale-out and scale-in rule combination that performs an increase and decrease</h3>
         <p class="is-marginless">If you use only one part of the combination, autoscaling will only take action in a single direction (scale out, or in) until
-            it reaches the maximum, or minimum instance counts of defined in the profile. This is not optimal, ideally you want your resource to scale up at
+            it reaches the maximum, or minimum instance counts, as defined in the profile. This is not optimal, ideally you want your resource to scale up at
             times of high usage to ensure availability. Similarly, at times of low usage you want your resource to scale down, so you can realize cost
             savings.</p>
     </blockquote>
@@ -94,7 +94,6 @@
     <p>Then your <code>example-asp</code> might get a flapping entry in its Activity log.</p>
     <p>This essay won't provide the reason why this is (because I couldn't figure it out); instead, it will tell the story of how I arrived at this discovery so
         you can avoid spending one week with a Microsoft representative trying to diagnose the same behavior.</p>
-    <p>I also added this finding to the official documentation.</p>
     <h2>Work item</h2>
     <p>On the 17th of June, 2021, I picked up a task from the backlog which read:</p>
     <blockquote>
