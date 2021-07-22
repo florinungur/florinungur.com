@@ -91,7 +91,7 @@
 <!-- --><code>When  example-asp  (Average) CpuPercentage < 45     Decrease count by 1</code><!--
  --></pre>
     <!-- @formatter:on -->
-    <p>Then your <code>example-asp</code> might get a flapping entry in its Activity log.</p>
+    <p>Then your <code>example-asp</code> might get stuck in a flapping state (the condition in which instances scale up and down rapidly and repetitively).</p>
     <p>This essay won't provide the reason why this is (because I couldn't figure it out); instead, it will tell the story of how I arrived at this discovery so
         you can avoid spending one week with a Microsoft representative trying to diagnose the same behavior.</p>
     <h2>Work item</h2>
@@ -109,8 +109,7 @@
         replaced by another stable instance; each instance lasted for about 4 days. All apps had ephemeral instances (i.e. with a 1-2 day lifespan). This was
         because of the sub-optimal scaling condition. The average CPU utilization per app slot was between 23% - 30% while the average memory usage was between
         63% - 78%. The scale in and scale out rules were based on the <code>CpuPercentage</code> metric, which was fine, but the scale in and scale out
-        thresholds were too close to each other, which lead to flapping (the phenomenon in which instances scale up/down rapidly and repetitively) and,
-        possibly, to the HTTP error calls.</p>
+        thresholds were too close to each other, which lead to flapping and, possibly, to the HTTP error calls.</p>
     <p>After some tweaking, I arrived at the scale condition mentioned above, which eliminated the HTTP errors but not the flapping. Flapping should have no
         longer occurred, but, instead, the ASP was stuck with 2 instances.</p>
     <p>The autoscale engine determines when to scale in based on the following formula:</p>
