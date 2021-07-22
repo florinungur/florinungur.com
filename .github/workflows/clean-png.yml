@@ -1,8 +1,8 @@
 name: Clean PNG files
 on:
   push:
-    paths:
-      - '**.png'
+    branches:
+      - master
 jobs:
   clean:
     runs-on: ubuntu-latest

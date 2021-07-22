@@ -1,8 +1,8 @@
 name: Compress WebP files
 on:
   push:
-    paths:
-      - '**.webp'
+    branches:
+      - master
 jobs:
   compress:
     runs-on: ubuntu-latest
