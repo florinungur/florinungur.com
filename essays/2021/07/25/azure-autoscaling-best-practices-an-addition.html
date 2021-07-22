@@ -75,7 +75,7 @@
             rel="noopener" target="_blank">archived Microsoft Docs link</a>] is:</p>
     <blockquote>
         <h3>Always use a scale-out and scale-in rule combination that performs an increase and decrease</h3>
-        <p class="is-marginless">If you use only one part of the combination, autoscaling will only take action in a single direction (scale out, or in) until
+        <p class="is-marginless">If you use only one part of the combination, autoscaling will only take action in a single direction (scale-out, or in) until
             it reaches the maximum, or minimum instance counts, as defined in the profile. This is not optimal, ideally you want your resource to scale up at
             times of high usage to ensure availability. Similarly, at times of low usage you want your resource to scale down, so you can realize cost
             savings.</p>
@@ -127,11 +127,11 @@
         </picture>
         <figcaption class="text-center">ASP average memory percentage by instance in June 17</figcaption>
     </figure>
-    <p>The scale in and scale out rules were based on the <code>CpuPercentage</code> metric, which was fine, but the scale in and scale out thresholds were too
+    <p>The scale-in and scale-out rules were based on the <code>CpuPercentage</code> metric, which was fine, but the scale-in and scale-out thresholds were too
         close to each other, which lead to flapping and, possibly, to the HTTP error calls. After some tweaking, I arrived at the scale condition mentioned
         above, which eliminated the HTTP errors but not the flapping. Flapping should have no longer occurred, but, instead, the ASP was stuck with 2 instances.
     </p>
-    <p>The autoscale engine determines when to scale in based on the following formula:</p>
+    <p>The autoscale engine determines when to scale-in based on the following formula:</p>
     <!-- @formatter:off Until the 'white-space' CSS property improves ... -->
     <pre>
 <!-- --><code>metric x current instance count / final number of instances when scaled down</code><!--
@@ -139,9 +139,9 @@
     <!-- @formatter:on -->
     <p>The reasoning behind this equation is simple: if you have a workload that is divided across N instances that is to be moved to N-1 instances, then the
         N-1 instances should be able to handle the workload that was present on the N instances.</p>
-    <p>For the ASP in question, the formula then should be: <code>30 (average CPU usage) x 2 (current number of instances) / 1 (desired number of instances) =
-        60</code>. This is 30% below the scale out threshold, yet the ASP was stuck in endless flapping. Only if the outcome of the equation would've been 90%
-        (the scale out threshold) or more should flapping occur.</p>
+    <p>For the ASP in question, the formula then should be: 30 (average CPU usage) x 2 (current number of instances) / 1 (desired number of instances) = 60.
+        This is 30% below the scale-out threshold, yet the ASP was stuck in endless flapping. Only if the outcome of the equation would've been 90% (the
+        scale-out threshold) or more should flapping occur.</p>
     <p>After depleting the available information on the subject (i.e. the official docs, a
         <a href="https://stackoverflow.com/questions/49760213/azure-app-service-autoscale-fails-to-scale-in" rel="noopener" target="_blank">StackOverflow
             post</a>
@@ -158,22 +158,23 @@
             rule, which I didn't do because memory usage was more fluctuating.
         </li>
     </ol>
-    <p>He also recommended lowering the scale out threshold to 80 because that's what they usually recommend to their clients.</p>
-    <p>The first solution didn't eliminate the flapping but the second one did. The representative didn't explain why or how a scale out rule might interfere
-        with another scale out rule, even after I pointed out that the <code>Or</code> in the scale condition syntax makes it seem like the scale out rules are
+    <p>He also recommended lowering the scale-out threshold to <code>CpuPercentage > 80</code> because that's what they usually recommend to their clients.</p>
+    <p>The first solution didn't eliminate the flapping but the second one did. The representative didn't explain why or how a scale-out rule might interfere
+        with another scale-out rule, even after I pointed out that the <code>Or</code> in the scale condition syntax makes it seem like the scale-out rules are
         not connected to each other.</p>
     <p>I chose to ignore his recommendation based on 2 facts:</p>
     <ol>
         <li>The way the CPU usage increases in the ASP (i.e. rare spikes that go from 30% straight to 90% - 95% in under 1 minute) makes it so that reducing the
-            scale out threshold by 10% would have no positive impact and one negative impact; that is...
+            scale-out threshold by 10% would have no positive impact and one negative impact; that is...
         </li>
-        <li>Lowering the scale out threshold would require lowering the scale in threshold too (for example, to 40%). This would result in an inefficient use of
-            computing resources because the average CPU utilization is 30% (with the occasional idling at 40% - 50%), meaning that the autoscale engine would
-            perform more autoscale events than necessary, which might cause the original problem (HTTP errors) to reoccur. I would have to lower the scale in
-            threshold because of the way the engine determines when to scale in. If the CPU usage is 44% (slightly below the current scale in threshold)
-            averaged across 2 instances, the Azure autoscaler would perform the following calculation: <code>44 x 2 / 1 = 88</code>. The result is above the
-            recommended scale out threshold of 80. Thus, the autoscaler would produce a flapping event and refrain from scaling in because the ASP would have to
-            scale out again immediately afterwards.
+        <li>Lowering the scale-out threshold would require lowering the scale-in threshold too (for example, to 40%). This would result in N-1 x 5% more
+            unused computing resources. The ASP would have N-1 x 5% more unused resources because lowering the scale-in threshold increases the permissible
+            amount of idling resources. This is not necessarily bad (say, if you have a spiky workload), but it's not optimal for the ASP in question. I would
+            have to lower the scale-in threshold because if I implement the recommended scale-out threshold of 80 but don't also lower the scale-in threshold to
+            at least 40, then the ASP can never scale-in to 1 instance. If the CPU usage is 44% (slightly below the current scale-in threshold) averaged across
+            2 instances, the Azure autoscaler would perform the following calculation: 44 x 2 / 1 = 88. The result is above the recommended scale-out threshold
+            of 80. Thus, the autoscaler would produce a flapping event and refrain from scaling in because the ASP would have to scale-out again immediately
+            afterwards.
         </li>
     </ol>
     <p>But the issue was closed:</p>
@@ -202,8 +203,9 @@
             algorithm.
         </li>
         <li>How often does the autoscale engine evaluate the scaling condition?</li>
-        <li>How does the autoscale engine resolve edge-cases? For example, is it safe for me to keep scale in and out rules that leave no margin of error for
-            the scale in calculation (as described in the second fact above)? The
+        <li>How does the autoscale engine resolve edge-cases? For example, is it safe for me to keep scale-in and scale-out rules that leave no margin of error
+            for
+            the scale-in calculation (as described in the second fact above)? The
             <a href="https://docs.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-best-practices#ensure-the-maximum-and-minimum-values-are-different-and-have-an-adequate-margin-between-them"
                rel="noopener" target="_blank">How often does the autoscale engine evaluate the scaling condition?</a>
             [<a href="https://web.archive.org/web/20210719080951/https://docs.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-best-practices#ensure-the-maximum-and-minimum-values-are-different-and-have-an-adequate-margin-between-them"
