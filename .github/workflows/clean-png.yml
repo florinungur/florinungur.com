@@ -1,8 +1,8 @@
 name: Clean PNG files
 on:
   push:
-    branches:
-      - add-azure-article
+    paths:
+      - '**.png'
 jobs:
   clean:
     runs-on: ubuntu-latest
