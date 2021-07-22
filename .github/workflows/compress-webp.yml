@@ -21,5 +21,6 @@ jobs:
         run: |
           git config --global user.name 'Florin Ungur'
           git config --global user.email 'hello@florinungur.com'
+          git pull
           git commit --all --message "Compress WebP files"
           git push
