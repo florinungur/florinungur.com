@@ -132,7 +132,7 @@
     <p>After some tweaking, I arrived at the scale condition mentioned above, which eliminated the HTTP errors but not the flapping. Flapping should have no
         longer occurred, but, instead, the ASP was stuck with 2 instances.</p>
     <p>The autoscale engine determines when to scale-in based on the following formula:</p>
-    <!-- @formatter:off Until the 'white-space' CSS property improves ... -->
+    <!-- @formatter:off -->
     <pre>
 <!-- --><code>metric x current instance count / final number of instances when scaled down</code><!--
  --></pre>
