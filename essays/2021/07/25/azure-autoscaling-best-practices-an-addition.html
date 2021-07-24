@@ -130,7 +130,7 @@
     </figure>
     <p>The scale condition was based on the <code>CpuPercentage</code> metric, which was fine, but the scale-in and scale-out thresholds were too close to each
         other (only 20 percentage points) which led to flapping and, possibly, to the HTTP error calls.</p>
-    <p>After some tweaking, I arrived at the scale condition mentioned at the beginning of the essay (scale-in at 45 and scale-out at 90), which eliminated the
+    <p>After some tweaking, I arrived at the scale condition mentioned at the beginning of the essay (scale-in at 45 and scale-out at 90) which eliminated the
         HTTP errors but not the flapping. Flapping should have no longer occurred, but, instead, the ASP was stuck with 2 instances.</p>
     <p>The autoscale engine then determines when to scale-in based on this formula:</p>
     <!-- @formatter:off -->
