@@ -178,8 +178,8 @@
         <li>The way the CPU usage increases in the ASP (i.e. rare spikes that go from 30% straight to 90% - 95% in under 1 minute) makes it so that reducing the
             scale-out threshold by 10% would have no positive impact and one negative impact; that is...
         </li>
-        <li>Lowering the scale-out threshold would require lowering the scale-in threshold too (for example, to 40%). This would result in N - 1 x 5% more
-            unused computing resources. The ASP would have N - 1 x 5% more unused resources because lowering the scale-in threshold increases the permissible
+        <li>Lowering the scale-out threshold would require lowering the scale-in threshold too (for example, to 40%). This would result in (N - 1) x 5% more
+            unused computing resources. The ASP would have (N - 1) x 5% more unused resources because lowering the scale-in threshold increases the permissible
             amount of idling resources. This is not necessarily bad (say, if you have a workload that fluctuates), but it's not optimal for the ASP in question.
             I would have to lower the scale-in threshold because if I implement the recommended scale-out threshold of 80 but don't also lower the scale-in
             threshold to at least 40, then the ASP can never scale in to 1 instance. If the CPU usage is 44% (slightly below the current scale-in threshold)
