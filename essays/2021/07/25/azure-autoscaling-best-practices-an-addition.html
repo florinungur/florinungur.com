@@ -180,6 +180,8 @@
             autoscaler would produce a flapping event and refrain from scaling in because the ASP would have to scale out again immediately afterwards.
         </li>
     </ol>
+    <p>But don't bother with why I ignored his recommendation for now. This will come in useful at the end of the essay as context for the questions I still
+        have unanswered. For now, let's focus on his solutions.</p>
     <p>The first solution didn't eliminate the flapping but removing the <code>MemoryPercentage</code> rule did the trick. We have a winner:</p>
     <!-- @formatter:off -->
     <pre>
