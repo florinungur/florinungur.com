@@ -102,7 +102,7 @@
             instances would we need?</p>
     </blockquote>
     <p>Please note that this task only provides context, it is not essential for understanding the topic at hand. The HTTP errors could have easily been caused
-        by services hitting unhealthy instances because the apps in the ASP didn't have health checks. But, investigating the problem from the ticket lead me to
+        by services hitting unhealthy instances because the apps in the ASP didn't have health checks. But, investigating the problem from the ticket led me to
         the core issue of this essay: Azure autoscaling is a black box service that you can use but not perfectly tune because you don't have all the
         information, only metrics, logs, and correlations.</p>
     <p>With that in mind, I looked at the metrics of each individual app and of the ASP. In total, 6 apps had the pattern of a stable instance which got
@@ -129,19 +129,19 @@
     </figure>
     <p>The scale condition was based on the <code>CpuPercentage</code> metric, which was fine, but the scale-in and scale-out thresholds were too close to each
         other (only 20 percentage points), which led to flapping and, possibly, to the HTTP error calls.</p>
-    <p>After some tweaking, I arrived at the scale condition mentioned above, which eliminated the HTTP errors but not the flapping. Flapping should have no
-        longer occurred, but, instead, the ASP was stuck with 2 instances.</p>
+    <p>After some tweaking, I arrived at the scale condition mentioned at the beginning of the essay (scale-in at 45 and scale-out at 90), which eliminated the
+        HTTP errors but not the flapping. Flapping should have no longer occurred, but, instead, the ASP was stuck with 2 instances.</p>
     <p>The autoscale engine determines when to scale-in based on the following formula:</p>
     <!-- @formatter:off -->
     <pre>
 <!-- --><code>metric x current instance count / final number of instances when scaled down</code><!--
  --></pre>
     <!-- @formatter:on -->
-    <p>The reasoning behind this equation is simple: if you have a workload that is divided across N instances that is to be moved to N-1 instances, then the
-        N-1 instances should be able to handle the workload that was present on the N instances.</p>
-    <p>For the ASP in question, the formula then should be: 30 (average CPU usage) x 2 (current number of instances) / 1 (desired number of instances) = 60.
-        This is 30% below the scale-out threshold I implemented, yet the ASP was stuck in endless flapping. Only if the outcome of the equation would've been
-        90% or more should flapping occur.</p>
+    <p>The reasoning behind this equation is simple: if you have a workload that is divided across N instances that is to be moved to N - 1 instances, then the
+        N - 1 instances should be able to handle the workload that was present on the N instances.</p>
+    <p>For the ASP in question, the formula should then be: 30 (average CPU usage) x 2 (current number of instances) / 1 (desired number of instances) = 60.
+        This is 30% below the scale-out threshold I implemented, yet the ASP was stuck in endless flapping. This should only happen if the outcome of the
+        equation is 90% or more.</p>
     <p>After depleting the available information on the subject (i.e. the official docs, a
         <a href="https://stackoverflow.com/questions/49760213/azure-app-service-autoscale-fails-to-scale-in" rel="noopener" target="_blank">StackOverflow
             post</a>
@@ -154,8 +154,9 @@
     <p>A Microsoft representative from the App Service team proposed two solutions:</p>
     <ol>
         <li>Switch the App Service Plan to the P1V2 tier: same costs but newer hardware with slightly more computing resources.</li>
-        <li>Remove the <code>MemoryPercentage</code> rule as it might interfere with the CPU one. Alternatively, add a scale down <code>MemoryPercentage</code>
-            rule, which I didn't do because memory usage was more fluctuating.
+        <li>Remove the <code>MemoryPercentage</code> rule as it might interfere with the CPU one. Alternatively, add a scale-in <code>MemoryPercentage</code>
+            rule, which I didn't do because memory usage was fluctuating more than CPU usage, thus making the task of setting memory scale-in and scale-out
+            thresholds harder.
         </li>
     </ol>
     <p>He also recommended lowering the scale-out threshold to <code>CpuPercentage > 80</code> because that's what they usually recommend to their clients.</p>
@@ -177,14 +178,14 @@
         <li>The way the CPU usage increases in the ASP (i.e. rare spikes that go from 30% straight to 90% - 95% in under 1 minute) makes it so that reducing the
             scale-out threshold by 10% would have no positive impact and one negative impact; that is...
         </li>
-        <li>Lowering the scale-out threshold would require lowering the scale-in threshold too (for example, to 40%). This would result in N-1 x 5% more
-            unused computing resources. The ASP would have N-1 x 5% more unused resources because lowering the scale-in threshold increases the permissible
-            amount of idling resources. This is not necessarily bad (say, if you have a spiky workload), but it's not optimal for the ASP in question. I would
-            have to lower the scale-in threshold because if I implement the recommended scale-out threshold of 80 but don't also lower the scale-in threshold to
-            at least 40, then the ASP can never scale in to 1 instance. If the CPU usage is 44% (slightly below the current scale-in threshold) averaged across
-            2 instances, the Azure autoscaler would perform the following calculation: 44 x 2 / 1 = 88. The result is above the recommended scale-out threshold
-            of 80. Thus, the autoscaler would produce a flapping event and refrain from scaling in because the ASP would have to scale out again immediately
-            afterwards.
+        <li>Lowering the scale-out threshold would require lowering the scale-in threshold too (for example, to 40%). This would result in N - 1 x 5% more
+            unused computing resources. The ASP would have N - 1 x 5% more unused resources because lowering the scale-in threshold increases the permissible
+            amount of idling resources. This is not necessarily bad (say, if you have a workload that fluctuates), but it's not optimal for the ASP in question.
+            I would have to lower the scale-in threshold because if I implement the recommended scale-out threshold of 80 but don't also lower the scale-in
+            threshold to at least 40, then the ASP can never scale in to 1 instance. If the CPU usage is 44% (slightly below the current scale-in threshold)
+            averaged across 2 instances, the Azure autoscaler would perform the following calculation: 44 x 2 / 1 = 88. The result is above the recommended
+            scale-out threshold of 80. Thus, the autoscaler would produce a flapping event and refrain from scaling in because the ASP would have to scale out
+            again immediately afterwards.
         </li>
     </ol>
     <p>But the issue was closed:</p>
@@ -216,7 +217,7 @@
             [<a href="https://web.archive.org/web/20210723123612/https://docs.microsoft.com/en-us/azure/architecture/best-practices/auto-scaling#use-azure-monitor-autoscale"
                 rel="noopener" target="_blank">archived version</a>]?
         </li>
-        <li>How does the autoscale engine resolve edge-cases? For example, is it safe for me to keep scale-in and scale-out rules that leave no margin of error
+        <li>How does the autoscale engine resolve edge cases? For example, is it safe for me to keep scale-in and scale-out rules that leave no margin of error
             for
             the scale-in calculation (as described in the second fact above)? The <q><a
                     href="https://docs.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-best-practices#ensure-the-maximum-and-minimum-values-are-different-and-have-an-adequate-margin-between-them"
@@ -225,11 +226,7 @@
                 rel="noopener" target="_blank">archived link</a>] best practice does not answer this question, unfortunately.
         </li>
     </ul>
-    <p>In short: <i>how does Azure autoscaling work, precisely?</i>
-        <a href="https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings?tabs=CMD" rel="noopener" target="_blank">Configuring
-            logs</a>
-        [<a href="https://web.archive.org/web/20210612231828/https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings?tabs=CMD"
-            rel="noopener" target="_blank">archived version</a>] for the ASP helps, but it doesn't take me the whole way.</p>
+    <p>In short: <i>how does Azure autoscaling work, precisely?</i></p>
 </main>
 <footer>Thoughts? Send them to <a href="mailto:hello@florinungur.com">hello@florinungur.com</a>.</footer>
 </body>
