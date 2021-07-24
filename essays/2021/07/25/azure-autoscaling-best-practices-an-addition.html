@@ -138,8 +138,8 @@
 <!-- --><code>all metric types used by scale-in rules x current instance count / final number of instances when scaled down</code><!--
  --></pre>
     <!-- @formatter:on -->
-    <p>The reasoning behind this equation is simple: if you have a workload that is divided across N instances that is to be moved to N - 1 instances, then the
-        N - 1 instances should be able to handle the workload that was present on the N instances.</p>
+    <p>The reasoning behind this equation is simple: if you have a workload that is divided across N instances that is to be moved to, for example, N - 1
+        instances, then the N - 1 instances should be able to handle the workload that was present on the N instances.</p>
     <p>The <a href="https://docs.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-understanding-settings#how-does-autoscale-evaluate-multiple-rules"
               rel="noopener" target="_blank">official Microsoft documentation</a>
         [<a href="https://web.archive.org/web/20210724181121/https://docs.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-understanding-settings"
