@@ -1,78 +1,51 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-    <url>
-        <loc>https://florinungur.com</loc>
-        <lastmod>2021-03-12</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.00</priority>
-    </url>
-    <url>
-        <loc>https://florinungur.com/webmarks</loc>
-        <lastmod>2021-02-06</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.80</priority>
-    </url>
-    <url>
-        <loc>https://florinungur.com/ideas</loc>
-        <lastmod>2021-10-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.80</priority>
-    </url>
-    <url>
-        <loc>https://florinungur.com/essays</loc>
-        <lastmod>2021-02-06</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.80</priority>
-    </url>
-    <url>
-        <loc>https://florinungur.com/resume</loc>
-        <lastmod>2021-11-23</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.80</priority>
-    </url>
-    <url>
-        <loc>https://florinungur.com/webmarks/article-notes</loc>
-        <lastmod>2021-08-06</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.64</priority>
-    </url>
-    <url>
-        <loc>https://florinungur.com/webmarks/book-notes</loc>
-        <lastmod>2021-03-06</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.64</priority>
-    </url>
-    <url>
-        <loc>https://florinungur.com/webmarks/collected-poems</loc>
-        <lastmod>2021-03-06</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.64</priority>
-    </url>
-    <url>
-        <loc>https://florinungur.com/webmarks/collected-quotes</loc>
-        <lastmod>2021-04-24</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.64</priority>
-    </url>
-    <url>
-        <loc>https://florinungur.com/webmarks/video-notes</loc>
-        <lastmod>2021-03-06</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.64</priority>
-    </url>
-    <url>
-        <loc>https://florinungur.com/essays/2020/09/01/hello-world</loc>
-        <lastmod>2021-07-20</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.64</priority>
-    </url>
-    <url>
-        <loc>https://florinungur.com/essays/2021/07/25/azure-autoscaling-best-practices-an-addition</loc>
-        <lastmod>2021-07-25</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.64</priority>
-    </url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>https://florinungur.com/</loc>
+<lastmod>2021-11-30T17:46:40+01:00</lastmod>
+</url>
+<url>
+<loc>https://florinungur.com/essays</loc>
+<lastmod>2021-11-30T17:46:40+01:00</lastmod>
+</url>
+<url>
+<loc>https://florinungur.com/ideas</loc>
+<lastmod>2021-11-30T17:46:40+01:00</lastmod>
+</url>
+<url>
+<loc>https://florinungur.com/resume</loc>
+<lastmod>2021-11-30T17:46:40+01:00</lastmod>
+</url>
+<url>
+<loc>https://florinungur.com/webmarks</loc>
+<lastmod>2021-11-30T17:46:40+01:00</lastmod>
+</url>
+<url>
+<loc>https://florinungur.com/webmarks/article-notes</loc>
+<lastmod>2021-11-30T17:46:40+01:00</lastmod>
+</url>
+<url>
+<loc>https://florinungur.com/webmarks/book-notes</loc>
+<lastmod>2021-11-30T17:46:40+01:00</lastmod>
+</url>
+<url>
+<loc>https://florinungur.com/webmarks/collected-poems</loc>
+<lastmod>2021-11-30T17:46:40+01:00</lastmod>
+</url>
+<url>
+<loc>https://florinungur.com/webmarks/collected-quotes</loc>
+<lastmod>2021-11-30T17:46:40+01:00</lastmod>
+</url>
+<url>
+<loc>https://florinungur.com/webmarks/video-notes</loc>
+<lastmod>2021-11-30T17:46:40+01:00</lastmod>
+</url>
+<url>
+<loc>https://florinungur.com/essays/2020/09/01/hello-world</loc>
+<lastmod>2021-11-30T17:46:40+01:00</lastmod>
+</url>
+<url>
+<loc>https://florinungur.com/essays/2021/07/25/azure-autoscaling-best-practices-an-addition</loc>
+<lastmod>2021-11-30T17:46:40+01:00</lastmod>
+</url>
 </urlset>
