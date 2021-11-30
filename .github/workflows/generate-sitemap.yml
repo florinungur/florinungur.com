@@ -1,0 +1,23 @@
+name: Generate sitemap.xml
+on:
+  push:
+    branches:
+      - main
+      - master
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: generate-sitemap
+        uses: cicirello/generate-sitemap@v1
+        with:
+          base-url-path: https://florinungur.com/
+          drop-html-extension: true
+      - name: Commit sitemap.xml
+        run: |
+          git config --global user.name 'Florin Ungur'
+          git config --global user.email 'hello@florinungur.com'
+          git pull
+          git commit --all --message "Generate sitemap.xml"
+          git push
