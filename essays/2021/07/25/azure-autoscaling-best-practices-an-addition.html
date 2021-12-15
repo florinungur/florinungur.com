@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <!-- Settings -->
-    <meta http-equiv="Content-Security-Policy"
-          content="
+    <meta content="
             base-uri 'none';
             default-src 'none';
             font-src 'self';
@@ -12,37 +11,38 @@
             manifest-src 'self';
             object-src 'none';
             script-src 'none';
-            style-src 'self'"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            style-src 'self'"
+          http-equiv="Content-Security-Policy"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta charset="utf-8"/>
 
     <!-- Webpage info -->
     <title>Azure autoscaling best practices: an addition • Florin Ungur</title>
-    <meta property="og:title" content="Azure autoscaling best practices: an addition"/>
-    <meta name="author" content="Florin Ungur"/>
-    <meta name="description"
-          content="If you don't use a scale-out and scale-in rule combination, then you might get flapping."/>
-    <meta property="og:description"
-          content="If you don't use a scale-out and scale-in rule combination, then you might get flapping."/>
-    <link rel="canonical" href="https://florinungur.com/essays/2021/07/25/azure-autoscaling-best-practices-an-addition"/>
-    <meta property="og:url" content="https://florinungur.com/2021/07/25/azure-autoscaling-best-practices-an-addition"/>
-    <meta property="og:image" content="https://florinungur.com/essays/2021/07/25/img1-abstract-painting.png"/>
+    <meta content="Azure autoscaling best practices: an addition" property="og:title"/>
+    <meta content="Florin Ungur" name="author"/>
+    <meta content="If you don't use a scale-out and scale-in rule combination, then you might get flapping."
+          name="description"/>
+    <meta content="If you don't use a scale-out and scale-in rule combination, then you might get flapping."
+          property="og:description"/>
+    <link href="https://florinungur.com/essays/2021/07/25/azure-autoscaling-best-practices-an-addition" rel="canonical"/>
+    <meta content="https://florinungur.com/2021/07/25/azure-autoscaling-best-practices-an-addition" property="og:url"/>
+    <meta content="https://florinungur.com/essays/2021/07/25/img1-abstract-painting.png" property="og:image"/>
 
     <!-- Favicons -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../../../../img/favicon/favicon-16x16.png"/>
-    <link rel="icon" type="image/png" sizes="32x32" href="../../../../img/favicon/favicon-32x32.png"/>
-    <link rel="mask-icon" href="../../../../img/favicon/safari-pinned-tab.svg" color="#d1861f"/>
-    <link rel="shortcut icon" href="../../../../img/favicon/favicon.ico"/>
+    <link href="../../../../img/favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+    <link href="../../../../img/favicon/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+    <link color="#d1861f" href="../../../../img/favicon/safari-pinned-tab.svg" rel="mask-icon"/>
+    <link href="../../../../img/favicon/favicon.ico" rel="shortcut icon"/>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../../../../css/main.css"/>
-    <link rel="stylesheet" href="../../../../css/essays.css"/>
+    <link href="../../../../css/main.css" rel="stylesheet"/>
+    <link href="../../../../css/essays.css" rel="stylesheet"/>
 </head>
 <body>
 <header>
     <div class="logo is-center">
         <a href="/">
-            <img loading="lazy" src="../../../../img/logo/logo.svg" alt="website logo" width="400" height="70"/>
+            <img alt="website logo" height="70" loading="lazy" src="../../../../img/logo/logo.svg" width="400"/>
         </a>
     </div>
 </header>
@@ -57,9 +57,9 @@
     <p>If you don't use a scale-out and scale-in rule combination, then you might get flapping.</p>
     <figure>
         <picture>
-            <source type="image/webp" srcset="img1-abstract-painting.webp"/>
-            <source type="image/png" srcset="img1-abstract-painting.png"/>
-            <img loading="lazy" src="img1.png" alt="AI-generated abstract painting" width="742" height="742"/>
+            <source srcset="img1-abstract-painting.webp" type="image/webp"/>
+            <source srcset="img1-abstract-painting.png" type="image/png"/>
+            <img alt="AI-generated abstract painting" height="742" loading="lazy" src="img1.png" width="742"/>
         </picture>
         <figcaption class="text-center">AI-generated abstract painting, courtesy of
             <cite>
@@ -111,19 +111,19 @@
     <p>The average CPU utilization of the ASP was between 23% - 30% while the average memory usage was between 63% - 78%.</p>
     <figure>
         <picture>
-            <source type="image/webp" srcset="img2-average-cpu-percentage-june-17.webp"/>
-            <source type="image/png" srcset="img2-average-cpu-percentage-june-17.png"/>
-            <img loading="lazy" src="img2-average-cpu-percentage-june-17.png" alt="ASP average CPU percentage by instance on June 17" width="2127"
-                 height="740"/>
+            <source srcset="img2-average-cpu-percentage-june-17.webp" type="image/webp"/>
+            <source srcset="img2-average-cpu-percentage-june-17.png" type="image/png"/>
+            <img alt="ASP average CPU percentage by instance on June 17" height="740" loading="lazy" src="img2-average-cpu-percentage-june-17.png"
+                 width="2127"/>
         </picture>
         <figcaption class="text-center">ASP average CPU percentage by instance on June 17</figcaption>
     </figure>
     <figure>
         <picture>
-            <source type="image/webp" srcset="img3-average-memory-percentage-june-17.webp"/>
-            <source type="image/png" srcset="img3-average-memory-percentage-june-17.png"/>
-            <img loading="lazy" src="img3-average-memory-percentage-june-17.png" alt="ASP average memory percentage by instance on June 17" width="2105"
-                 height="742"/>
+            <source srcset="img3-average-memory-percentage-june-17.webp" type="image/webp"/>
+            <source srcset="img3-average-memory-percentage-june-17.png" type="image/png"/>
+            <img alt="ASP average memory percentage by instance on June 17" height="742" loading="lazy" src="img3-average-memory-percentage-june-17.png"
+                 width="2105"/>
         </picture>
         <figcaption class="text-center">ASP average memory percentage by instance on June 17</figcaption>
     </figure>
@@ -212,19 +212,19 @@
     <p>Now the issue is closed:</p>
     <figure>
         <picture>
-            <source type="image/webp" srcset="img4-average-cpu-percentage-july-17.webp"/>
-            <source type="image/png" srcset="img4-average-cpu-percentage-july-17.png"/>
-            <img loading="lazy" src="img4-average-cpu-percentage-july-17.png" alt="ASP average CPU percentage by instance on July 17" width="2127"
-                 height="736"/>
+            <source srcset="img4-average-cpu-percentage-july-17.webp" type="image/webp"/>
+            <source srcset="img4-average-cpu-percentage-july-17.png" type="image/png"/>
+            <img alt="ASP average CPU percentage by instance on July 17" height="736" loading="lazy" src="img4-average-cpu-percentage-july-17.png"
+                 width="2127"/>
         </picture>
         <figcaption class="text-center">ASP average CPU percentage by instance on July 17</figcaption>
     </figure>
     <figure>
         <picture>
-            <source type="image/webp" srcset="img5-average-memory-percentage-july-17.webp"/>
-            <source type="image/png" srcset="img5-average-memory-percentage-july-17.png"/>
-            <img loading="lazy" src="img5-average-memory-percentage-july-17.png" alt="ASP average memory percentage by instance on July 17" width="2108"
-                 height="745"/>
+            <source srcset="img5-average-memory-percentage-july-17.webp" type="image/webp"/>
+            <source srcset="img5-average-memory-percentage-july-17.png" type="image/png"/>
+            <img alt="ASP average memory percentage by instance on July 17" height="745" loading="lazy" src="img5-average-memory-percentage-july-17.png"
+                 width="2108"/>
         </picture>
         <figcaption class="text-center">ASP average memory percentage by instance on July 17</figcaption>
     </figure>

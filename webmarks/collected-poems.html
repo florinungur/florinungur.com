@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <!-- Settings -->
-    <meta http-equiv="Content-Security-Policy"
-          content="
+    <meta content="
             base-uri 'none';
             default-src 'none';
             font-src 'self';
@@ -12,35 +11,36 @@
             manifest-src 'self';
             object-src 'none';
             script-src 'none';
-            style-src 'self'"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            style-src 'self'"
+          http-equiv="Content-Security-Policy"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta charset="utf-8"/>
 
     <!-- Webpage info -->
     <title>Collected poems • Florin Ungur</title>
-    <meta property="og:title" content="Collected poems"/>
-    <meta name="author" content="Florin Ungur"/>
-    <meta name="description" content="This is a page which I will update every time I stumble upon a poem I like and want to (eventually) memorize."/>
-    <meta property="og:description" content="This is a page which I will update every time I stumble upon a poem I like and want to (eventually) memorize."/>
-    <link rel="canonical" href="https://florinungur.com/webmarks/collected-poems"/>
-    <meta property="og:url" content="https://florinungur.com/webmarks/collected-poems"/>
-    <meta property="og:image" content="https://florinungur.com/img/logo/logo.png"/>
+    <meta content="Collected poems" property="og:title"/>
+    <meta content="Florin Ungur" name="author"/>
+    <meta content="This is a page which I will update every time I stumble upon a poem I like and want to (eventually) memorize." name="description"/>
+    <meta content="This is a page which I will update every time I stumble upon a poem I like and want to (eventually) memorize." property="og:description"/>
+    <link href="https://florinungur.com/webmarks/collected-poems" rel="canonical"/>
+    <meta content="https://florinungur.com/webmarks/collected-poems" property="og:url"/>
+    <meta content="https://florinungur.com/img/logo/logo.png" property="og:image"/>
 
     <!-- Favicons -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon/favicon-16x16.png"/>
-    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon/favicon-32x32.png"/>
-    <link rel="mask-icon" href="../img/favicon/safari-pinned-tab.svg" color="#d1861f"/>
-    <link rel="shortcut icon" href="../img/favicon/favicon.ico"/>
+    <link href="../img/favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+    <link href="../img/favicon/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+    <link color="#d1861f" href="../img/favicon/safari-pinned-tab.svg" rel="mask-icon"/>
+    <link href="../img/favicon/favicon.ico" rel="shortcut icon"/>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/main.css"/>
-    <link rel="stylesheet" href="../css/webmarks.css"/>
+    <link href="../css/main.css" rel="stylesheet"/>
+    <link href="../css/webmarks.css" rel="stylesheet"/>
 </head>
 <body>
 <header>
     <div class="logo is-center">
         <a href="/">
-            <img loading="lazy" src="../img/logo/logo.svg" alt="website logo" width="400" height="70"/>
+            <img alt="website logo" height="70" loading="lazy" src="../img/logo/logo.svg" width="400"/>
         </a>
     </div>
 </header>
@@ -49,7 +49,9 @@
 </nav>
 <main>
     <h1>Collected poems</h1>
+    <!-- @formatter:off -->
     <div class="datetime">Updated on <time datetime="2020-10-21">Oct 21, 2020</time>: added all the poems</div>
+    <!-- @formatter:on -->
     <p>This is a page which I will update every time I stumble upon a poem I like and want to (eventually) memorize.</p>
     <h2 class="text-center">James Broughton - This is It</h2>
     <p class="text-center">This is It
@@ -80,8 +82,8 @@
         <br/>Say I'm growing old, but add,
         <br/>Jenny kiss'd me.
     </p>
-    <h2 lang="ro" class="text-center">Mihai Eminescu - Glossă</h2>
-    <p lang="ro" class="text-center">Vreme trece, vreme vine,
+    <h2 class="text-center" lang="ro">Mihai Eminescu - Glossă</h2>
+    <p class="text-center" lang="ro">Vreme trece, vreme vine,
         <br/>Toate-s vechi şi nouă toate;
         <br/>Ce e rău şi ce e bine
         <br/>Tu te-ntreabă şi socoate;

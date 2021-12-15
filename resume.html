@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <!-- Settings -->
-    <meta http-equiv="Content-Security-Policy"
-          content="
+    <meta content="
             base-uri 'none';
             default-src 'none';
             font-src 'self';
@@ -12,37 +11,38 @@
             manifest-src 'self';
             object-src 'none';
             script-src 'none';
-            style-src 'self'"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            style-src 'self'"
+          http-equiv="Content-Security-Policy"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta charset="utf-8"/>
 
     <!-- Webpage info -->
     <title>Résumé • Florin Ungur</title>
-    <meta property="og:title" content="Résumé"/>
-    <meta name="author" content="Florin Ungur"/>
-    <meta name="description"
-          content="The résumé of Florin Ungur (pronounced Flo•REEN Un•gur), a guy that likes computers, philosophy, psychology, and Hunter S. Thompson."/>
-    <meta property="og:description"
-          content="The résumé of Florin Ungur (pronounced Flo•REEN Un•gur), a guy that likes computers, philosophy, psychology, and Hunter S. Thompson."/>
-    <link rel="canonical" href="https://florinungur.com/resume"/>
-    <meta property="og:url" content="https://florinungur.com/resume"/>
-    <meta property="og:image" content="https://florinungur.com/img/logo/logo.png"/>
+    <meta content="Résumé" property="og:title"/>
+    <meta content="Florin Ungur" name="author"/>
+    <meta content="The résumé of Florin Ungur (pronounced Flo•REEN Un•gur), a guy that likes computers, philosophy, psychology, and Hunter S. Thompson."
+          name="description"/>
+    <meta content="The résumé of Florin Ungur (pronounced Flo•REEN Un•gur), a guy that likes computers, philosophy, psychology, and Hunter S. Thompson."
+          property="og:description"/>
+    <link href="https://florinungur.com/resume" rel="canonical"/>
+    <meta content="https://florinungur.com/resume" property="og:url"/>
+    <meta content="https://florinungur.com/img/logo/logo.png" property="og:image"/>
 
     <!-- Favicons -->
-    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png"/>
-    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png"/>
-    <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#d1861f"/>
-    <link rel="shortcut icon" href="/img/favicon/favicon.ico"/>
+    <link href="/img/favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+    <link href="/img/favicon/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+    <link color="#d1861f" href="/img/favicon/safari-pinned-tab.svg" rel="mask-icon"/>
+    <link href="/img/favicon/favicon.ico" rel="shortcut icon"/>
 
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="css/resume.css"/>
+    <link href="css/resume.css" rel="stylesheet" type="text/css"/>
 </head>
 <!-- Thanks to https://github.com/WebPraktikos/universal-resume for the template -->
 <body>
 <main class="font-firago hyphens-manual">
     <!-- Page -->
     <div class="p-6 mx-auto page max-w-2xl print:max-w-a4 md:max-w-a4 md:h-a4 xsm:p-8 sm:p-9 md:p-16 bg-white">
-        <time datetime="2021-11-23" class="text-gray-700">Nov 23, 2021</time>
+        <time class="text-gray-700" datetime="2021-11-23">Nov 23, 2021</time>
         <!-- Name -->
         <header class="flex items-center mb-4 md:mb-4">
             <h1 class="text-2xl font-bold text-gray-700 pb-px uppercase">Florin</h1>
