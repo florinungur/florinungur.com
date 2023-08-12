@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3.5.3
-      - name: generate-sitemap
+      - name: Generate sitemap.xml
         uses: cicirello/generate-sitemap@v1.9.1
         with:
           base-url-path: https://florinungur.com/
