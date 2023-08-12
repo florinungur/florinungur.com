@@ -1,9 +1,5 @@
 name: Generate sitemap.xml
-on:
-  push:
-    branches:
-      - main
-      - master
+on: workflow_call
 jobs:
   generate:
     runs-on: ubuntu-latest
