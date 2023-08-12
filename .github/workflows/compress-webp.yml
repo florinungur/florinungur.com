@@ -10,7 +10,8 @@ jobs:
   compress:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3.5.3
       - name: Install webp
         run: sudo apt-get install webp
       - name: Compress WebP files
@@ -22,8 +23,10 @@ jobs:
           done
       - name: Commit compressed WebP files
         run: |
-          git config --global user.name 'Florin Ungur'
-          git config --global user.email 'florin@florinungur.com'
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
           git pull
           git commit --all --message "Compress WebP files"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
