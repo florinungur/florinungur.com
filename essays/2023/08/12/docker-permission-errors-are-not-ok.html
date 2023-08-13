@@ -52,7 +52,7 @@
     <h1>Docker permission errors are not ok</h1>
     <!-- @formatter:off -->
     <div class="datetime">
-        <time datetime="2023-08-12">Aug 12, 2023</time>
+        <time datetime="2023-08-12">Aug 12, 2023</time> | <i>Updated on <time datetime="2023-08-13">Aug 13, 2023</time>: added second solution</i>
     </div>
     <!-- @formatter:on -->
     <p class="dropcap">Quick one for you today. And it's a mystery for you to solve. Kinda like Sherlock Holmes' The Final Problem but more Unix-y.</p>
@@ -82,6 +82,13 @@
  --></pre>
     <!-- @formatter:on -->
     <p>Things work.</p>
+    <p>Even better, you can put this line:</p>
+    <!-- @formatter:off -->
+    <pre>
+<!-- --><code>RUN chmod +x start.sh</code><!--
+ --></pre>
+    <!-- @formatter:on -->
+    <p>In the <code>Dockerfile</code> to make the solution more permanent. Better to rely on the Docker build system than on Git or your filesystem.</p>
     <p>How is this related to permissions, you ask? Well, in Unix-like operating systems the ability to execute a script is a permission just like read and
         write.</p>
     <p>Would've loved a more explicit error than:</p>
@@ -91,6 +98,8 @@
  --></pre>
     <!-- @formatter:on -->
     <p>But this is what I get for not contributing to OSS yet.</p>
+    <p class="is-center">❦</p>
+    <p>Thank you <a href="https://nico.dcotta.eu" rel="noopener" target="_blank">Nico</a> for having a 2AM epiphany that resulted in the second solution.</p>
 </main>
 <footer>Thoughts? Send them to <code>florin at $website</code>.</footer>
 </body>
