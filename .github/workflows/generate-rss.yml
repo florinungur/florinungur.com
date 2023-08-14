@@ -1,7 +1,7 @@
 name: Generate atom.xml
 on: workflow_call
 jobs:
-  generate:
+  generate-rss:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
