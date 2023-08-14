@@ -6,7 +6,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3.5.3
-      - name: Test Rssify
+      - name: Generate atom.xml
         uses: tabhub/rssify@v2
         with:
           title: "Florin Ungur's essays RSS feed"
@@ -15,5 +15,5 @@ jobs:
           item-title-css: h2
           item-url-css: .content-list > a
           item-date-css: time
-          item-date-format: "%b %-d, %Y"
+          item-date-format: "%b %d, %Y"
           item-timezone: "Europe/London"
