@@ -15,11 +15,6 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 jobs:
-  # has to be first because of this:
-  # https://github.com/florinungur/florinungur.com/actions/runs/5857617165/job/15879856418#step:3:178
-  # TODO: set this up locally
-  generate-rss:
-    uses: ./.github/workflows/generate-rss.yml
   generate-sitemap:
     uses: ./.github/workflows/generate-sitemap.yml
   deploy:
@@ -29,7 +24,6 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - generate-sitemap
-      - generate-rss
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3.5.3

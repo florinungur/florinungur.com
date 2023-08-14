@@ -1,7 +1,12 @@
 name: Generate sitemap.xml
 on: workflow_call
 jobs:
-  generate:
+  # has to be first because of this:
+  # https://github.com/florinungur/florinungur.com/actions/runs/5857617165/job/15879856418#step:3:178
+  # TODO: set this up locally
+  generate-rss:
+    uses: ./.github/workflows/generate-rss.yml
+  generate-sitemap:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
