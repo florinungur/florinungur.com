@@ -12,9 +12,6 @@ jobs:
           title: "Florin Ungur's essays RSS feed"
           subtitle: "This RSS feed is for my essays. I also have some ideas on my website; check them out, they're always updating."
           url: "https://florinungur.com/essays"
-          language: "en"
-          author-name: "Florin Ungur"
-          author-email: "florin@florinungur.com"
           item-title-css: h2
           item-url-css: .content-list > a
           item-date-css: time
