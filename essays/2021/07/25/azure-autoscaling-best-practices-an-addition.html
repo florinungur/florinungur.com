@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Settings -->
+    <meta content="
+            base-uri 'none';
+            default-src 'none';
+            font-src 'self';
+            form-action 'none';
+            img-src 'self';
+            manifest-src 'self';
+            object-src 'none';
+            script-src 'none';
+            style-src 'self'"
+          http-equiv="Content-Security-Policy"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta charset="utf-8"/>
+
+    <!-- Webpage info -->
+    <title>Azure autoscaling best practices: an addition • Florin Ungur</title>
+    <meta content="Azure autoscaling best practices: an addition" property="og:title"/>
+    <meta content="Florin Ungur" name="author"/>
+    <meta content="If you don't use a scale-out and scale-in rule combination, then you might get flapping."
+          name="description"/>
+    <meta content="If you don't use a scale-out and scale-in rule combination, then you might get flapping."
+          property="og:description"/>
+    <link href="https://florinungur.com/essays/2021/07/25/azure-autoscaling-best-practices-an-addition" rel="canonical"/>
+    <meta content="https://florinungur.com/2021/07/25/azure-autoscaling-best-practices-an-addition" property="og:url"/>
+    <meta content="https://florinungur.com/essays/2021/07/25/img1-abstract-painting.png" property="og:image"/>
+
+    <!-- Favicons -->
+    <link href="../../../../img/favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+    <link href="../../../../img/favicon/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+    <link color="#d1861f" href="../../../../img/favicon/safari-pinned-tab.svg" rel="mask-icon"/>
+    <link href="../../../../img/favicon/favicon.ico" rel="shortcut icon"/>
+
+    <!-- CSS -->
+    <link href="../../../../css/main.css" rel="stylesheet"/>
+    <link href="../../../../css/essays.css" rel="stylesheet"/>
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="Florin Ungur's essays RSS feed" href="https://florinungur.com/rss.xml">
+</head>
+<body>
+<header>
+    <div class="logo is-center">
+        <a href="/">
+            <img alt="website logo" height="70" loading="lazy" src="../../../../img/logo/logo.svg" width="400"/>
+        </a>
+    </div>
+</header>
+<nav>
+    <a href="/essays">← Essays</a>
+</nav>
+<main>
+    <h1>Azure autoscaling best practices: an addition</h1>
+    <div class="datetime">
+        <time datetime="2020-09-01">Jul 25, 2021</time>
+    </div>
+    <p>If you don't use a scale-out and scale-in rule combination, then you might get flapping.</p>
+    <figure>
+        <picture>
+            <source srcset="img1-abstract-painting.webp" type="image/webp"/>
+            <source srcset="img1-abstract-painting.png" type="image/png"/>
+            <img alt="AI-generated abstract painting" height="742" loading="lazy" src="img1.png" width="742"/>
+        </picture>
+        <figcaption class="text-center">AI-generated abstract painting, courtesy of
+            <cite>
+                <a href="https://1secondpaintingimages.s3.us-west-2.amazonaws.com/1677.png" rel="noopener" target="_blank">1SecondPainting</a>
+                [<a href="https://web.archive.org/web/20210716172843/https://1secondpaintingimages.s3.us-west-2.amazonaws.com/1677.png" rel="noopener"
+                    target="_blank">archived link</a>]
+            </cite>
+        </figcaption>
+    </figure>
+    <p class="dropcap">One autoscaling best practice mentioned in the
+        <a href="https://docs.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-best-practices" rel="noopener" target="_blank">Microsoft Docs</a>
+        [<a href="https://web.archive.org/web/20210723073254/https://docs.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-best-practices"
+            rel="noopener" target="_blank">archived Microsoft Docs link</a>] is:</p>
+    <blockquote>
+        <h3>Always use a scale-out and scale-in rule combination that performs an increase and decrease</h3>
+        <p class="is-marginless">If you use only one part of the combination, autoscaling will only take action in a single direction (scale-out, or in) until
+            it reaches the maximum, or minimum instance counts, as defined in the profile. This is not optimal, ideally you want your resource to scale up at
+            times of high usage to ensure availability. Similarly, at times of low usage you want your resource to scale down, so you can realize cost
+            savings.</p>
+    </blockquote>
+    <p>What this paragraph doesn't say is that if you have a scale condition like:</p>
+    <!-- @formatter:off Until the 'white-space' CSS property improves ... -->
+    <pre>
+<!-- --><code>Scale out</code>
+<!-- --><code>When  example-asp  (Average) CpuPercentage > 90     Increase count by 1</code>
+<!-- --><code>Or    example-asp  (Average) MemoryPercentage > 90  Increase count by 1</code>
+<!-- --><code></code>
+<!-- --><code>Scale in</code>
+<!-- --><code>When  example-asp  (Average) CpuPercentage < 45     Decrease count by 1</code><!--
+ --></pre>
+    <!-- @formatter:on -->
+    <p>Then your <code>example-asp</code> might get stuck in a flapping state (the condition in which instances scale up and down rapidly and repetitively).
+        This is because the ASP might meet both the memory-based scale-out condition and the CPU-based scale-in condition.</p>
+    <p>The rest of the essay will tell the story of how I arrived at this discovery along with some insights so you can avoid spending one week with a Microsoft
+        representative trying to diagnose the same behavior.</p>
+    <h2>Work item</h2>
+    <p>On the 17th of June, 2021, I picked up a task from the backlog which read:</p>
+    <blockquote>
+        <p class="is-marginless">Our App Service Plan is set to scale automatically, but that leads to some errors while the ASP is scaling: (it seems) mostly
+            HTTP calls that call an instance which is starting or shutting down. Please investigate if it's better to disable autoscaling; and, if so, how many
+            instances would we need?</p>
+    </blockquote>
+    <p>The HTTP errors could have easily been caused by services hitting unhealthy instances because the apps in the ASP didn't have health checks. But,
+        investigating the problem from the ticket led me to the core issue of this essay: Azure autoscaling is a black box service that you can use but not
+        perfectly tune because you don't have all the information, only metrics, logs, correlations, and speculations.</p>
+    <p>With that in mind, I looked at the metrics of each individual app and of the ASP. In total, 6 apps had the pattern of a stable instance which got
+        replaced by another stable instance; each instance lasted for about 4 days. All apps had ephemeral instances (i.e. with a 1-2 day lifespan); this was
+        because of the sub-optimal scaling condition that had the scale-in threshold set at 60 and the scale-out at 80.</p>
+    <p>The average CPU utilization of the ASP was between 23% - 30% while the average memory usage was between 63% - 78%.</p>
+    <figure>
+        <picture>
+            <source srcset="img2-average-cpu-percentage-june-17.webp" type="image/webp"/>
+            <source srcset="img2-average-cpu-percentage-june-17.png" type="image/png"/>
+            <img alt="ASP average CPU percentage by instance on June 17" height="740" loading="lazy" src="img2-average-cpu-percentage-june-17.png"
+                 width="2127"/>
+        </picture>
+        <figcaption class="text-center">ASP average CPU percentage by instance on June 17</figcaption>
+    </figure>
+    <figure>
+        <picture>
+            <source srcset="img3-average-memory-percentage-june-17.webp" type="image/webp"/>
+            <source srcset="img3-average-memory-percentage-june-17.png" type="image/png"/>
+            <img alt="ASP average memory percentage by instance on June 17" height="742" loading="lazy" src="img3-average-memory-percentage-june-17.png"
+                 width="2105"/>
+        </picture>
+        <figcaption class="text-center">ASP average memory percentage by instance on June 17</figcaption>
+    </figure>
+    <p>The scale condition was based on the <code>CpuPercentage</code> metric, which was fine, but the scale-in and scale-out thresholds were too close to each
+        other (only 20 percentage points) which led to flapping and, possibly, to the HTTP error calls.</p>
+    <p>After some tweaking, I arrived at the scale condition mentioned at the beginning of the essay (scale-in at 45 and scale-out at 90) which eliminated the
+        HTTP errors but not the flapping. Flapping should have no longer occurred, but, instead, the ASP was stuck with 2 instances.</p>
+    <p>The autoscale engine determines when to scale-in based on this formula:</p>
+    <!-- @formatter:off -->
+    <pre>
+<!-- --><code>used scale-in metric types x current instance count / final number of instances when scaled down</code><!--
+ --></pre>
+    <!-- @formatter:on -->
+    <p>The reasoning behind this equation is simple: if you have a workload that is divided across N instances that is to be moved to, for example, N - 1
+        instances, then the N - 1 instances should be able to handle the workload that was present on the N instances.</p>
+    <p>The <a href="https://docs.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-understanding-settings#how-does-autoscale-evaluate-multiple-rules"
+              rel="noopener" target="_blank">official Microsoft documentation</a>
+        [<a href="https://web.archive.org/web/20210724181121/https://docs.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-understanding-settings"
+            rel="noopener" target="_blank">archived documentation</a>] explains why the formula uses all metric types of a scaling condition's scale-in rules
+        when determining when to scale in: <q>Autoscale only takes a scale-in action if all of the scale-in rules are triggered.</q></p>
+    <p>For the ASP in question, the formula should then be: 30 (average CPU usage) x 2 (current number of instances) / 1 (desired number of instances) = 60.
+        This is 30% below the scale-out threshold I implemented, yet the ASP was stuck in endless flapping. This should only happen if the outcome of the
+        equation is 90% or more.</p>
+    <p>After depleting the available information on the subject (i.e. the official docs, a
+        <a href="https://stackoverflow.com/questions/49760213/azure-app-service-autoscale-fails-to-scale-in" rel="noopener" target="_blank">StackOverflow
+            post</a>
+        [<a href="https://web.archive.org/web/20210719093924/https://stackoverflow.com/questions/49760213/azure-app-service-autoscale-fails-to-scale-in"
+            rel="noopener" target="_blank">archived version</a>], and a
+        <a href="https://camerondwyer.com/2019/04/02/azure-app-service-my-experience-with-auto-scale-in-failing" rel="noopener" target="_blank">blog post</a>
+        [<a href="https://web.archive.org/web/20210302053114/https://camerondwyer.com/2019/04/02/azure-app-service-my-experience-with-auto-scale-in-failing/"
+            rel="noopener" target="_blank">archived version</a>]) I decided to contact Microsoft.</p>
+    <h2>Microsoft Support ticket</h2>
+    <p>A Microsoft representative from the App Service team proposed two solutions:</p>
+    <ol>
+        <li>Switch the App Service Plan to the P1V2 tier: same costs but newer hardware with slightly more computing resources.</li>
+        <li>Remove the <code>MemoryPercentage</code> rule as it might interfere with the CPU one. Alternatively, add a scale-in <code>MemoryPercentage</code>
+            rule, which I didn't do because memory usage was fluctuating more than CPU usage, thus making the task of setting memory scale-in and scale-out
+            thresholds harder.
+        </li>
+    </ol>
+    <p>He also recommended lowering the scale-out threshold to <code>CpuPercentage > 80</code> because that's what they usually recommend to their clients.</p>
+    <p>I chose to ignore his recommendation based on 2 facts:</p>
+    <ol>
+        <li>The way the CPU usage increases in the ASP (i.e. rare spikes that go from 30% straight to 90% - 95% in under 1 minute) makes it so that reducing the
+            scale-out threshold by 10% would have no positive impact and one negative impact; that is...
+        </li>
+        <li>Lowering the scale-out threshold would require lowering the scale-in threshold too (for example, to 40%). This would result in 5% more inefficient
+            use of computing resources because lowering the scale-in threshold increases the permissible amount of idling resources. This is not necessarily bad
+            (say, if you have a workload that fluctuates), but it's not optimal for the ASP in question. I would have to lower the scale-in threshold because if
+            I implement the recommended scale-out threshold of 80 but don't also lower the scale-in threshold to at least 40, then the ASP can never scale in to
+            1 instance. If the CPU usage is 44% (slightly below the current scale-in threshold) averaged across 2 instances, the Azure autoscaler would perform
+            the following calculation: 44 x 2 / 1 = 88. The result is above the recommended scale-out threshold of 80. Thus, the autoscaler would produce a
+            flapping event and refrain from scaling in because then it would have to scale out again immediately afterwards.
+        </li>
+    </ol>
+    <p>But don't bother with why I ignored his recommendation for now. This will come in useful at the end of the essay as context for the questions I still
+        have unanswered. For now, let's focus on his solutions.</p>
+    <p>The first solution didn't eliminate the flapping but removing the <code>MemoryPercentage</code> rule did the trick. We have a winner:</p>
+    <!-- @formatter:off -->
+    <pre>
+<!-- --><code>Scale out</code>
+<!-- --><code>When  example-asp  (Average) CpuPercentage > 90     Increase count by 1</code>
+<!-- --><code></code>
+<!-- --><code>Scale in</code>
+<!-- --><code>When  example-asp  (Average) CpuPercentage < 45     Decrease count by 1</code><!--
+ --></pre>
+    <!-- @formatter:on -->
+    <p>The representative didn't explain why or how a scale-out rule might interfere with another scale-out rule, even after I pointed out that the
+        <code>Or</code> in the scale condition syntax makes it seem like the scale-out rules are not connected to each other.</p>
+    <p>Then my friend <a href="https://www.linkedin.com/in/ioannis-linardos/" rel="noopener" target="_blank">Yannis</a>, who has no familiarity with Azure, gave
+        what I think to be the right explanation: sometimes the ASP might get stuck in flapping because both a memory-based scale-out condition and a CPU-based
+        scale-in condition are met at the same time.</p>
+    <p>This might be why if you set two scale-in conditions, one will be prefixed by <code>When</code> and the other by <code>And</code>, but if you set two
+        scale-out conditions, one will be prefixed by <code>When</code> and the other by <code>Or</code>:</p>
+    <!-- @formatter:off -->
+    <pre>
+<!-- --><code>Scale out</code>
+<!-- --><code>When  example-asp  (Average) CpuPercentage > 90     Increase count by 1</code>
+<!-- --><code>Or  example-asp  (Average) MemoryPercentage > 90    Increase count by 1</code>
+<!-- --><code></code>
+<!-- --><code>Scale in</code>
+<!-- --><code>When  example-asp  (Average) CpuPercentage < 45     Decrease count by 1</code>
+<!-- --><code>And  example-asp  (Average) MemoryPercentage < 45   Decrease count by 1</code><!--
+ --></pre>
+    <!-- @formatter:on -->
+    <p>Now the issue is closed:</p>
+    <figure>
+        <picture>
+            <source srcset="img4-average-cpu-percentage-july-17.webp" type="image/webp"/>
+            <source srcset="img4-average-cpu-percentage-july-17.png" type="image/png"/>
+            <img alt="ASP average CPU percentage by instance on July 17" height="736" loading="lazy" src="img4-average-cpu-percentage-july-17.png"
+                 width="2127"/>
+        </picture>
+        <figcaption class="text-center">ASP average CPU percentage by instance on July 17</figcaption>
+    </figure>
+    <figure>
+        <picture>
+            <source srcset="img5-average-memory-percentage-july-17.webp" type="image/webp"/>
+            <source srcset="img5-average-memory-percentage-july-17.png" type="image/png"/>
+            <img alt="ASP average memory percentage by instance on July 17" height="745" loading="lazy" src="img5-average-memory-percentage-july-17.png"
+                 width="2108"/>
+        </picture>
+        <figcaption class="text-center">ASP average memory percentage by instance on July 17</figcaption>
+    </figure>
+    <p>But still, all of this is speculation and the only reason I'm explaining myself at length is to give context for the questions I am still left with.</p>
+    <h2>Questions</h2>
+    <ul>
+        <li>How does the autoscale engine (a.k.a. the Azure Monitor autoscale) evaluate the scaling condition? I would love to see the algorithm.</li>
+        <li>How often does the autoscale engine evaluate the scaling condition? Is it
+            <a href="https://docs.microsoft.com/en-us/azure/architecture/best-practices/auto-scaling#use-azure-monitor-autoscale" rel="noopener"
+               target="_blank">5 minutes</a>
+            [<a href="https://web.archive.org/web/20210723123612/https://docs.microsoft.com/en-us/azure/architecture/best-practices/auto-scaling#use-azure-monitor-autoscale"
+                rel="noopener" target="_blank">archived version</a>]?
+        </li>
+        <li>How does the autoscale engine resolve edge cases? For example, is it safe for me to keep scale-in and scale-out rules that leave no leeway for the
+            scale-in calculation (as described in the second fact above)? The <q><a
+                    href="https://docs.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-best-practices#ensure-the-maximum-and-minimum-values-are-different-and-have-an-adequate-margin-between-them"
+                    rel="noopener" target="_blank">Ensure the maximum and minimum values are different and have an adequate margin between them</a></q>
+            [<a href="https://web.archive.org/web/20210723073254/https://docs.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-best-practices#ensure-the-maximum-and-minimum-values-are-different-and-have-an-adequate-margin-between-them"
+                rel="noopener" target="_blank">archived link</a>] best practice does not answer this question, unfortunately.
+        </li>
+    </ul>
+    <p>In short: <i>how does Azure autoscaling work, precisely?</i></p>
+    <p class="is-center">❦</p>
+    <p>Thank you <a href="https://www.linkedin.com/in/ioannis-linardos/" rel="noopener" target="_blank">Yannis</a> and
+        <a href="https://www.linkedin.com/in/larisa-emanuela-cuturean/" rel="noopener" target="_blank">Larisa</a> for helping me write this.</p>
+</main>
+<footer>
+    <p>Thoughts? Send them to <code>florin at $website</code>.</p>
+    <p>Want to subscribe to my newsletter? Send me another email.</p>
+</footer>
+</body>
+</html>

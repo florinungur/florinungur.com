@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Settings -->
+    <meta content="
+            base-uri 'none';
+            default-src 'none';
+            font-src 'self';
+            form-action 'none';
+            img-src 'self';
+            manifest-src 'self';
+            object-src 'none';
+            script-src 'none';
+            style-src 'self'"
+          http-equiv="Content-Security-Policy"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta charset="utf-8"/>
+
+    <!-- Webpage info -->
+    <title>/usr/local/bin/polkadot: line 1: Not: command not found • Florin Ungur</title>
+    <meta content="/usr/local/bin/polkadot: line 1: Not: command not found" property="og:title"/>
+    <meta content="Florin Ungur" name="author"/>
+    <meta content="What do you do when you see an error like that? If you are like me, you do not read the full message. You instead rush to create hypotheses
+            and test them."
+          name="description"/>
+    <meta content="What do you do when you see an error like that? If you are like me, you do not read the full message. You instead rush to create hypotheses
+            and test them."
+          property="og:description"/>
+    <link href="https://florinungur.com/essays/2022/04/18/not-command-not-found" rel="canonical"/>
+    <meta content="https://florinungur.com/essays/2022/04/18/not-command-not-found" property="og:url"/>
+
+    <!-- Favicons -->
+    <link href="../../../../img/favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+    <link href="../../../../img/favicon/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+    <link color="#d1861f" href="../../../../img/favicon/safari-pinned-tab.svg" rel="mask-icon"/>
+    <link href="../../../../img/favicon/favicon.ico" rel="shortcut icon"/>
+
+    <!-- CSS -->
+    <link href="../../../../css/main.css" rel="stylesheet"/>
+    <link href="../../../../css/essays.css" rel="stylesheet"/>
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="Florin Ungur's essays RSS feed" href="https://florinungur.com/rss.xml">
+</head>
+<body>
+<header>
+    <div class="logo is-center">
+        <a href="/">
+            <img alt="website logo" height="70" loading="lazy" src="../../../../img/logo/logo.svg" width="400"/>
+        </a>
+    </div>
+</header>
+<nav>
+    <a href="/essays">← Essays</a>
+</nav>
+<main>
+    <h1>/usr/local/bin/polkadot: line 1: Not: command not found</h1>
+    <div class="subtitle">Or: A lesson in paying attention</div>
+    <!-- @formatter:off -->
+    <div class="datetime">
+        <time datetime="2022-04-18">Apr 18, 2022</time>
+    </div>
+    <!-- @formatter:on -->
+    <p class="dropcap">What do you do when you see an error like that? If you are like me, you do not read the full message. You instead rush to create
+        hypotheses and test them.</p>
+    <p>If you are <b>not</b> like me, you might have picked up on the curious fact that the first line of code of the <code>polkadot</code> command is the word
+        <code>Not</code>.
+    </p>
+    <p>If you are like me, you skim the error message, not notice the <code>Not:</code>, and assume that the computer does not have the <code>polkadot</code>
+        binary. Why do you skim? Because you are eternally, anxiously, irretrievably, and intractably in a hurry. And this hurry leads to a dead end, which
+        leads to frustration. And this hurry leads to a couple more dead ends.</p>
+    <p>Thank God for wiser people than myself, like my colleague Bruno, who retrieved the container with the <code>polkadot</code> binary from our repository
+        and ran it locally to look around:</p>
+    <!-- @formatter:off Until the 'white-space' CSS property improves ... -->
+    <pre>
+<!-- --><code>$ docker run -ti eu.gcr.io/$COMPANY/polkadot:v0.9.17-5e15a6a -- bash</code><!--
+ --></pre>
+    <!-- @formatter:on -->
+    <p>Meanwhile, I found that the Dockerfile of our polkadot container assumes that every release conforms to a standard version notation: v0.9.17 in this
+        case. Well, they misnamed this release. It was <code>v0.9.17-rc4</code>. Go to the
+        <a href="https://github.com/paritytech/polkadot/releases/tag/v0.9.17-rc4" rel="noopener" target="_blank">release page</a> and hover over the <code>polkadot</code>
+        binary to see for yourself.</p>
+    <p>Cool catch, huh? But what caused the strange error message?</p>
+    <p>Again, Bruno was wiser than me and had the courage to look inside the <code>polkadot</code> binary, something which I considered to be scary and not
+        necessary.</p>
+    <!-- @formatter:off -->
+    <pre>
+<!-- --><code>$ cat polkadot</code>
+<!-- --><code>Not Found</code><!--
+ --></pre>
+    <!-- @formatter:on -->
+    <p>Nice! So the container tried to execute the binary but because <code>Not</code> is not a command present in the container, it returned the puzzling
+        error.</p>
+    <p>But why does <code>polkadot</code> have <code>Not Found</code> as its code?</p>
+    <p>Unfortunately, this was the point where both of us got stuck. The output made it worse. Due to its simplicity, it made the problem more mysterious. Two
+        words?! What do they mean? Why is "Found" capitalized? This caused a bit of exasperation. With time ticking, it culminated into a feeling of
+        desperation. No light at the end of the tunnel. You revert to testing hypotheses that you feel to be dead ends, you start to form wild conspiracy
+        theories, you degenerate. You compare working versions of the same container with this one, you read that error message five more times, you start to
+        procrastinate.</p>
+    <p>Thankfully, time does funny things to our brains, if you let it. Just take a break. You will be different after. Maybe better.</p>
+    <p>Your intuition pulls you to look at the Dockerfile again.</p>
+    <!-- @formatter:off -->
+    <pre>
+<!-- --><code>VERSION=$(git -C $BUILD_DIR/polkadot describe --tags |awk -F '-' '{print$1}’)</code>
+<!-- --><code>... stuff ...</code>
+<!-- --><code>curl -O -L "https://github.com/paritytech/polkadot/releases/download/${VERSION}/polkadot"</code><!--
+ --></pre>
+    <!-- @formatter:on -->
+    <p>The way the Dockerfile builds the version is alright, save for cases where the version is not what you expect. In these cases, the curl command does
+        something you did not take into consideration. From the curl man page:</p>
+    <!-- @formatter:off -->
+    <pre>
+<!-- --><code>-O, --remote-name</code>
+<!-- --><code>Write output to a local file named like the remote file we get. (Only the file part of the remote file is used, the path is cut off.)</code><!--
+ --></pre>
+    <!-- @formatter:on -->
+    <p>Maybe because curl did not find the <code>${VERSION}</code> in question, it wrote the error message that would otherwise be written to stdout to the
+        <code>polkadot</code> file.</p>
+    <p>At this point you feel that you are close. You swiftly craft a modified curl command and run it locally to test your hypothesis. Something like this,
+        maybe?</p>
+    <!-- @formatter:off -->
+    <pre>
+<!-- --><code>curl -O "https://github.com/paritytech/polkadot/releases/download/v0.9.17/polkadot"</code><!--
+ --></pre>
+    <!-- @formatter:on -->
+    <p>Yeah, that should do the trick.</p>
+    <p>The error message?</p>
+    <!-- @formatter:off -->
+    <pre>
+<!-- --><code>Not Found</code><!--
+ --></pre>
+    <!-- @formatter:on -->
+    <p>Do you feel that wave of relief, breaking into your being, filling you with what feels like one of the holiest states of existence? Even better, add
+        joy to it, since you discovered something that you now can share with your colleague. Even better! Add laughter, since you both independently discovered
+        the same thing at the same time! Being an engineer makes you feel alive, no matter if the emotions are positive or negative. Let us cherish that, shall
+        we?</p>
+    <p>Great! Mystery solved! No time to take a beat and celebrate this small victory. Remember, you are in a hurry.</p>
+    <p>So, how do you solve this problem? Do you spend several hours testing an improved Dockerfile for this particular edge case? No, you hardcode the desired
+        version for this run, rebuild the container image, and go about your merry way.</p>
+    <p>But! You do not forget! If this happens again, you might consider improving the Dockerfile (and all other Dockerfiles).</p>
+    <p>And this story will be the memory, so that we can never forget.</p>
+</main>
+<footer>
+    <p>Thoughts? Send them to <code>florin at $website</code>.</p>
+    <p>Want to subscribe to my newsletter? Send me another email.</p>
+</footer>
+</body>
+</html>

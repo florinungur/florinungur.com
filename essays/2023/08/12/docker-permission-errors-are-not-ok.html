@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Settings -->
+    <meta content="
+            base-uri 'none';
+            default-src 'none';
+            font-src 'self';
+            form-action 'none';
+            img-src 'self';
+            manifest-src 'self';
+            object-src 'none';
+            script-src 'none';
+            style-src 'self'"
+          http-equiv="Content-Security-Policy"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta charset="utf-8"/>
+
+    <!-- Webpage info -->
+    <title>Docker permission errors are not ok • Florin Ungur</title>
+    <meta content="Docker permission errors are not ok" property="og:title"/>
+    <meta content="Florin Ungur" name="author"/>
+    <meta content="Quick one for you today. And it's a mystery for you to solve. Kinda like Sherlock Holmes' The Final Problem but more Unix-y."
+          name="description"/>
+    <meta content="Quick one for you today. And it's a mystery for you to solve. Kinda like Sherlock Holmes' The Final Problem but more Unix-y."
+          property="og:description"/>
+    <link href="https://florinungur.com/essays/2023/08/12/docker-permission-errors-are-not-ok" rel="canonical"/>
+    <meta content="https://florinungur.com/essays/2023/08/12/docker-permission-errors-are-not-ok" property="og:url"/>
+
+    <!-- Favicons -->
+    <link href="../../../../img/favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+    <link href="../../../../img/favicon/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+    <link color="#d1861f" href="../../../../img/favicon/safari-pinned-tab.svg" rel="mask-icon"/>
+    <link href="../../../../img/favicon/favicon.ico" rel="shortcut icon"/>
+
+    <!-- CSS -->
+    <link href="../../../../css/main.css" rel="stylesheet"/>
+    <link href="../../../../css/essays.css" rel="stylesheet"/>
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="Florin Ungur's essays RSS feed" href="https://florinungur.com/rss.xml">
+</head>
+<body>
+<header>
+    <div class="logo is-center">
+        <a href="/">
+            <img alt="website logo" height="70" loading="lazy" src="../../../../img/logo/logo.svg" width="400"/>
+        </a>
+    </div>
+</header>
+<nav>
+    <a href="/essays">← Essays</a>
+</nav>
+<main>
+    <h1>Docker permission errors are not ok</h1>
+    <!-- @formatter:off -->
+    <div class="datetime">
+        <time datetime="2023-08-12">Aug 12, 2023</time> | <i>Updated on <time datetime="2023-08-13">Aug 13, 2023</time>: added second solution</i>
+    </div>
+    <!-- @formatter:on -->
+    <p class="dropcap">Quick one for you today. And it's a mystery for you to solve. Kinda like Sherlock Holmes' The Final Problem but more Unix-y.</p>
+    <p><b>First clue: </b>You have a simple <code>Dockerfile</code>.</p>
+    <p><b>Second clue: </b>The Docker image has a simple script that does <code>echo hello</code>.</p>
+    <p><b>Third clue: </b>You build and try to run the image; this is what you get:</p>
+    <!-- @formatter:off -->
+    <pre>
+<!-- --><code>$ docker build . -t florin-secret</code>
+<!-- --><code>$ docker run --user root -it florin-secret</code>
+<!-- --><code>/bin/bash docker: Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "/tmp/hello.sh": permission denied: unknown. ERRO 0000 error waiting for container: context canceled</code><!--
+ --></pre>
+    <!-- @formatter:on -->
+    <p>Why do you get this error?</p>
+    <br>
+    <p>...</p>
+    <br>
+    <br>
+    <p>.....</p>
+    <p>Figured it out?</p>
+    <p>Great, your brain contains yet another piece of trivia.</p>
+    <p><b>Answer: </b> the script is not executable.</p>
+    <p>Yeah... if you do:</p>
+    <!-- @formatter:off -->
+    <pre>
+<!-- --><code>$ chmod +x hello.sh</code><!--
+ --></pre>
+    <!-- @formatter:on -->
+    <p>Things work.</p>
+    <p>Even better, you can put this line:</p>
+    <!-- @formatter:off -->
+    <pre>
+<!-- --><code>RUN chmod +x hello.sh</code><!--
+ --></pre>
+    <!-- @formatter:on -->
+    <p>In the <code>Dockerfile</code> to make the solution more permanent. Better to rely on the Docker build system than on Git or your filesystem.</p>
+    <p>How is this related to permissions, you ask? Well, in Unix-like operating systems the ability to execute a script is a permission just like read and
+        write.</p>
+    <p>Would've loved a more explicit error than:</p>
+    <!-- @formatter:off -->
+    <pre>
+<!-- --><code>permission denied: unknown</code><!--
+ --></pre>
+    <!-- @formatter:on -->
+    <p>But this is what I get for not contributing to OSS yet.</p>
+    <p class="is-center">❦</p>
+    <p>Thank you <a href="https://nico.dcotta.eu" rel="noopener" target="_blank">Nico</a> for having a 2AM epiphany that resulted in the second solution.</p>
+</main>
+<footer>
+    <p>Thoughts? Send them to <code>florin at $website</code>.</p>
+    <p>Want to subscribe to my newsletter? Send me another email.</p>
+</footer>
+</body>
+</html>

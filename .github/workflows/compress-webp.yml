@@ -1,0 +1,32 @@
+name: Compress WebP files
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - '**.webp'
+jobs:
+  compress:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install webp
+        run: sudo apt-get install webp
+      - name: Compress WebP files
+        run: |
+          mapfile -t UncrompressedFiles < <( find $GITHUB_WORKSPACE -type f -and -iname "*.webp" )
+
+          for File in "${UncrompressedFiles[@]}"; do
+            cwebp "$File" -o "$File" -v;
+          done
+      - name: Commit compressed WebP files
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git pull
+          git commit --all --message "Compress WebP files"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

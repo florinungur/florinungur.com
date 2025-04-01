@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Settings -->
+    <meta content="
+            base-uri 'none';
+            default-src 'none';
+            font-src 'self';
+            form-action 'none';
+            img-src 'self';
+            manifest-src 'self';
+            object-src 'none';
+            script-src 'none';
+            style-src 'self'"
+          http-equiv="Content-Security-Policy"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta charset="utf-8"/>
+
+    <!-- Webpage info -->
+    <title>The human risk of failure • Florin Ungur</title>
+    <meta content="The human risk of failure" property="og:title"/>
+    <meta content="Florin Ungur" name="author"/>
+    <meta content="I recently lost a flight by 7 minutes, and that gave me an idea." name="description"/>
+    <meta content="I recently lost a flight by 7 minutes, and that gave me an idea." property="og:description"/>
+    <link href="https://florinungur.com/essays/2024/10/12/the-human-risk-of-failure" rel="canonical"/>
+    <meta content="https://florinungur.com/essays/2024/10/12/the-human-risk-of-failure" property="og:url"/>
+
+    <!-- Favicons -->
+    <link href="../../../../img/favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+    <link href="../../../../img/favicon/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+    <link color="#d1861f" href="../../../../img/favicon/safari-pinned-tab.svg" rel="mask-icon"/>
+    <link href="../../../../img/favicon/favicon.ico" rel="shortcut icon"/>
+
+    <!-- CSS -->
+    <link href="../../../../css/main.css" rel="stylesheet"/>
+    <link href="../../../../css/essays.css" rel="stylesheet"/>
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="Florin Ungur's essays RSS feed" href="https://florinungur.com/rss.xml">
+</head>
+<body>
+<header>
+    <div class="logo is-center">
+        <a href="/">
+            <img alt="website logo" height="70" loading="lazy" src="../../../../img/logo/logo.svg" width="400"/>
+        </a>
+    </div>
+</header>
+<nav>
+    <a href="/essays">← Essays</a>
+</nav>
+<main>
+    <h1>The human risk of failure</h1>
+    <!-- @formatter:off -->
+    <div class="datetime">
+        <time datetime="2024-10-12">Oct 12, 2024</time>
+    </div>
+    <!-- @formatter:on -->
+    <p>I recently lost a flight by 7 minutes because my bus to the airport accrued 1 hour of delays. After trying everything with the staff at the boarding gate, I walked back with my tail behind my legs, through the duty free shops, through security, to buy another plane ticket. I got to talking with the lady at the check-in desk where I learned that airlines overbook seats. If everyone from my upcoming flight was to show up, I'd be reimbursed £400. On top of that, the airline would book the next available flight for me and pay for my overnight hotel stay if needed. Pretty sweet, no? There's even <a href="https://eur-lex.europa.eu/eli/reg/2004/261/oj" rel="noopener" target="_blank">a law</a> which stipulates reimbursements up to £500! However, she said that usually they have around 10 to 12 no-shows, so I shouldn't get my hopes up.</p>
+    <p>But then I realised: wait, does that mean that airlines defined a percentage for things going wrong in day to day life (transport, Internet problems, bureaucracy, people delays) and they use it to bet money against it through overbooking?</p>
+    <p>Yes.</p>
+    <p>We can also use this percentage for other people problems, and maybe think about our software systems in a different light too.</p>
+    <p>But first, some fun math.</p>
+    <p>The flight was on an Airbus A321 Neo. <a href="https://aircraft.airbus.com/en/aircraft/a320-the-most-successful-aircraft-family-ever/a321neo" rel="noopener" target="_blank">According to Airbus</a>, this plane can seat 180-220 people. I used Wizz Air. According to their <a href="https://wizzair.com/en-gb/information-and-services/about-us/about-wizz" rel="noopener" target="_blank">About page</a> and <a href="https://wizzair.com/en-gb/information-and-services/about-us/news/wizz-air-to-switch-all-luton-based-aircraft-to-airbus-a321neo-by-2025" rel="noopener" target="_blank">this news article</a> they have a seating configuration of 239 passengers.</p>
+    <p>While I was striking a conversation with the new boarding crew, I saw on their monitor that the flight had 12 no-shows, so 5%, and 3 overbookings, 1%. I couldn't find a law that specifies an exact percentage allowed for overbooking, but that doesn't really matter. What matters is that for this particular flight we had a 5% population of no-shows. This number fits with what the lady at the check-in desk told me and with <a href="https://www.airhelp.com/en-int/overbooking-compensation/#your-rights-on-overbooking" rel="noopener" target="_blank">this article</a> that says the no-show percentage is around 5%-15%.</p>
+    <p>So, humans and the systems they use, in at least part of their life, have a 85% - 95% SLA.</p>
+    <p>Might be worth accounting for this:</p>
+    <ul>
+        <li>How about adding this buffer into our on-call rotation SLAs: there's a 5-15% chance the on-call person's internet will fail, or they're stuck on the highway and don't have a good enough 5G connection for their laptop, or can't get a PR approval because the <code>CODEOWNERS</code> is broken, etc.</li>
+        <li>Add 5-15% more time to your project's time estimation. (That, I hope, you've already doubled.)</li>
+        <li>Switching gears: there's a 5-15% chance that your sales person won't make the meeting in time.</li>
+        <li>Maybe the groom didn't show up because of this SLA, not because they don't love you.</li>
+    </ul>
+    <p>You can also think about engineering and testing in a quirky new way: simulating conditions where certain services fail is akin to overbooking for potential no-show passengers; accommodating for unknown state or incomplete actions in a system (by, for example, implementing a cache or retry logic) is the same as admitting an overbooked passenger on the flight.</p>
+    <p>If nothing, just take this from my essay: set up contingency plans for any process involving humans and add ~10% more time to the primary plan's duration. I feel like tech engineers and their managers sometimes forget that it's not about how long it takes to solve a problem, it's about the person solving it too.</p>
+</main>
+<footer>
+    <p>Thoughts? Send them to <code>florin at $website</code>.</p>
+    <p>Want to subscribe to my newsletter? Send me another email.</p>
+</footer>
+</body>
+</html>

@@ -1,356 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Florin Ungur - Hello world!</title>
+<head>
+    <!-- Settings -->
+    <meta content="
+            base-uri 'none';
+            default-src 'none';
+            font-src 'self';
+            form-action 'none';
+            img-src 'self';
+            manifest-src 'self';
+            object-src 'none';
+            script-src 'none';
+            style-src 'self'"
+          http-equiv="Content-Security-Policy"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta charset="utf-8"/>
 
-    <!-- Going meta -->
-    <meta name="author" content="Florin Ungur" />
-    <meta
-      name="description"
-      content="Pinning the philosophy of what is to come (when it comes to content on this website)."
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="utf-8" />
-
-    <!-- Open Graph Data -->
-    <meta property="og:title" content="Florin Ungur - Hello world!" />
-    <meta
-      property="og:description"
-      content="Pinning the philosophy of what is to come (when it comes to content on this website)."
-    />
-    <meta property="og:image" content="https://florinungur.com/essays/2020/09/01/img1.png" />
-    <meta property="og:url" content="https://florinungur.com/essays/2020/09/01/hello-world" />
+    <!-- Webpage info -->
+    <title>Hello, World! • Florin Ungur</title>
+    <meta content="Hello, World!" property="og:title"/>
+    <meta content="Florin Ungur" name="author"/>
+    <meta content="This website will have mostly philosophy-, psychology-, and technology-related content. I aim to display this content on a simple yet
+            beautiful website that is designed to last and to be accessible to as many types of people as possible throughout its lifetime."
+          name="description"/>
+    <meta content="This website will have mostly philosophy-, psychology-, and technology-related content. I aim to display this content on a simple yet
+            beautiful website that is designed to last and to be accessible to as many types of people as possible throughout its lifetime."
+          property="og:description"/>
+    <link href="https://florinungur.com/essays/2020/09/01/hello-world" rel="canonical"/>
+    <meta content="https://florinungur.com/essays/2020/09/01/hello-world" property="og:url"/>
+    <meta content="https://florinungur.com/essays/2020/09/01/img1-abstract-painting.png" property="og:image"/>
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="../../../../img/favicon/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="../../../../img/favicon/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="../../../../img/favicon/favicon-16x16.png" />
-    <link rel="manifest" href="../../../../img/favicon/site.webmanifest" />
-    <link rel="mask-icon" href="../../../../img/favicon/safari-pinned-tab.svg" color="#d1861f" />
-    <link rel="shortcut icon" href="../../../../img/favicon/favicon.ico" />
-    <meta name="msapplication-TileColor" content="#ffffff" />
-    <meta name="msapplication-TileImage" content="../../../../img/favicon/mstile-144x144.png" />
-    <meta name="msapplication-config" content="../../../../img/favicon/browserconfig.xml" />
-    <meta name="theme-color" content="#ffffff" />
+    <link href="../../../../img/favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+    <link href="../../../../img/favicon/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+    <link color="#d1861f" href="../../../../img/favicon/safari-pinned-tab.svg" rel="mask-icon"/>
+    <link href="../../../../img/favicon/favicon.ico" rel="shortcut icon"/>
 
-    <!-- Extra resources -->
-    <link rel="canonical" href="https://florinungur.com/essays/2020/09/01/hello-world" />
-    <link rel="stylesheet" href="../../../../css/chota.css" />
-    <link rel="stylesheet" href="../../../../css/extra.css" />
-    <script defer src="../../../../js/dark-mode.js"></script>
-    <link rel="alternate" type="application/rss+xml" title="Florin Ungur" href="https://florinungur.com/rss.xml" />
-  </head>
+    <!-- CSS -->
+    <link href="../../../../css/main.css" rel="stylesheet"/>
+    <link href="../../../../css/essays.css" rel="stylesheet"/>
 
-  <body>
-    <main class="container">
-      <div class="logo is-center is-vertical-align">
-        <a href="/"><img src="../../../../img/logo/logo.svg" alt="florinungur.com site logo" /></a>
-      </div>
-      <nav class="nav is-center">
-        <a href="/">Home</a>
-        <a href="../../../../webmarks">Webmarks</a>
-        <a href="../../../../ideas">Ideas</a>
-        <a class="active" href="../../../../essays">Essays</a>
-        <a href="">Guestbook</a>
-        <a href="javascript:void(0)" id="theme-switcher">☀️</a>
-      </nav>
-
-      <noscript>
-        <div class="card text-error">
-          <p>I use JavaScript only for setting the color scheme of the website to either dark or light.</p>
-        </div>
-      </noscript>
-
-      <article>
-        <header>
-          <p><time datetime="2020-09-01">September 1, 2020</time></p>
-
-          <h1>Hello world!</h1>
-          <p class="subtitle">Or: How I finally decided to create my website</p>
-          <p class="summary">
-            This website will have mostly philosophy-, psychology-, and technology-related content. I aim to display
-            this content on a simple yet beautiful website that is designed to last and to be accessible to as many
-            types of people as possible throughout its lifetime.
-          </p>
-        </header>
-
-        <figure>
-          <img src="img1.png" alt="AI-generated abstract painting" />
-          <figcaption class="text-center">
-            AI-generated abstract painting, courtesy of
-            <cite
-              ><a
-                href="https://1secondpainting.com/wp-content/uploads/2020/07/6191.png"
-                rel="noopener noreferrer"
-                target="_blank"
-                >1SecondPainting</a
-              ></cite
-            >
-          </figcaption>
-        </figure>
-
-        <p class="dropcap">
-          Welcome! Welcome to my humble digital abode, to my corner of the internet, to another website with a
-          forgettable name that you will bookmark but will seldomly return to.
-        </p>
-
-        <p>
-          I have several essays lined up and ready to go, but this one seems the most difficult. Maybe because it is the
-          first one, maybe because this essay is meant to explicate the implicit assumptions of my website... maybe
-          both. So, to achieve the goal of this essay, I will talk about:
-        </p>
-
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="Florin Ungur's essays RSS feed" href="https://florinungur.com/rss.xml">
+</head>
+<body>
+<header>
+    <div class="logo is-center">
+        <a href="/">
+            <img alt="website logo" height="70" loading="lazy" src="../../../../img/logo/logo.svg" width="400"/>
+        </a>
+    </div>
+</header>
+<nav>
+    <a href="/essays">← Essays</a>
+</nav>
+<main>
+    <h1>Hello, World!</h1>
+    <div class="subtitle">Or: How I finally decided to create my website</div>
+    <!-- @formatter:off -->
+    <div class="datetime">
+        <time datetime="2020-09-01">Sep 1, 2020</time> | <i>Updated on <time datetime="2022-07-10">Jul 10, 2022</time>: changed logo and some wording</i>
+    </div>
+    <!-- @formatter:on -->
+    <p>This website will have mostly philosophy-, psychology-, and technology-related content. I aim to display this content on a simple yet beautiful website
+        that is designed to last and to be accessible to as many types of people as possible throughout its lifetime.</p>
+    <figure>
+        <picture>
+            <source srcset="img1-abstract-painting.webp" type="image/webp"/>
+            <source srcset="img1-abstract-painting.png" type="image/png"/>
+            <img alt="AI-generated abstract painting" height="742" loading="lazy" src="img1-abstract-painting.png" width="742"/>
+        </picture>
+        <figcaption class="text-center">AI-generated abstract painting, courtesy of
+            <cite>
+                <a href="https://1secondpaintingimages.s3.us-west-2.amazonaws.com/8912.png" rel="noopener" target="_blank">1SecondPainting</a>
+                [<a href="https://web.archive.org/web/20210106190807/https://1secondpaintingimages.s3.us-west-2.amazonaws.com/8912.png" rel="noopener"
+                    target="_blank">archived link</a>]
+            </cite>
+        </figcaption>
+    </figure>
+    <p class="dropcap">Welcome! Welcome to my humble digital abode, to my corner of the internet, to another website with a forgettable name that you will
+        probably not return to.</p>
+    <p>I have several essays lined up and ready to go, but this one seems the most difficult. Maybe because it is the first one, maybe because this essay is
+        meant to explicate the implicit assumptions of my website... maybe both. So, to achieve the goal of this essay, I will talk about:</p>
+    <ul>
+        <li>what I write about,</li>
+        <li>how the website is built, and</li>
+        <li>why the website is built.</li>
+    </ul>
+    <p>Why am I writing about this? It feels like a cliché by now, but, as
+        <a href="https://alexnixon.github.io/2019/12/10/writing.html" rel="noopener" target="_blank">Alex Nixon said</a>
+        [<a href="https://web.archive.org/web/20200722020956/https://alexnixon.github.io/2019/12/10/writing.html" rel="noopener" target="_blank">archived
+            link</a>], it is to justify to myself why I made this website and how.</p>
+    <h2>Content</h2>
+    <p>I will write about philosophy, psychology, and technology. Take a look around my website; look at <a href="../../../../ideas" target="_blank">my
+        ideas</a>, for example, and you will get a taste of what is to come, content-wise, from me.</p>
+    <p>I will write about issues I searched for but could not find a satisfactory answer to. I will also write about myself — my ideas, philosophy, stuff like
+        that. I will try, as much as possible, to only write stuff that never existed before.</p>
+    <h2>Styling</h2>
+    <p>Because the medium is the message, I also have to talk about how this website looks.</p>
+    <p>The styling was VERY HARD. There are so many different CSS frameworks to choose from and so many website designs that I like (more on this below)... I
+        settled on making my own CSS which I based on <a href="https://jenil.github.io/chota/" rel="noopener" target="_blank">chota</a>.</p>
+    <p>This site is for reading, so I did not add a lot of padding — no wasted space in my layout! No animated content. No fixed floating header.</p>
+    <p>I created the favicon using <a href="https://www.photopea.com/" rel="noopener" target="_blank">Photopea</a> and converted it to multiple formats using
+        <a href="https://realfavicongenerator.net" rel="noopener" target="_blank">realfavicongenerator.net</a>. The favicon stands for balance and tamed
+        complexity. (You can grab the PSD file <a href="../../../../img/favicon/favicon.psd" target="_blank">here [direct download]</a>.)</p>
+    <p>The logo (my name + the favicon) was created by me in around an hour. My friend,
+        <a href="https://www.instagram.com/alexandra_argh/" rel="noopener" target="_blank">Alex Arghiriade</a>, did a previous iteration because I am
+        definitely not a web designer. But I think I'm getting better. The font is Libertinus Sans.</p>
+    <p>I found the artwork at the top of this essay on <a href="https://news.ycombinator.com/item?id=23919590" rel="noopener" target="_blank">Hacker News</a>
+        [<a href="https://web.archive.org/web/20200901035747/https://news.ycombinator.com/item?id=23919590" rel="noopener" target="_blank">archived link</a>].
+        There are more AI artists out there: <a href="https://art42.net/" rel="noopener" target="_blank">art42.net</a> and
+        <a href="https://thisartworkdoesnotexist.com/" rel="noopener" target="_blank">thisartworkdoesnotexist.com</a>, for example.</p>
+    <h2>Inspirations</h2>
+    <p>I, along with the styling and almost everything else around here, was inspired by these websites:</p>
+    <ul>
+        <li>
+            <a href="https://brandur.org/" rel="noopener" target="_blank">brandur.org</a>
+            [<a href="https://web.archive.org/web/20200901035834/https://brandur.org/" rel="noopener" target="_blank">archived link</a>]
+        </li>
+        <li>
+            <a href="https://thebestmotherfucking.website/" rel="noopener" target="_blank">thebestmotherfucking.website</a>
+            [<a href="https://web.archive.org/web/20200901035910/https://thebestmotherfucking.website/" rel="noopener" target="_blank">archived link</a>]
+        </li>
+        <li>
+            <a href="https://tonsky.me/" rel="noopener" target="_blank">tonsky.me</a>
+            [<a href="https://web.archive.org/web/20200901035932/https://tonsky.me/" rel="noopener" target="_blank">archived link</a>]
+        </li>
+        <li>
+            <a href="https://fingers.today/" rel="noopener" target="_blank">fingers.today</a>
+            [<a href="https://web.archive.org/web/20200901035957/https://fingers.today/" rel="noopener" target="_blank">archived link</a>]
+        </li>
+        <li>
+            <a href="https://jmduke.com/" rel="noopener" target="_blank">jmduke.com</a>
+            [<a href="https://web.archive.org/web/20200901040029/https://jmduke.com/" rel="noopener" target="_blank">archived link</a>]
+        </li>
+        <li>
+            <a href="https://fabiensanglard.net/" rel="noopener" target="_blank">fabiensanglard.net</a>
+            [<a href="https://web.archive.org/web/20201223151641/https://fabiensanglard.net/" rel="noopener" target="_blank">archived link</a>]
+        </li>
+        <li>
+            <a href="https://rxi.github.io" rel="noopener" target="_blank">rxi.github.io</a>
+            [<a href="https://web.archive.org/web/20201219200305/https://rxi.github.io/" rel="noopener" target="_blank">archived link</a>]
+        </li>
+    </ul>
+    <p>I was also probably inspired by my <a href="../../../../webmarks" target="_blank">webmarks</a>.</p>
+    <h2>Tooling</h2>
+    <p>For the technically inclined, here are the tools I use for this website:</p>
+    <ul>
+        <li>IntelliJ IDEA for writing the content;</li>
+        <li>
+            <a href="https://github.com/florinungur/florinungur.com" rel="noopener" target="_blank">GitHub</a> and
+            <a href="https://soverin.net/" rel="noopener" target="_blank">Soverin</a> for hosting the content;
+        </li>
+        <li><a href="https://github.com/florinungur/florinungur.com/tree/add-azure-article/.github/workflows" rel="noopener" target="_blank">GitHub Actions</a>
+            for building the website; they use:
+        </li>
         <ul>
-          <li>what I write about,</li>
-          <li>how the website is built, and</li>
-          <li>why the website is built.</li>
+            <li><a href="https://cssnano.co/" rel="noopener" target="_blank">cssnano</a> for minifying the CSS;</li>
+            <li><a href="https://developers.google.com/speed/webp/docs/cwebp" rel="noopener" target="_blank">cwebp</a> for compressing WebP files;</li>
+            <li><a href="https://github.com/svg/svgo" rel="noopener" target="_blank">svgo</a> for optimizing SVG files;</li>
+            <li>and <a href="https://www.npmjs.com/package/optipng-bin" rel="noopener" target="_blank">optipng-bin</a> for cleaning PNG images.</li>
         </ul>
-
-        <p>
-          Why am I writing about this? It feels like a cliché by now, but, as
-          <a
-            href="https://web.archive.org/web/20200722020956/https://alexnixon.github.io/2019/12/10/writing.html"
-            rel="noopener noreferrer"
-            target="_blank"
-            >Alex Nixon said</a
-          >, it is to justify to myself why I made this website and how.
-        </p>
-
-        <h1>Content</h1>
-        <p>
-          I will write about philosophy, psychology, and technology. Take a look around my website; look at
-          <a href="../../../../ideas" target="_blank">my ideas</a>, for example, and you will get a taste of what is to
-          come, content-wise, from me.
-        </p>
-        <p>
-          I will write about issues I searched for but could not find a satisfactory answer to. I will also write about
-          myself — my ideas, philosophy, stuff like that. I will try, as much as possible, to only write stuff that
-          never existed before.
-        </p>
-
-        <h1>Styling</h1>
-        <p>Because the medium is the message, I also have to talk about this website.</p>
-        <p>
-          The styling was VERY HARD. I love art but I suffer from choice anxiety. There are so many different CSS
-          frameworks to choose from and so many website styles that I like (more on this below). I settled on
-          <a href="https://jenil.github.io/chota/" rel="noopener noreferrer" target="_blank">chota</a>
-          for now because of its lightness, because it provided easy instructions to write my only JavaScript file (<a
-            href="../../../../js/dark-mode.js"
-            target="_blank"
-            >dark-mode.js</a
-          >), and because it has cards.
-        </p>
-        <p>
-          This site is for reading, so I did not add a lot of padding — no wasted space in my layout! No animated
-          content. No fixed floating header.
-        </p>
-        <p>
-          I created the favicon using
-          <a href="https://www.photopea.com/" rel="noopener noreferrer" target="_blank">Photopea</a>
-          and converted it to multiple formats using
-          <a href="https://realfavicongenerator.net" rel="noopener noreferrer" target="_blank"
-            >realfavicongenerator.net</a
-          >. (You can grab the <a href="../../../../img/favicon/favicon.psd" target="_blank">.PSD file</a>.)
-        </p>
-        <p>
-          The logo (my name + the favicon) was created by my friend
-          <a href="https://www.instagram.com/alexandra_argh/" rel="noopener noreferrer" target="_blank"
-            >Alex Arghiriade</a
-          >, because I am definetely not a web designer. I did a previous iteration myself but it did not click as much
-          as the current logo does. The font is Segoe UI SemiLight.
-        </p>
-
-        <p>
-          I found the artwork at the top of this essay on
-          <a
-            href="https://web.archive.org/web/20200901035747/https://news.ycombinator.com/item?id=23919590"
-            rel="noopener noreferrer"
-            target="_blank"
-            >Hacker News</a
-          >. There are more AI artists out there:
-          <a href="https://art42.net/" rel="noopener noreferrer" target="_blank">art42.net</a>
-          and
-          <a href="https://thisartworkdoesnotexist.com/" rel="noopener noreferrer" target="_blank"
-            >thisartworkdoesnotexist.com</a
-          >, for example.
-        </p>
-
-        <h1>Inspirations</h1>
-        <p>I was inspired by these websites:</p>
-        <ul>
-          <li>
-            <a
-              href="https://web.archive.org/web/20200901035834/https://brandur.org/"
-              rel="noopener noreferrer"
-              target="_blank"
-              >brandur.org</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://web.archive.org/web/20200901035910/https://thebestmotherfucking.website/"
-              rel="noopener noreferrer"
-              target="_blank"
-              >thebestmotherfucking.website</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://web.archive.org/web/20200901035932/https://tonsky.me/"
-              rel="noopener noreferrer"
-              target="_blank"
-              >tonsky.me</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://web.archive.org/web/20200901035957/https://fingers.today/"
-              rel="noopener noreferrer"
-              target="_blank"
-              >fingers.today</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://web.archive.org/web/20200901040029/https://jmduke.com/"
-              rel="noopener noreferrer"
-              target="_blank"
-              >jmduke.com</a
-            >
-          </li>
-        </ul>
-        <p>
-          I was also probably inspired by my
-          <a href="../../../../webmarks" target="_blank">favorite writings on the web</a>.
-        </p>
-
-        <h1>Philosophy</h1>
-        <p>
-          You might have noticed that I like to archive every link. This is because I believe in a sustainable,
-          long-lasting, free, and fun internet, beliefs which, I think, are shared by people like
-          <a
-            href="https://web.archive.org/web/20200724092502/https://solar.lowtechmagazine.com/2018/09/how-to-build-a-lowtech-website/"
-            rel="noopener noreferrer"
-            target="_blank"
-            >the guys at LOW←TECH MAGAZINE</a
-          >,
-          <a
-            href="https://web.archive.org/web/20200621074025/https://neustadt.fr/essays/the-small-web/"
-            rel="noopener noreferrer"
-            target="_blank"
-            >Parimal Satyal</a
-          >,
-          <a
-            href="https://web.archive.org/web/20200708045446/https://jeffhuang.com/designed_to_last/"
-            rel="noopener noreferrer"
-            target="_blank"
-            >Jeff Huang</a
-          >,
-          <a
-            href="https://web.archive.org/web/20200724093257/https://tinyprojects.dev/posts/tiny_websites_are_great"
-            rel="noopener noreferrer"
-            target="_blank"
-            >and Ben</a
-          >.
-        </p>
-        <p>
-          I also believe in an accessible internet, hence why I strived to make the website conform to some
-          accessibility standards (like, for example,
-          <a
-            href="https://web.archive.org/web/20200901061821/https://sourcehut.org/blog/2020-05-27-accessibility-through-simplicity/"
-            rel="noopener noreferrer"
-            target="_blank"
-            >SourceHut</a
-          >), and why I will probably translate the content into several languages later.
-        </p>
-        <p>
-          I also like simplicity, balance, and durability, hence why I am writing all the pages in plain HTML with CSS I
-          (kind of) understand and with minimal tooling overhead.
-        </p>
-        <p>The tools in question are:</p>
-        <ul>
-          <li>the VSCode IDE with the Prettier, ESLint, and Live Server extensions for writing the content;</li>
-          <li>GitHub and CloudFlare for hosting said content;</li>
-          <li>
-            Microsoft's
-            <a href="https://accessibilityinsights.io/en/" rel="noopener noreferrer" target="_blank"
-              >Accessibility Insights</a
-            >
-            and IBM's
-            <a href="https://github.com/IBMa/equal-access" rel="noopener noreferrer" target="_blank">Equal Access</a>
-            for accessibility testing;
-          </li>
-          <li>
-            <a href="https://www.fastorslow.com/" rel="noopener noreferrer" target="_blank">fastorslow.com</a>
-            and
-            <a href="https://www.dareboost.com/en" rel="noopener noreferrer" target="_blank">Dareboost</a>
-            for performance testing;
-          </li>
-          <li>
-            <a href="https://www.checkbot.io/" rel="noopener noreferrer" target="_blank">Checkbot</a>
-            for assessing the SEO, speed, and security of my website; and, finally
-          </li>
-          <li>
-            Mozilla's
-            <a href="https://observatory.mozilla.org/" rel="noopener noreferrer" target="_blank">Observatory</a>
-            and Google Chrome's
-            <a href="https://developers.google.com/web/tools/lighthouse" rel="noopener noreferrer" target="_blank"
-              >Lighthouse</a
-            >
-            for a holistic assessment.
-          </li>
-        </ul>
-        <p>
-          (I found some of these tools on Shawn Wang's
-          <a
-            href="https://web.archive.org/web/20200831180535/https://www.swyx.io/writing/webperf-tests/"
-            rel="noopener noreferrer"
-            target="_blank"
-            >website</a
-          >
-          which, in turn, I stumbled upon in the comments of an
-          <a
-            href="https://web.archive.org/web/20200831180606/https://news.ycombinator.com/item?id=23119701"
-            rel="noopener noreferrer"
-            target="_blank"
-            >HN article</a
-          >. And I say that this is a minimal tooling overhead because I will use all tools only at the beggining, to
-          improve my website and learn new stuff. The only long-term tools will be the first two bullet points, but even
-          with those included I will not be affected if any/all of these tools will disappear or, worse, be
-          discontinued. I will just change to an alternative.)
-        </p>
-
-        <p>
-          Not to be clickbaity and get to the subtitle of this essay last, but... I finally decided to make this website
-          because I no longer feel that my ideas, poems, and essays are trash. Secondly, publishing these things pushes
-          me to get rid of the trash. Lastly, I want an email address with a custom domain. That is it.
-        </p>
-      </article>
-
-      <hr class="footer" />
-
-      <footer class="is-text-center">
-        <p>
-          Liked my writing? Follow it on
-          <a href="../../../../rss.xml" target="_blank"
-            ><img src="../../../../img/icons/feed.svg" alt="RSS SVG logo" /> RSS</a
-          >, sign my
-          <a href=""><img src="../../../../img/icons/guestbook.svg" alt="Guestbook SVG logo" /> guestbook</a>, send me
-          an
-          <a href="mailto:hello@florinungur.com"
-            ><img src="../../../../img/icons/email.svg" alt="Email SVG logo" /> email</a
-          >, or hit me up on
-          <a href="https://www.linkedin.com/in/florinungur" rel="noopener noreferrer" target="_blank"
-            ><img src="../../../../img/icons/linkedin.svg" alt="LinkedIn SVG logo" /> LinkedIn</a
-          >.
-        </p>
-        <p>
-          Did I make a mistake? Please consider sending a
-          <a href="https://www.github.com/ungurflorin" rel="noopener noreferrer" target="_blank"
-            ><img src="../../../../img/icons/github.svg" alt="GitHub SVG logo" /> pull request</a
-          >.
-        </p>
-      </footer>
-    </main>
-  </body>
+        <li>
+            Microsoft's <a href="https://accessibilityinsights.io/en/" rel="noopener" target="_blank">Accessibility Insights</a>, IBM's
+            <a href="https://github.com/IBMa/equal-access" rel="noopener" target="_blank">Equal Access Accessibility Checker</a>, and Toptal's
+            <a href="https://www.toptal.com/designers/colorfilter" rel="noopener" target="_blank">Colorblind Web Page Filter</a> for accessibility testing;
+        </li>
+        <li>
+            <a href="https://www.checkbot.io/" rel="noopener" target="_blank">Checkbot</a> for assessing the SEO, speed, and security of my website; and,
+            finally
+        </li>
+        <li>
+            Mozilla's <a href="https://observatory.mozilla.org/" rel="noopener" target="_blank">Observatory</a> and Google Chrome's
+            <a href="https://developers.google.com/web/tools/lighthouse" rel="noopener" target="_blank">Lighthouse</a> for a holistic assessment.
+        </li>
+    </ul>
+    <p>(I found some of these tools on Shawn Wang's <a href="https://www.swyx.io/writing/webperf-tests/" rel="noopener" target="_blank">website</a>
+        [<a href="https://web.archive.org/web/20200831180535/https://www.swyx.io/writing/webperf-tests/" rel="noopener" target="_blank">archived link</a>]
+        which, in turn, I stumbled upon in the comments of an
+        <a href="https://news.ycombinator.com/item?id=23119701" rel="noopener" target="_blank">HN article</a>
+        [<a href="https://web.archive.org/web/20200831180606/https://news.ycombinator.com/item?id=23119701" rel="noopener" target="_blank">archived hacker
+            link</a>].)</p>
+    <h2>Philosophy</h2>
+    <p>I finally decided to make this website because I no longer feel that my ideas, poems, and essays are trash. Secondly, publishing these things pushes me
+        to get rid of the trash. Lastly, I want an email address with a custom domain. That is it.</p>
+    <p>You might have noticed that I like to archive every link. This is because I like the idea of a sustainable, long-lasting, free, and fun internet. This
+        preference, I think, is shared by people like the guys at
+        <a href="https://solar.lowtechmagazine.com/2018/09/how-to-build-a-lowtech-website/" rel="noopener" target="_blank">LOW←TECH MAGAZINE</a>
+        [<a href="https://web.archive.org/web/20200724092502/https://solar.lowtechmagazine.com/2018/09/how-to-build-a-lowtech-website/" rel="noopener"
+            target="_blank">archived link</a>], <a href="https://neustadt.fr/essays/the-small-web/" rel="noopener" target="_blank">Parimal Satyal</a>
+        [<a href="https://web.archive.org/web/20200621074025/https://neustadt.fr/essays/the-small-web/" rel="noopener" target="_blank">archived link</a>],
+        <a href="https://jeffhuang.com/designed_to_last/" rel="noopener" target="_blank">Jeff Huang</a>
+        [<a href="https://web.archive.org/web/20200708045446/https://jeffhuang.com/designed_to_last/" rel="noopener" target="_blank">archived link</a>], and
+        <a href="https://tinyprojects.dev/posts/tiny_websites_are_great" rel="noopener" target="_blank">Ben</a>
+        [<a href="https://web.archive.org/web/20200724093257/https://tinyprojects.dev/posts/tiny_websites_are_great" rel="noopener" target="_blank">and the
+            archived link</a>].</p>
+    <p>I — like <a href="https://sourcehut.org/blog/2020-05-27-accessibility-through-simplicity/" rel="noopener" target="_blank">SourceHut</a>
+        [<a href="https://web.archive.org/web/20200901061821/https://sourcehut.org/blog/2020-05-27-accessibility-through-simplicity/" rel="noopener"
+            target="_blank">archived link</a>] — also like the idea of an accessible internet, hence why I strived to make the website conform to some
+        accessibility standards and why I will probably translate the content into several languages later.</p>
+    <p>The last "land" of my digital philosophy is all about simplicity, balance, and durability. I am writing all the pages in plain HTML with CSS I (kind of)
+        understand. This partly takes care of simplicity and durability. Balance? I do not use any JavaScript; not because I dislike it (my third year
+        internship was all about it), but because I do not need it for this project. Balance, for me, is about only juggling the stuff you like, want, need,
+        plus some extra fluff. Throwing something on just because also throws you — or a website — off balance. You can restore the balance by putting in extra
+        effort (i.e. using JavaScript to better achieve this website's goals and philosophy) or by probably five or six more ways, what do I know? I am wary
+        about putting in extra effort for fluff. I spare this energy for other "unbalanced" things, like my obsession with words. Case in point: using
+        <a href="https://highlightjs.org/" rel="noopener" target="_blank">highlight.js</a> would not, on one side, throw the website off balance because I would
+        use this code to improve the reading experience, make it more fun. On the other side, though, it would come in conflict with my love for simplicity and,
+        arguably, with my desire for durability. But life is a balancing act. Who knows... in the future the reading experience might take more weight than
+        simplicity and durability, so then the balance would need to be restored.</p>
+    <p class="is-center">❦</p>
+    <p>Thank you <a href="https://www.linkedin.com/in/larisa-emanuela-cuturean/" rel="noopener" target="_blank">Larisa</a> for helping me write this.</p>
+</main>
+<footer>
+    <p>Thoughts? Send them to <code>florin at $website</code>.</p>
+    <p>Want to subscribe to my newsletter? Send me another email.</p>
+</footer>
+</body>
 </html>

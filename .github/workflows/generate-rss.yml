@@ -1,0 +1,19 @@
+name: Generate atom.xml
+on: workflow_call
+jobs:
+  generate-rss:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Generate atom.xml
+        uses: tabhub/rssify@v2
+        with:
+          title: "Florin Ungur's essays RSS feed"
+          subtitle: "This RSS feed is for my essays. I also have some ideas on my website; check them out, they're always updating."
+          url: "https://florinungur.com/essays"
+          item-title-css: h2
+          item-url-css: .content-list > a
+          item-date-css: time
+          item-date-format: "%b %d, %Y"
+          item-timezone: "Europe/London"
