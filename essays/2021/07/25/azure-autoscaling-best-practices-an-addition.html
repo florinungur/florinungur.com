@@ -84,7 +84,6 @@
             savings.</p>
     </blockquote>
     <p>What this paragraph doesn't say is that if you have a scale condition like:</p>
-    <!-- @formatter:off Until the 'white-space' CSS property improves ... -->
     <pre>
 <!-- --><code>Scale out</code>
 <!-- --><code>When  example-asp  (Average) CpuPercentage > 90     Increase count by 1</code>
@@ -93,7 +92,6 @@
 <!-- --><code>Scale in</code>
 <!-- --><code>When  example-asp  (Average) CpuPercentage < 45     Decrease count by 1</code><!--
  --></pre>
-    <!-- @formatter:on -->
     <p>Then your <code>example-asp</code> might get stuck in a flapping state (the condition in which instances scale up and down rapidly and repetitively).
         This is because the ASP might meet both the memory-based scale-out condition and the CPU-based scale-in condition.</p>
     <p>The rest of the essay will tell the story of how I arrived at this discovery along with some insights so you can avoid spending one week with a Microsoft
@@ -135,11 +133,9 @@
     <p>After some tweaking, I arrived at the scale condition mentioned at the beginning of the essay (scale-in at 45 and scale-out at 90) which eliminated the
         HTTP errors but not the flapping. Flapping should have no longer occurred, but, instead, the ASP was stuck with 2 instances.</p>
     <p>The autoscale engine determines when to scale-in based on this formula:</p>
-    <!-- @formatter:off -->
     <pre>
 <!-- --><code>used scale-in metric types x current instance count / final number of instances when scaled down</code><!--
  --></pre>
-    <!-- @formatter:on -->
     <p>The reasoning behind this equation is simple: if you have a workload that is divided across N instances that is to be moved to, for example, N - 1
         instances, then the N - 1 instances should be able to handle the workload that was present on the N instances.</p>
     <p>The <a href="https://docs.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-understanding-settings#how-does-autoscale-evaluate-multiple-rules"
@@ -185,7 +181,6 @@
     <p>But don't bother with why I ignored his recommendation for now. This will come in useful at the end of the essay as context for the questions I still
         have unanswered. For now, let's focus on his solutions.</p>
     <p>The first solution didn't eliminate the flapping but removing the <code>MemoryPercentage</code> rule did the trick. We have a winner:</p>
-    <!-- @formatter:off -->
     <pre>
 <!-- --><code>Scale out</code>
 <!-- --><code>When  example-asp  (Average) CpuPercentage > 90     Increase count by 1</code>
@@ -193,7 +188,6 @@
 <!-- --><code>Scale in</code>
 <!-- --><code>When  example-asp  (Average) CpuPercentage < 45     Decrease count by 1</code><!--
  --></pre>
-    <!-- @formatter:on -->
     <p>The representative didn't explain why or how a scale-out rule might interfere with another scale-out rule, even after I pointed out that the
         <code>Or</code> in the scale condition syntax makes it seem like the scale-out rules are not connected to each other.</p>
     <p>Then my friend <a href="https://www.linkedin.com/in/ioannis-linardos/" rel="noopener" target="_blank">Yannis</a>, who has no familiarity with Azure, gave
@@ -201,7 +195,6 @@
         scale-in condition are met at the same time.</p>
     <p>This might be why if you set two scale-in conditions, one will be prefixed by <code>When</code> and the other by <code>And</code>, but if you set two
         scale-out conditions, one will be prefixed by <code>When</code> and the other by <code>Or</code>:</p>
-    <!-- @formatter:off -->
     <pre>
 <!-- --><code>Scale out</code>
 <!-- --><code>When  example-asp  (Average) CpuPercentage > 90     Increase count by 1</code>
@@ -211,7 +204,6 @@
 <!-- --><code>When  example-asp  (Average) CpuPercentage < 45     Decrease count by 1</code>
 <!-- --><code>And  example-asp  (Average) MemoryPercentage < 45   Decrease count by 1</code><!--
  --></pre>
-    <!-- @formatter:on -->
     <p>Now the issue is closed:</p>
     <figure>
         <picture>

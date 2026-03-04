@@ -56,11 +56,9 @@
 <main>
     <h1>/usr/local/bin/polkadot: line 1: Not: command not found</h1>
     <div class="subtitle">Or: A lesson in paying attention</div>
-    <!-- @formatter:off -->
     <div class="datetime">
         <time datetime="2022-04-18">Apr 18, 2022</time>
     </div>
-    <!-- @formatter:on -->
     <p class="dropcap">What do you do when you see an error like that? If you are like me, you do not read the full message. You instead rush to create
         hypotheses and test them.</p>
     <p>If you are <b>not</b> like me, you might have picked up on the curious fact that the first line of code of the <code>polkadot</code> command is the word
@@ -71,11 +69,9 @@
         leads to frustration. And this hurry leads to a couple more dead ends.</p>
     <p>Thank God for wiser people than myself, like my colleague Bruno, who retrieved the container with the <code>polkadot</code> binary from our repository
         and ran it locally to look around:</p>
-    <!-- @formatter:off Until the 'white-space' CSS property improves ... -->
     <pre>
 <!-- --><code>$ docker run -ti eu.gcr.io/$COMPANY/polkadot:v0.9.17-5e15a6a -- bash</code><!--
  --></pre>
-    <!-- @formatter:on -->
     <p>Meanwhile, I found that the Dockerfile of our polkadot container assumes that every release conforms to a standard version notation: v0.9.17 in this
         case. Well, they misnamed this release. It was <code>v0.9.17-rc4</code>. Go to the
         <a href="https://github.com/paritytech/polkadot/releases/tag/v0.9.17-rc4" rel="noopener" target="_blank">release page</a> and hover over the <code>polkadot</code>
@@ -83,12 +79,10 @@
     <p>Cool catch, huh? But what caused the strange error message?</p>
     <p>Again, Bruno was wiser than me and had the courage to look inside the <code>polkadot</code> binary, something which I considered to be scary and not
         necessary.</p>
-    <!-- @formatter:off -->
     <pre>
 <!-- --><code>$ cat polkadot</code>
 <!-- --><code>Not Found</code><!--
  --></pre>
-    <!-- @formatter:on -->
     <p>Nice! So the container tried to execute the binary but because <code>Not</code> is not a command present in the container, it returned the puzzling
         error.</p>
     <p>But why does <code>polkadot</code> have <code>Not Found</code> as its code?</p>
@@ -99,37 +93,29 @@
         procrastinate.</p>
     <p>Thankfully, time does funny things to our brains, if you let it. Just take a break. You will be different after. Maybe better.</p>
     <p>Your intuition pulls you to look at the Dockerfile again.</p>
-    <!-- @formatter:off -->
     <pre>
 <!-- --><code>VERSION=$(git -C $BUILD_DIR/polkadot describe --tags |awk -F '-' '{print$1}’)</code>
 <!-- --><code>... stuff ...</code>
 <!-- --><code>curl -O -L "https://github.com/paritytech/polkadot/releases/download/${VERSION}/polkadot"</code><!--
  --></pre>
-    <!-- @formatter:on -->
     <p>The way the Dockerfile builds the version is alright, save for cases where the version is not what you expect. In these cases, the curl command does
         something you did not take into consideration. From the curl man page:</p>
-    <!-- @formatter:off -->
     <pre>
 <!-- --><code>-O, --remote-name</code>
 <!-- --><code>Write output to a local file named like the remote file we get. (Only the file part of the remote file is used, the path is cut off.)</code><!--
  --></pre>
-    <!-- @formatter:on -->
     <p>Maybe because curl did not find the <code>${VERSION}</code> in question, it wrote the error message that would otherwise be written to stdout to the
         <code>polkadot</code> file.</p>
     <p>At this point you feel that you are close. You swiftly craft a modified curl command and run it locally to test your hypothesis. Something like this,
         maybe?</p>
-    <!-- @formatter:off -->
     <pre>
 <!-- --><code>curl -O "https://github.com/paritytech/polkadot/releases/download/v0.9.17/polkadot"</code><!--
  --></pre>
-    <!-- @formatter:on -->
     <p>Yeah, that should do the trick.</p>
     <p>The error message?</p>
-    <!-- @formatter:off -->
     <pre>
 <!-- --><code>Not Found</code><!--
  --></pre>
-    <!-- @formatter:on -->
     <p>Do you feel that wave of relief, breaking into your being, filling you with what feels like one of the holiest states of existence? Even better, add
         joy to it, since you discovered something that you now can share with your colleague. Even better! Add laughter, since you both independently discovered
         the same thing at the same time! Being an engineer makes you feel alive, no matter if the emotions are positive or negative. Let us cherish that, shall
