@@ -21,6 +21,7 @@ CSS files in `css/` are stored unminified (readable source). Minification happen
 ## Content Security Policy
 
 Every HTML page embeds a strict CSP in `<head>`:
+
 - `script-src 'none'` — no JavaScript, ever
 - `style-src 'self'` — only self-hosted stylesheets
 - `font-src 'self'` — no external fonts
@@ -51,25 +52,27 @@ The RSS generator (`scripts/generate-rss.mjs`) reads `essays.html` using CSS sel
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <!-- Settings (CSP, viewport, charset) -->
     <!-- Webpage info (title, og:*, canonical, author, description) -->
     <!-- Favicons (4 links, paths relative: ../../../../img/favicon/...) -->
     <!-- CSS: main.css + essays.css (paths: ../../../../css/...) -->
     <!-- RSS alternate link -->
-</head>
-<body>
-<header><!-- logo --></header>
-<nav><a href="/essays">← Essays</a></nav>
-<main>
-    <h1>Essay title</h1>
-    <div class="datetime"><time datetime="YYYY-MM-DD">Mon DD, YYYY</time></div>
-    <!-- essay body paragraphs -->
-</main>
-<footer>
-    <p>Thoughts? Send them to <code>florin at $website</code>.</p>
-    <p>Want to subscribe to my newsletter? Send me another email.</p>
-</footer>
-</body>
+  </head>
+  <body>
+    <header><!-- logo --></header>
+    <nav><a href="/essays">← Essays</a></nav>
+    <main>
+      <h1>Essay title</h1>
+      <div class="datetime">
+        <time datetime="YYYY-MM-DD">Mon DD, YYYY</time>
+      </div>
+      <!-- essay body paragraphs -->
+    </main>
+    <footer>
+      <p>Thoughts? Send them to <code>florin at $website</code>.</p>
+      <p>Want to subscribe to my newsletter? Send me another email.</p>
+    </footer>
+  </body>
 </html>
 ```
