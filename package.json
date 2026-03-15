@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "cheerio": "latest",
+    "cssnano": "latest",
+    "postcss": "latest",
+    "postcss-cli": "latest"
+  }
+}

@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SVGS=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.svg$' || true)
+PNGS=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.png$' || true)
+WEBPS=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.webp$' || true)
+
+if [ -n "$SVGS" ] || [ -n "$PNGS" ] || [ -n "$WEBPS" ]; then
+  echo "→ Optimizing images..."
+fi
+
+if [ -n "$SVGS" ]; then
+  if ! command -v bunx &>/dev/null; then
+    echo "error: bunx not found — install bun to optimize SVG files" >&2
+    exit 1
+  fi
+  echo "$SVGS" | xargs bunx svgo --multipass --quiet
+  echo "$SVGS" | xargs git add
+fi
+
+if [ -n "$PNGS" ]; then
+  if ! command -v optipng &>/dev/null; then
+    echo "error: optipng not found — run: brew install optipng" >&2
+    exit 1
+  fi
+  while IFS= read -r f; do
+    optipng -quiet -clobber "$f"
+    git add "$f"
+  done <<< "$PNGS"
+fi
+
+if [ -n "$WEBPS" ]; then
+  if ! command -v cwebp &>/dev/null; then
+    echo "error: cwebp not found — run: brew install webp" >&2
+    exit 1
+  fi
+  while IFS= read -r f; do
+    cwebp -quiet "$f" -o "$f"
+    git add "$f"
+  done <<< "$WEBPS"
+fi
