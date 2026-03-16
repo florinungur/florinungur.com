@@ -60,9 +60,10 @@ The RSS generator (`scripts/generate-rss.mjs`) reads `essays.html` using CSS sel
     <!-- RSS alternate link -->
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header><!-- logo --></header>
-    <nav><a href="/essays">← Essays</a></nav>
-    <main>
+    <nav aria-label="Back to essays"><a href="/essays">← Essays</a></nav>
+    <main id="main-content">
       <h1>Essay title</h1>
       <div class="datetime">
         <time datetime="YYYY-MM-DD">Mon DD, YYYY</time>
@@ -76,3 +77,24 @@ The RSS generator (`scripts/generate-rss.mjs`) reads `essays.html` using CSS sel
   </body>
 </html>
 ```
+
+## Essay "Updated on" convention
+
+When modifying an essay, add an update note in the datetime div:
+
+```html
+<div class="datetime">
+    <time datetime="YYYY-MM-DD">Mon DD, YYYY</time> |
+    <i>Updated on <time datetime="YYYY-MM-DD">Mon DD, YYYY</time>: short description of changes</i>
+</div>
+```
+
+Multiple updates are chained with ` | `. See `hello-world.html` for an example with two update notes.
+
+## Linting
+
+`make lint` runs Stylelint on CSS and html-validate on HTML. `make validate` does a full build + lint + output check.
+
+- `resume.html` and `resume.css` are excluded from linting (resume is optimized for printability, don't modify it)
+- Stylelint config: `.stylelintrc.json` — fix CSS issues instead of disabling rules; only disable rules that are genuinely not applicable
+- HTML validate config: `.htmlvalidate.json` — void elements use self-closing style (`<meta/>` not `<meta>`)
