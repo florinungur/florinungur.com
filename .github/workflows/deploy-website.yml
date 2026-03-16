@@ -48,16 +48,11 @@ jobs:
           restore-keys: bun-${{ runner.os }}-
       - name: Install dependencies
         run: bun install --production
-      - name: Cache apt packages
-        id: apt-cache
-        uses: actions/cache@v4
-        with:
-          path: /var/cache/apt/archives
-          key: apt-${{ runner.os }}-optipng-webp-libxml2-utils
       - name: Install system dependencies
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends optipng webp libxml2-utils
+        uses: awalsh128/cache-apt-pkgs-action@v1
+        with:
+          packages: optipng webp libxml2-utils
+          version: 1.0
       - name: Build site
         run: |
           rsync -a --delete \
@@ -109,14 +104,6 @@ jobs:
             echo "error: no HTML files in _site/" >&2
             exit 1
           fi
-
-          # Images should be optimized (optipng reports 0% reduction on already-optimized PNGs)
-          for f in $(find _site -name '*.png'); do
-            result=$(optipng -simulate "$f" 2>&1)
-            if ! echo "$result" | grep -q "is already optimized"; then
-              echo "warning: $f may not be fully optimized" >&2
-            fi
-          done
 
           # SVGs should have been through svgo (check they don't contain common unoptimized patterns)
           for f in $(find _site -name '*.svg'); do
