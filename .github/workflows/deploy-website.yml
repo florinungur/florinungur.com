@@ -65,6 +65,12 @@ jobs:
             cp /var/cache/apt/archives/*.deb /tmp/apt-pkgs/
             sudo apt-get install -y --no-install-recommends optipng webp libxml2-utils
           fi
+      - name: Cache optimized images
+        id: images-cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/optimized-images
+          key: images-${{ runner.os }}-${{ hashFiles('essays/**/*.png', 'essays/**/*.webp', 'img/**/*.png', 'img/**/*.svg') }}
       - name: Build site
         run: |
           rsync -a --delete \
@@ -90,9 +96,20 @@ jobs:
           bun scripts/generate-sitemap.mjs _site/sitemap.xml _site
       - name: Optimize images
         run: |
-          find _site -name '*.png' -exec optipng -quiet -clobber {} +
-          find _site -name '*.webp' | while IFS= read -r f; do cwebp -lossless -quiet "$f" -o "$f"; done
-          find _site -name '*.svg' -exec bunx svgo --multipass --quiet {} +
+          if [ "${{ steps.images-cache.outputs.cache-hit }}" = "true" ]; then
+            rsync -a /tmp/optimized-images/ _site/
+          else
+            find _site -name '*.png' -exec optipng -quiet -clobber {} +
+            find _site -name '*.webp' | while IFS= read -r f; do cwebp -lossless -quiet "$f" -o "$f"; done
+            find _site -name '*.svg' -exec bunx svgo --multipass --quiet {} +
+            rsync -a \
+              --include='*/' \
+              --include='*.png' \
+              --include='*.webp' \
+              --include='*.svg' \
+              --exclude='*' \
+              _site/ /tmp/optimized-images/
+          fi
       - name: Validate build
         run: |
           # RSS and sitemap must exist and be valid XML
