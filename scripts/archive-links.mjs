@@ -40,11 +40,16 @@ async function checkAvailability(url) {
     const res = await fetch(
       `https://archive.org/wayback/available?url=${encodeURIComponent(url)}`,
     );
-    if (!res.ok) return null;
+    if (!res.ok)
+      return { url: null, reason: `availability check failed (${res.status})` };
     const data = await res.json();
-    return data?.archived_snapshots?.closest?.url || null;
-  } catch {
-    return null;
+    const archiveUrl = data?.archived_snapshots?.closest?.url || null;
+    return {
+      url: archiveUrl,
+      reason: archiveUrl ? null : "no snapshot found in Wayback Machine",
+    };
+  } catch (e) {
+    return { url: null, reason: `availability check error: ${e.message}` };
   }
 }
 
@@ -54,24 +59,25 @@ async function savePageNow(url) {
       method: "POST",
     });
     if (res.status === 429 || res.status === 503) {
-      console.log(`  rate-limited saving ${url}, skipping`);
-      return null;
+      return { url: null, reason: `Save Page Now rate-limited (${res.status})` };
     }
     if (!res.ok) {
-      console.log(`  save failed (${res.status}) for ${url}, skipping`);
-      return null;
+      return { url: null, reason: `Save Page Now failed (${res.status})` };
     }
     const contentLocation = res.headers.get("content-location");
     if (contentLocation) {
-      return `https://web.archive.org${contentLocation}`;
+      return { url: `https://web.archive.org${contentLocation}`, reason: null };
     }
     const location = res.headers.get("location");
     if (location && location.includes("web.archive.org")) {
-      return location;
+      return { url: location, reason: null };
     }
-    return null;
-  } catch {
-    return null;
+    return {
+      url: null,
+      reason: "Save Page Now returned OK but no archive URL in response",
+    };
+  } catch (e) {
+    return { url: null, reason: `Save Page Now error: ${e.message}` };
   }
 }
 
@@ -134,11 +140,16 @@ for (const filePath of htmlFiles) {
     }
 
     // Check Wayback Machine availability
-    let archiveUrl = await checkAvailability(href);
+    let availability = await checkAvailability(href);
     await delay(1000);
 
+    let archiveUrl = availability.url;
+    let skipReason = availability.reason;
+
     if (!archiveUrl) {
-      archiveUrl = await savePageNow(href);
+      const save = await savePageNow(href);
+      archiveUrl = save.url;
+      skipReason = save.reason;
       if (archiveUrl) {
         await delay(1000);
       }
@@ -178,7 +189,7 @@ for (const filePath of htmlFiles) {
       }
     } else {
       totalSkipped++;
-      console.log(`  ✗ skipped: ${href}`);
+      console.log(`  ✗ skipped: ${href} — ${skipReason}`);
     }
   }
 

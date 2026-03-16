@@ -58,7 +58,8 @@
     <h1>/usr/local/bin/polkadot: line 1: Not: command not found</h1>
     <div class="subtitle">Or: A lesson in paying attention</div>
     <div class="datetime">
-        <time datetime="2022-04-18">Apr 18, 2022</time>
+        <time datetime="2022-04-18">Apr 18, 2022</time> |
+        <i>Updated on <time datetime="2026-03-16">Mar 16, 2026</time>: added archived links and accessibility improvements</i>
     </div>
     <p class="dropcap">What do you do when you see an error like that? If you are like me, you do not read the full message. You instead rush to create
         hypotheses and test them.</p>
@@ -75,7 +76,8 @@
  --></pre>
     <p>Meanwhile, I found that the Dockerfile of our polkadot container assumes that every release conforms to a standard version notation: v0.9.17 in this
         case. Well, they misnamed this release. It was <code>v0.9.17-rc4</code>. Go to the
-        <a href="https://github.com/paritytech/polkadot/releases/tag/v0.9.17-rc4" rel="noopener" target="_blank">release page</a> and hover over the <code>polkadot</code>
+        <a href="https://github.com/paritytech/polkadot/releases/tag/v0.9.17-rc4" rel="noopener" target="_blank">release page</a>
+            [<a href="http://web.archive.org/web/20220310004549/https://github.com/paritytech/polkadot/releases/tag/v0.9.17-rc4" rel="noopener" target="_blank">archived link</a>] and hover over the <code>polkadot</code>
         binary to see for yourself.</p>
     <p>Cool catch, huh? But what caused the strange error message?</p>
     <p>Again, Bruno was wiser than me and had the courage to look inside the <code>polkadot</code> binary, something which I considered to be scary and not
