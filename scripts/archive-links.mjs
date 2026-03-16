@@ -2,10 +2,22 @@ import { readFileSync, writeFileSync, statSync } from "fs";
 import { join } from "path";
 import * as cheerio from "cheerio";
 
-const args = process.argv.slice(2);
+const rawArgs = process.argv.slice(2);
+
+// Parse --url <url> flag
+let targetUrl = null;
+const args = [];
+for (let i = 0; i < rawArgs.length; i++) {
+  if (rawArgs[i] === "--url" && i + 1 < rawArgs.length) {
+    targetUrl = rawArgs[++i];
+  } else {
+    args.push(rawArgs[i]);
+  }
+}
+
 if (args.length === 0) {
   console.error(
-    "Usage: bun scripts/archive-links.mjs <file-or-directory> [...]",
+    "Usage: bun scripts/archive-links.mjs <file-or-directory> [...] [--url <url>]",
   );
   process.exit(1);
 }
@@ -133,6 +145,8 @@ for (const filePath of htmlFiles) {
     } catch {
       return;
     }
+
+    if (targetUrl && href !== targetUrl) return;
 
     links.push(el);
   });
