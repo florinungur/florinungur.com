@@ -91,6 +91,24 @@ When modifying an essay, add an update note in the datetime div:
 
 Multiple updates are chained with ` | `. See `hello-world.html` for an example with two update notes.
 
+## Archive links
+
+`scripts/archive-links.mjs` checks every external link in the given HTML files against the Wayback Machine and inserts `[archived link]` annotations for any that aren't already annotated.
+
+**Full pass** (new essay or first-time run):
+```
+bun scripts/archive-links.mjs essays/YYYY/MM/DD/slug.html
+```
+
+**Targeted** (fixed a single link, or added one new link to an existing essay):
+```
+bun scripts/archive-links.mjs <file> --url <exact-href>
+```
+
+Use `--url` whenever you only changed one link — it skips every other link in the file and archives just that one. Running the full script after a single-link change wastes several minutes re-trying permanently-unarchivable links (LinkedIn, Instagram) through their retry loops.
+
+Links that fail archiving (Cloudflare-blocked sites, deleted pages) are logged as skipped but leave no annotation — they'll be re-tried on every full pass. That's expected; don't try to force them.
+
 ## Linting
 
 `make lint` runs Stylelint on CSS and html-validate on HTML. `make validate` does a full build + lint + output check.
