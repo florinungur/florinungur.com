@@ -1,6 +1,22 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Lint staged CSS files
+CSS=$(git diff --cached --name-only --diff-filter=ACM -- '*.css')
+if [ -n "$CSS" ]; then
+  echo "$CSS" | while IFS= read -r f; do
+    bunx stylelint "$f"
+  done || exit 1
+fi
+
+# Validate staged HTML files
+HTML=$(git diff --cached --name-only --diff-filter=ACM -- '*.html')
+if [ -n "$HTML" ]; then
+  echo "$HTML" | while IFS= read -r f; do
+    bunx html-validate "$f"
+  done || exit 1
+fi
+
 SVGS=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.svg$' || true)
 PNGS=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.png$' || true)
 WEBPS=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.webp$' || true)
@@ -14,8 +30,10 @@ if [ -n "$SVGS" ]; then
     echo "error: bunx not found — install bun to optimize SVG files" >&2
     exit 1
   fi
-  echo "$SVGS" | xargs bunx svgo --multipass --quiet
-  echo "$SVGS" | xargs git add
+  while IFS= read -r f; do
+    bunx svgo --multipass --quiet "$f"
+    git add "$f"
+  done <<< "$SVGS"
 fi
 
 if [ -n "$PNGS" ]; then

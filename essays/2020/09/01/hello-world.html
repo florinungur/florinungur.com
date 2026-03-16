@@ -41,9 +41,10 @@
     <link href="../../../../css/essays.css" rel="stylesheet"/>
 
     <!-- RSS -->
-    <link rel="alternate" type="application/rss+xml" title="Florin Ungur's Essays" href="https://florinungur.com/rss.xml">
+    <link rel="alternate" type="application/rss+xml" title="Florin Ungur's Essays" href="https://florinungur.com/rss.xml"/>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to content</a>
 <header>
     <div class="logo is-center">
         <a href="/">
@@ -51,14 +52,15 @@
         </a>
     </div>
 </header>
-<nav>
+<nav aria-label="Back to essays">
     <a href="/essays">← Essays</a>
 </nav>
-<main>
+<main id="main-content">
     <h1>Hello, World!</h1>
     <div class="subtitle">Or: How I finally decided to create my website</div>
     <div class="datetime">
-        <time datetime="2020-09-01">Sep 1, 2020</time> | <i>Updated on <time datetime="2022-07-10">Jul 10, 2022</time>: changed logo and some wording</i>
+        <time datetime="2020-09-01">Sep 1, 2020</time> | <i>Updated on <time datetime="2022-07-10">Jul 10, 2022</time>: changed logo and some wording</i> |
+        <i>Updated on <time datetime="2026-03-16">Mar 16, 2026</time>: added archived links, fixed HTML, and added accessibility improvements</i>
     </div>
     <p>This website will have mostly philosophy-, psychology-, and technology-related content. I aim to display this content on a simple yet beautiful website
         that is designed to last and to be accessible to as many types of people as possible throughout its lifetime.</p>
@@ -100,14 +102,16 @@
         settled on making my own CSS which I based on <a href="https://jenil.github.io/chota/" rel="noopener" target="_blank">chota</a>.</p>
     <p>This site is for reading, so I did not add a lot of padding — no wasted space in my layout! No animated content. No fixed floating header.</p>
     <p>I created the favicon using <a href="https://www.photopea.com/" rel="noopener" target="_blank">Photopea</a> and converted it to multiple formats using
-        <a href="https://realfavicongenerator.net" rel="noopener" target="_blank">realfavicongenerator.net</a>. The favicon stands for balance and tamed
+        <a href="https://realfavicongenerator.net" rel="noopener" target="_blank">realfavicongenerator.net</a>
+            [<a href="http://web.archive.org/web/20260315110041/https://realfavicongenerator.net/" rel="noopener" target="_blank">archived link</a>]. The favicon stands for balance and tamed
         complexity. (You can grab the PSD file <a href="../../../../img/favicon/favicon.psd" target="_blank">here [direct download]</a>.)</p>
     <p>The logo (my name + the favicon) was created by me in around an hour. My friend,
         <a href="https://www.instagram.com/alexandra_argh/" rel="noopener" target="_blank">Alex Arghiriade</a>, did a previous iteration because I am
         definitely not a web designer. But I think I'm getting better. The font is Libertinus Sans.</p>
     <p>I found the artwork at the top of this essay on <a href="https://news.ycombinator.com/item?id=23919590" rel="noopener" target="_blank">Hacker News</a>
         [<a href="https://web.archive.org/web/20200901035747/https://news.ycombinator.com/item?id=23919590" rel="noopener" target="_blank">archived link</a>].
-        There are more AI artists out there: <a href="https://art42.net/" rel="noopener" target="_blank">art42.net</a> and
+        There are more AI artists out there: <a href="https://art42.net/" rel="noopener" target="_blank">art42.net</a>
+            [<a href="http://web.archive.org/web/20250320114605/https://art42.net/" rel="noopener" target="_blank">archived link</a>] and
         <a href="https://thisartworkdoesnotexist.com/" rel="noopener" target="_blank">thisartworkdoesnotexist.com</a>, for example.</p>
     <h2>Inspirations</h2>
     <p>I, along with the styling and almost everything else around here, was inspired by these websites:</p>
@@ -152,13 +156,14 @@
         </li>
         <li><a href="https://github.com/florinungur/florinungur.com/tree/add-azure-article/.github/workflows" rel="noopener" target="_blank">GitHub Actions</a>
             for building the website; they use:
+            <ul>
+                <li><a href="https://cssnano.co/" rel="noopener" target="_blank">cssnano</a> for minifying the CSS;</li>
+                <li><a href="https://developers.google.com/speed/webp/docs/cwebp" rel="noopener" target="_blank">cwebp</a> for compressing WebP files;</li>
+                <li><a href="https://github.com/svg/svgo" rel="noopener" target="_blank">svgo</a> for optimizing SVG files;</li>
+                <li>and <a href="https://www.npmjs.com/package/optipng-bin" rel="noopener" target="_blank">optipng-bin</a>
+            [<a href="http://web.archive.org/web/20250912122543/https://www.npmjs.com/package/optipng-bin" rel="noopener" target="_blank">archived link</a>] for cleaning PNG images.</li>
+            </ul>
         </li>
-        <ul>
-            <li><a href="https://cssnano.co/" rel="noopener" target="_blank">cssnano</a> for minifying the CSS;</li>
-            <li><a href="https://developers.google.com/speed/webp/docs/cwebp" rel="noopener" target="_blank">cwebp</a> for compressing WebP files;</li>
-            <li><a href="https://github.com/svg/svgo" rel="noopener" target="_blank">svgo</a> for optimizing SVG files;</li>
-            <li>and <a href="https://www.npmjs.com/package/optipng-bin" rel="noopener" target="_blank">optipng-bin</a> for cleaning PNG images.</li>
-        </ul>
         <li>
             Microsoft's <a href="https://accessibilityinsights.io/en/" rel="noopener" target="_blank">Accessibility Insights</a>, IBM's
             <a href="https://github.com/IBMa/equal-access" rel="noopener" target="_blank">Equal Access Accessibility Checker</a>, and Toptal's
@@ -169,7 +174,8 @@
             finally
         </li>
         <li>
-            Mozilla's <a href="https://observatory.mozilla.org/" rel="noopener" target="_blank">Observatory</a> and Google Chrome's
+            Mozilla's <a href="https://observatory.mozilla.org/" rel="noopener" target="_blank">Observatory</a>
+            [<a href="http://web.archive.org/web/20241006142122/https://observatory.mozilla.org/" rel="noopener" target="_blank">archived link</a>] and Google Chrome's
             <a href="https://developers.google.com/web/tools/lighthouse" rel="noopener" target="_blank">Lighthouse</a> for a holistic assessment.
         </li>
     </ul>
@@ -203,7 +209,8 @@
         plus some extra fluff. Throwing something on just because also throws you — or a website — off balance. You can restore the balance by putting in extra
         effort (i.e. using JavaScript to better achieve this website's goals and philosophy) or by probably five or six more ways, what do I know? I am wary
         about putting in extra effort for fluff. I spare this energy for other "unbalanced" things, like my obsession with words. Case in point: using
-        <a href="https://highlightjs.org/" rel="noopener" target="_blank">highlight.js</a> would not, on one side, throw the website off balance because I would
+        <a href="https://highlightjs.org/" rel="noopener" target="_blank">highlight.js</a>
+            [<a href="http://web.archive.org/web/20260311073123/https://highlightjs.org/" rel="noopener" target="_blank">archived link</a>] would not, on one side, throw the website off balance because I would
         use this code to improve the reading experience, make it more fun. On the other side, though, it would come in conflict with my love for simplicity and,
         arguably, with my desire for durability. But life is a balancing act. Who knows... in the future the reading experience might take more weight than
         simplicity and durability, so then the balance would need to be restored.</p>

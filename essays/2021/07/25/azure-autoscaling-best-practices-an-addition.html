@@ -39,9 +39,10 @@
     <link href="../../../../css/essays.css" rel="stylesheet"/>
 
     <!-- RSS -->
-    <link rel="alternate" type="application/rss+xml" title="Florin Ungur's Essays" href="https://florinungur.com/rss.xml">
+    <link rel="alternate" type="application/rss+xml" title="Florin Ungur's Essays" href="https://florinungur.com/rss.xml"/>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to content</a>
 <header>
     <div class="logo is-center">
         <a href="/">
@@ -49,10 +50,10 @@
         </a>
     </div>
 </header>
-<nav>
+<nav aria-label="Back to essays">
     <a href="/essays">← Essays</a>
 </nav>
-<main>
+<main id="main-content">
     <h1>Azure autoscaling best practices: an addition</h1>
     <div class="datetime">
         <time datetime="2021-07-25">Jul 25, 2021</time>
@@ -86,11 +87,11 @@
     <p>What this paragraph doesn't say is that if you have a scale condition like:</p>
     <pre>
 <!-- --><code>Scale out</code>
-<!-- --><code>When  example-asp  (Average) CpuPercentage > 90     Increase count by 1</code>
-<!-- --><code>Or    example-asp  (Average) MemoryPercentage > 90  Increase count by 1</code>
+<!-- --><code>When  example-asp  (Average) CpuPercentage &gt; 90     Increase count by 1</code>
+<!-- --><code>Or    example-asp  (Average) MemoryPercentage &gt; 90  Increase count by 1</code>
 <!-- --><code></code>
 <!-- --><code>Scale in</code>
-<!-- --><code>When  example-asp  (Average) CpuPercentage < 45     Decrease count by 1</code><!--
+<!-- --><code>When  example-asp  (Average) CpuPercentage &lt; 45     Decrease count by 1</code><!--
  --></pre>
     <p>Then your <code>example-asp</code> might get stuck in a flapping state (the condition in which instances scale up and down rapidly and repetitively).
         This is because the ASP might meet both the memory-based scale-out condition and the CPU-based scale-in condition.</p>
@@ -163,7 +164,7 @@
             thresholds harder.
         </li>
     </ol>
-    <p>He also recommended lowering the scale-out threshold to <code>CpuPercentage > 80</code> because that's what they usually recommend to their clients.</p>
+    <p>He also recommended lowering the scale-out threshold to <code>CpuPercentage &gt; 80</code> because that's what they usually recommend to their clients.</p>
     <p>I chose to ignore his recommendation based on 2 facts:</p>
     <ol>
         <li>The way the CPU usage increases in the ASP (i.e. rare spikes that go from 30% straight to 90% - 95% in under 1 minute) makes it so that reducing the
@@ -183,10 +184,10 @@
     <p>The first solution didn't eliminate the flapping but removing the <code>MemoryPercentage</code> rule did the trick. We have a winner:</p>
     <pre>
 <!-- --><code>Scale out</code>
-<!-- --><code>When  example-asp  (Average) CpuPercentage > 90     Increase count by 1</code>
+<!-- --><code>When  example-asp  (Average) CpuPercentage &gt; 90     Increase count by 1</code>
 <!-- --><code></code>
 <!-- --><code>Scale in</code>
-<!-- --><code>When  example-asp  (Average) CpuPercentage < 45     Decrease count by 1</code><!--
+<!-- --><code>When  example-asp  (Average) CpuPercentage &lt; 45     Decrease count by 1</code><!--
  --></pre>
     <p>The representative didn't explain why or how a scale-out rule might interfere with another scale-out rule, even after I pointed out that the
         <code>Or</code> in the scale condition syntax makes it seem like the scale-out rules are not connected to each other.</p>
@@ -197,12 +198,12 @@
         scale-out conditions, one will be prefixed by <code>When</code> and the other by <code>Or</code>:</p>
     <pre>
 <!-- --><code>Scale out</code>
-<!-- --><code>When  example-asp  (Average) CpuPercentage > 90     Increase count by 1</code>
-<!-- --><code>Or  example-asp  (Average) MemoryPercentage > 90    Increase count by 1</code>
+<!-- --><code>When  example-asp  (Average) CpuPercentage &gt; 90     Increase count by 1</code>
+<!-- --><code>Or  example-asp  (Average) MemoryPercentage &gt; 90    Increase count by 1</code>
 <!-- --><code></code>
 <!-- --><code>Scale in</code>
-<!-- --><code>When  example-asp  (Average) CpuPercentage < 45     Decrease count by 1</code>
-<!-- --><code>And  example-asp  (Average) MemoryPercentage < 45   Decrease count by 1</code><!--
+<!-- --><code>When  example-asp  (Average) CpuPercentage &lt; 45     Decrease count by 1</code>
+<!-- --><code>And  example-asp  (Average) MemoryPercentage &lt; 45   Decrease count by 1</code><!--
  --></pre>
     <p>Now the issue is closed:</p>
     <figure>

@@ -38,9 +38,10 @@
     <link href="../../../../css/essays.css" rel="stylesheet"/>
 
     <!-- RSS -->
-    <link rel="alternate" type="application/rss+xml" title="Florin Ungur's Essays" href="https://florinungur.com/rss.xml">
+    <link rel="alternate" type="application/rss+xml" title="Florin Ungur's Essays" href="https://florinungur.com/rss.xml"/>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to content</a>
 <header>
     <div class="logo is-center">
         <a href="/">
@@ -48,10 +49,10 @@
         </a>
     </div>
 </header>
-<nav>
+<nav aria-label="Back to essays">
     <a href="/essays">← Essays</a>
 </nav>
-<main>
+<main id="main-content">
     <h1>Docker permission errors are not ok</h1>
     <div class="datetime">
         <time datetime="2023-08-12">Aug 12, 2023</time> | <i>Updated on <time datetime="2023-08-13">Aug 13, 2023</time>: added second solution</i>
@@ -66,10 +67,10 @@
 <!-- --><code>/bin/bash docker: Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "/tmp/hello.sh": permission denied: unknown. ERRO 0000 error waiting for container: context canceled</code><!--
  --></pre>
     <p>Why do you get this error?</p>
-    <br>
+    <br/>
     <p>...</p>
-    <br>
-    <br>
+    <br/>
+    <br/>
     <p>.....</p>
     <p>Figured it out?</p>
     <p>Great, your brain contains yet another piece of trivia.</p>
