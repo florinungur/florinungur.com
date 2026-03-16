@@ -48,11 +48,23 @@ jobs:
           restore-keys: bun-${{ runner.os }}-
       - name: Install dependencies
         run: bun install --production
-      - name: Install system dependencies
-        uses: awalsh128/cache-apt-pkgs-action@v1
+      - name: Cache apt packages
+        id: apt-cache
+        uses: actions/cache@v4
         with:
-          packages: optipng webp libxml2-utils
-          version: 1.0
+          path: /tmp/apt-pkgs
+          key: apt-${{ runner.os }}-optipng-webp-libxml2-utils
+      - name: Install system dependencies
+        run: |
+          if [ "${{ steps.apt-cache.outputs.cache-hit }}" = "true" ]; then
+            sudo dpkg -i /tmp/apt-pkgs/*.deb
+          else
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends --download-only optipng webp libxml2-utils
+            mkdir -p /tmp/apt-pkgs
+            cp /var/cache/apt/archives/*.deb /tmp/apt-pkgs/
+            sudo apt-get install -y --no-install-recommends optipng webp libxml2-utils
+          fi
       - name: Build site
         run: |
           rsync -a --delete \
