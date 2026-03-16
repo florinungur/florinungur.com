@@ -54,31 +54,51 @@ async function checkAvailability(url) {
 }
 
 async function savePageNow(url) {
-  try {
-    const res = await fetch(`https://web.archive.org/save/${url}`, {
-      method: "POST",
-    });
-    if (res.status === 429 || res.status === 503) {
-      return { url: null, reason: `Save Page Now rate-limited (${res.status})` };
+  const MAX_TRIES = 5;
+  let lastReason = "unknown error";
+
+  for (let tries = 0; tries < MAX_TRIES; tries++) {
+    if (tries >= 1) {
+      await delay(tries % 3 === 0 ? 10000 : 5000);
     }
-    if (!res.ok) {
-      return { url: null, reason: `Save Page Now failed (${res.status})` };
+
+    try {
+      const res = await fetch(`https://web.archive.org/save/${url}`, {
+        redirect: "follow",
+      });
+
+      if (res.status === 429) {
+        return { url: null, reason: "Save Page Now rate-limited (429) — try again in 5 minutes" };
+      }
+      if (res.status === 509) {
+        return { url: null, reason: "Save Page Now session limit reached (509)" };
+      }
+
+      // Collect all headers into a single string to run regex over (matching waybackpy's approach)
+      const headersStr = [...res.headers.entries()]
+        .map(([k, v]) => `${k}: ${v}`)
+        .join("\n");
+
+      const m1 = headersStr.match(/content-location: (\/web\/\d{14}\/.*)/i);
+      if (m1) return { url: `https://web.archive.org${m1[1]}`, reason: null };
+
+      const m2 = headersStr.match(/rel="memento.*?(web\.archive\.org\/web\/\d{14}\/.*?)>/i);
+      if (m2) return { url: `https://${m2[1]}`, reason: null };
+
+      const m3 = headersStr.match(/x-cache-key:\shttps(.*)[A-Z]{2}/i);
+      if (m3) return { url: `https${m3[1]}`, reason: null };
+
+      // Final fallback: check the response URL after redirects
+      const m4 = res.url.match(/web\.archive\.org\/web\/\d*?\/.+$/);
+      if (m4) return { url: `https://${m4[0]}`, reason: null };
+
+      lastReason = `no archive URL found in response (status ${res.status})`;
+    } catch (e) {
+      lastReason = `fetch error: ${e.message}`;
     }
-    const contentLocation = res.headers.get("content-location");
-    if (contentLocation) {
-      return { url: `https://web.archive.org${contentLocation}`, reason: null };
-    }
-    const location = res.headers.get("location");
-    if (location && location.includes("web.archive.org")) {
-      return { url: location, reason: null };
-    }
-    return {
-      url: null,
-      reason: "Save Page Now returned OK but no archive URL in response",
-    };
-  } catch (e) {
-    return { url: null, reason: `Save Page Now error: ${e.message}` };
   }
+
+  return { url: null, reason: `Save Page Now failed after ${MAX_TRIES} tries: ${lastReason}` };
 }
 
 function delay(ms) {
