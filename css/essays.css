@@ -1,0 +1,13 @@
+.dropcap::first-letter {
+  float: left;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 0.7em;
+  margin-right: 0.16em;
+  padding: 0.16em 0;
+}
+
+.subtitle {
+  font-size: x-large;
+  margin-block-end: 1rem;
+}

@@ -1,0 +1,57 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+        exclude: \.(svg|png|webp)$
+      - id: check-yaml
+      - id: check-json
+      - id: check-merge-conflict
+      - id: detect-private-key
+
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+        args: ["-S", "style"]
+
+  - repo: local
+    hooks:
+      - id: stylelint
+        name: stylelint
+        entry: bunx stylelint
+        language: system
+        types: [css]
+
+      - id: html-validate
+        name: html-validate
+        entry: bunx html-validate
+        language: system
+        types: [html]
+        exclude: ^resume\.html$
+
+      - id: optimize-svg
+        name: optimize SVG
+        entry: bunx svgo --multipass --quiet
+        language: system
+        types: [svg]
+
+      - id: optimize-png
+        name: optimize PNG
+        entry: bunx optipng-bin -quiet -clobber
+        language: system
+        types: [png]
+
+      - id: optimize-webp
+        name: optimize WebP
+        entry: bash -c 'for f; do tmp="$(mktemp)"; bunx cwebp-bin -lossless -quiet "$f" -o "$tmp" && [ "$(wc -c < "$tmp")" -lt "$(wc -c < "$f")" ] && mv "$tmp" "$f" || rm -f "$tmp"; done' _
+        language: system
+        types: [file]
+        files: \.webp$
+
+      - id: gitleaks
+        name: gitleaks
+        entry: gitleaks protect --staged --verbose
+        language: system
+        pass_filenames: false

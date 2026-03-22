@@ -1,0 +1,158 @@
+name: Deploy website to GitHub Pages
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Git ref to deploy (default: main)"
+        required: false
+        default: "main"
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-slim
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref || github.sha }}
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Cache bun binary
+        id: bun-binary-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/bin
+          key: bun-bin-${{ runner.os }}-1.3.10
+      - name: Setup bun
+        if: steps.bun-binary-cache.outputs.cache-hit != 'true'
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.3.10"
+      - name: Add bun to PATH
+        if: steps.bun-binary-cache.outputs.cache-hit == 'true'
+        run: echo "$HOME/.bun/bin" >> $GITHUB_PATH
+      - name: Cache bun dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-
+      - name: Install dependencies
+        run: bun install --production
+      - name: Cache apt packages
+        id: apt-cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/apt-pkgs
+          key: apt-${{ runner.os }}-optipng-webp-libxml2-utils
+      - name: Install system dependencies
+        run: |
+          if [ "${{ steps.apt-cache.outputs.cache-hit }}" = "true" ]; then
+            sudo dpkg -i /tmp/apt-pkgs/*.deb
+          else
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends --download-only optipng webp libxml2-utils
+            mkdir -p /tmp/apt-pkgs
+            cp /var/cache/apt/archives/*.deb /tmp/apt-pkgs/
+            sudo apt-get install -y --no-install-recommends optipng webp libxml2-utils
+          fi
+      - name: Cache optimized images
+        id: images-cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/optimized-images
+          key: images-${{ runner.os }}-${{ hashFiles('essays/**/*.png', 'essays/**/*.webp', 'essays/**/*.svg', 'img/**/*.png', 'img/**/*.webp', 'img/**/*.svg') }}
+      - name: Build site
+        run: |
+          rsync -a --delete \
+            --exclude=node_modules \
+            --exclude=.claude \
+            --exclude=.git \
+            --exclude=.github \
+            --exclude=.githooks \
+            --exclude=.gitignore \
+            --exclude=_site \
+            --exclude=scripts \
+            --exclude=Makefile \
+            --exclude=package.json \
+            --exclude=bun.lock \
+            --exclude=CLAUDE.md \
+            --exclude=README.md \
+            --exclude=LICENSE \
+            --exclude=.stylelintrc.json \
+            --exclude=.htmlvalidate.json \
+            . _site/
+          bunx postcss _site/css/ --dir _site/css/ --use cssnano --no-map
+          bun scripts/generate-rss.mjs _site/rss.xml _site
+          bun scripts/generate-sitemap.mjs _site/sitemap.xml _site
+      - name: Optimize images
+        run: |
+          if [ "${{ steps.images-cache.outputs.cache-hit }}" = "true" ]; then
+            rsync -a /tmp/optimized-images/ _site/
+          else
+            find _site -name '*.png' -exec optipng -quiet -clobber {} +
+            find _site -name '*.webp' | while IFS= read -r f; do tmp="$(mktemp)"; cwebp -lossless -quiet "$f" -o "$tmp" && [ "$(wc -c < "$tmp")" -lt "$(wc -c < "$f")" ] && mv "$tmp" "$f" || rm -f "$tmp"; done
+            find _site -name '*.svg' -exec bunx svgo --multipass --quiet {} +
+            rsync -a \
+              --include='*/' \
+              --include='*.png' \
+              --include='*.webp' \
+              --include='*.svg' \
+              --exclude='*' \
+              _site/ /tmp/optimized-images/
+          fi
+      - name: Validate build
+        run: |
+          # RSS and sitemap must exist and be valid XML
+          xmllint --noout _site/rss.xml
+          xmllint --noout _site/sitemap.xml
+
+          # Minified CSS must be smaller than source
+          for f in css/*.css; do
+            base=$(basename "$f")
+            src_size=$(stat -c%s "$f")
+            min_size=$(stat -c%s "_site/css/$base")
+            if [ "$min_size" -ge "$src_size" ]; then
+              echo "error: _site/css/$base ($min_size) is not smaller than $f ($src_size)" >&2
+              exit 1
+            fi
+          done
+
+          # At least one HTML file must exist
+          html_count=$(find _site -name '*.html' | wc -l)
+          if [ "$html_count" -eq 0 ]; then
+            echo "error: no HTML files in _site/" >&2
+            exit 1
+          fi
+
+          # SVGs should have been through svgo (check they don't contain common unoptimized patterns)
+          for f in $(find _site -name '*.svg'); do
+            if grep -q '<?xml' "$f" 2>/dev/null; then
+              echo "warning: $f contains XML declaration (likely not svgo-optimized)" >&2
+            fi
+          done
+
+          echo "Build validation passed: $html_count HTML files, RSS/sitemap valid, CSS minified"
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-slim
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
