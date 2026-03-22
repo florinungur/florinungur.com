@@ -72,7 +72,7 @@ The RSS generator (`scripts/generate-rss.mjs`) reads `essays.html` using CSS sel
     </main>
     <footer>
       <p>Thoughts? Send them to <code>florin at $website</code>.</p>
-      <p>Want to subscribe to my newsletter? Send me another email. (Or grab the <a href="/feed.xml">RSS feed</a>.)</p>
+      <p>Want to subscribe to my newsletter? Send me another email. (Or grab the <a href="/rss.xml">RSS feed</a>.)</p>
     </footer>
   </body>
 </html>
