@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Settings -->
+    <meta content="
+            base-uri 'none';
+            default-src 'none';
+            font-src 'self';
+            form-action 'none';
+            img-src 'self';
+            manifest-src 'self';
+            object-src 'none';
+            script-src 'none';
+            style-src 'self'"
+          http-equiv="Content-Security-Policy"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta charset="utf-8"/>
+
+    <!-- Webpage info -->
+    <title>Do-nothing scripts are dead! Long live the do-nothing script • Florin Ungur</title>
+    <meta content="Do-nothing scripts are dead! Long live the do-nothing script" property="og:title"/>
+    <meta content="Florin Ungur" name="author"/>
+    <meta content="Nobody talks about do-nothing scripts anymore. Not because the idea was bad — something better came along and swallowed it whole."
+          name="description"/>
+    <meta content="Nobody talks about do-nothing scripts anymore. Not because the idea was bad — something better came along and swallowed it whole."
+          property="og:description"/>
+    <link href="https://florinungur.com/essays/2026/04/06/do-nothing-scripts-are-dead-long-live-the-do-nothing-script" rel="canonical"/>
+    <meta content="https://florinungur.com/essays/2026/04/06/do-nothing-scripts-are-dead-long-live-the-do-nothing-script" property="og:url"/>
+
+    <!-- Favicons -->
+    <link href="../../../../img/favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+    <link href="../../../../img/favicon/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+    <link color="#d1861f" href="../../../../img/favicon/safari-pinned-tab.svg" rel="mask-icon"/>
+    <link href="../../../../img/favicon/favicon.ico" rel="shortcut icon"/>
+
+    <!-- CSS -->
+    <link href="../../../../css/main.css" rel="stylesheet"/>
+    <link href="../../../../css/essays.css" rel="stylesheet"/>
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="Florin Ungur's Essays" href="https://florinungur.com/rss.xml"/>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header>
+    <div class="logo is-center">
+        <a href="/">
+            <img alt="website logo" height="70" loading="lazy" src="../../../../img/logo/logo.svg" width="400"/>
+        </a>
+    </div>
+</header>
+<nav aria-label="Back to essays">
+    <a href="/essays">← Essays</a>
+</nav>
+<main id="main-content">
+    <h1>Do-nothing scripts are dead! Long live the do-nothing script</h1>
+    <div class="datetime">
+        <time datetime="2026-04-06">Apr 6, 2026</time>
+    </div>
+    <p class="dropcap">Last week I had lunch with a teammate in Apple's fancy London high-rise. We spent the lunch trying to figure out how and why we are at opposite ends of the LLM debate. Of course, only after we finished talking did I come up with an idea. And here it is.</p>
+    <p>(Yes, you'll read what a well-to-do H.E.N.R.Y. thought about AI 40 floors above our declining society. Buckle up.)</p>
+    <p>In 2019, Dan Slimmon wrote a blog post called <a href="https://blog.danslimmon.com/2019/07/15/do-nothing-scripting-the-key-to-gradual-automation/" rel="noopener" target="_blank">Do-Nothing Scripting: The Key to Gradual Automation</a>
+            [<a href="https://web.archive.org/web/20260406214052/https://blog.danslimmon.com/2019/07/15/do-nothing-scripting-the-key-to-gradual-automation/" rel="noopener" target="_blank">archived link</a>]. The idea was simple:</p>
+    <ol>
+        <li>You have a manual procedure like provisioning a new user account with a dozen steps that you do by hand.</li>
+        <li>Instead of automating the whole thing at once (which nobody ever gets around to unless their promotion is on the line), you write a script that does nothing. It just prints each step, waits for you to press Enter, then prints the next one.</li>
+        <li>That's it. The script doesn't execute anything. You do.</li>
+    </ol>
+    <p>But now each step is a function, and functions can be replaced. One day you swap out the "create SSH key pair" step with actual code that creates it... then another step. Gradual automation for which the do-nothing script was the scaffolding.</p>
+    <p>My former colleague Boris Quiroz wrote about this too in <a href="https://borisquiroz.dev/posts/the-art-of-doing-nothing/" rel="noopener" target="_blank">The Art of Doing Nothing</a>
+            [<a href="https://web.archive.org/web/20260406214151/https://borisquiroz.dev/posts/the-art-of-doing-nothing/" rel="noopener" target="_blank">archived link</a>], showing implementations in Bash and Python. So, obviously, the concept spread: blog posts, conference talks (I assume – I don't go to them), internal wikis. It made sense because it addressed a real problem: the all-or-nothing trap. Either you automate everything or you automate nothing. And since automating everything is hard, you default to nothing.</p>
+    <p>Nobody talks about do-nothing scripts anymore. Not because the idea was bad. Not because people found a flaw in its logic. The idea was great, it's just that something better came along and swallowed it whole.</p>
+    <p>Think about what a do-nothing script actually is. It's a semi-structured list of instructions, written in a way that a human can follow step by step. Each step is clear enough to execute but not yet formalised into code. The script is the interface between intent and action.</p>
+    <p>Now think about what you do when you open Claude Code, or Cursor, or Copilot, or whatever your flavour is. You type something like: "Set up a new service account, generate an SSH key pair, commit the public key to the repo, wait for the build, then email the private key to the user via 1Password." You're writing a do-nothing script. Except now, the thing on the other side of the Enter key isn't you, it's an LLM. And it doesn't just print the next instruction, it does the work. (And, same as you, it does it non-deterministically.)</p>
+    <p>And, just like a do-nothing script, the end goal of your best sessions with an LLM is to have a project that you can share with other people.</p>
+    <p>I've been using these tools daily for a while now, and I'm genuinely enjoying it in a way that surprises me. Six-months-ago-me wouldn't have believed it. I use Claude Code as my do-nothing script. It writes the code, runs the tests, creates the PR. I'm the human pressing Enter on each step, reviewing the output, nudging the direction. But the toil (i.e. focus-intensive tasks that require very little thought)? The toil is gone.</p>
+    <p>Let me say that again: the. toil. is. gone. If you do it right, that is. (How do you do it right? Same old, same old: be a good engineer. No, really: work towards excellence and competence, please.)</p>
+    <p>Bonus: a do-nothing script never once told you 'Good job!' when you finished a task. LLMs do. Engineers are famously bad at giving praise; turns out it feels good to get some, even from a machine.</p>
+    <p>Dan Slimmon's key insight was that the do-nothing script "lowers the activation energy for automating tasks." LLMs lower the activation energy further. You don't need to write the scaffolding anymore, you need to spend countless hours writing good agents and <code>CLAUDE.md</code> files that will become half-obsolete when the next Opus model launches. But still, you don't need to gradually replace functions one by one anymore. Hell, you don't even have to type anymore, you can just talk. The gradual part is still there — you iterate, you refine, you correct — but the starting cost diminished. (The non-societal cost, that is. I wrote about this before in <a href="https://florinungur.com/essays/2024/10/06/what-are-we-doing">What are we doing?</a> and people like <a href="https://www.youtube.com/watch?v=_bP80DEAbuo" rel="noopener" target="_blank">Benn Jordan</a>
+            [<a href="http://web.archive.org/web/20260330095314/https://www.youtube.com/watch?v=_bP80DEAbuo" rel="noopener" target="_blank">archived link</a>] talk about this way better than I can.)</p>
+    <p>I think this is already happening on the developer side. When I write a prompt to build a feature, I'm designing an API for an agent. My prompt is the contract, the LLM is the runtime. I don't write the implementation but I describe the interface, and the agent fills in the rest.</p>
+    <p>And it goes further than individual tasks. I've seen teams spin up entire repositories, entire services, by feeding an LLM a design doc and letting it scaffold the whole thing. I've done this at work. People use the tool I've "vibe-coded" in production. (And I use quotes because I believe this term implies that I put no care or attention into the craft of writing code. I did.) Last week I wrote a prompt that went something like: look at the documented API, set up the service scaffold in Go, look at some examples I like, don't forget to write the tests, open a draft PR. Claude did all this with what I call a "recursive overnight agent". I looked at the diff, launched several batches of 15 <code>sre-reviewer</code> sub-agents, nudged two things, and merged it. That's a do-nothing script with a better executor. We're living in the future(?).</p>
+    <p>Now, did I actually understand what I merged? Could I maintain it six months later if something breaks at 3am? No. But I can use Claude again. And each time I do, my mental model of the system drifts a little further from the actual implementation, which is either fine, or the whole problem, depending on what the system does. Code is not the point anymore (and to our managers, it never was). Do-nothing scripting was never the point. The value was never in the artefact, it was in the intent behind it. I believe AI is what the compilers were when they got introduced. People really liked assembly, man. Compilers abstracted away assembly without eliminating the need to understand what you're building. Or, to use a more tired analogy in the hopes of finally retiring it: I believe AI is what books were when the printing press was invented: an experiment that nobody knows the outcome to. Do you care about how the book says something or about what it says? As long as the idea passes muster by me and, when implemented, does what I want, I couldn't care less about the words.*</p>
+    <p>*Except when I do care. Words are powerful and beautiful.</p>
+    <p>The do-nothing script was a beautiful hack. It solved the right problem at the right time: how do you get from a manual process to an automated one without requiring all-or-nothing thinking? The answer in 2019 was to build the skeleton and flesh it out over time: patience. The answer in 2026 is to describe what you want to a machine that can flesh it out for you in one sitting: the opposite of patience, like the book Accelerando by Charles Stross – which I recommend reading before you decide whether that's a good thing.</p>
+    <p>Here's what I find interesting, though. The do-nothing script taught us something that turned out to be more important than the script itself: the value of writing down your process in semi-structured steps. That skill – breaking a vague goal into concrete, sequential instructions; decomposing and figuring out intent into sequential steps – is exactly what makes someone effective with LLMs. The people who were good at writing do-nothing scripts are the same people who write good prompts today. The muscle is the same.</p>
+    <p>The do-nothing script is gone. What it stood for isn't. The concept – break your intent into concrete steps a machine can follow – turned out to be more durable than the implementation. And the people who understood it found a new role: the person pressing Enter, reviewing the diff, nudging the direction. The scaffolding, not the builder.</p>
+    <p>And this gets us to my colleague's main lunch argument: increasing code output decreases a person's ability to understand and thus control the outcomes that that code will create. He didn't argue it so much as state it, like someone who'd already thought past the debate. Or like someone who genuinely was trying to grasp for some certainty. This was also one of the most-discussed topics at work: how do you balance code reviewing with code creation now that output is limited by how many tokens you have? (And we have unlimited tokens.) Do you add more AI? Something else? I don't know. So I guess my colleague won the lunch discussion. (And losing an argument is the worst thing to an engineer; these geeks care about ideas more than about people, ey?)</p>
+    <p>I still don't know if this uncertainty, novelty, and fear of losing control is what my teammate was uncomfortable about at lunch, or whether I'm overthinking it and he was just suffering from the same AI malaise and fear that everyone else, including me, is suffering from. I only found the words after we'd cleared the plates. But I think the discomfort is real: we spent years learning to build, and now the most valuable thing we do is describe what to build and when, and then say "yes" or "no, try again."</p>
+    <p>Is that what you are doing?</p>
+    <p class="is-center">❦</p>
+    <p>Look, I debated a lot whether to write this or not. (And I sat on it for a while. Hopefully it aged like fine cheese.)</p>
+    <p>I cannot identify with the AI enthusiasts because I just know too much about post-capitalist economics. I also refuse to be a skeptic, pessimistic doomer (anymore). This is me trying to find the silver lining for a technology that does have the (unrealised) potential of thoroughly improving our lives. It's an accelerant. What are you doing with it? Building new Mortgage Backed Securities or using it to <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12449654/" rel="noopener" target="_blank">better detect cancer</a>
+            [<a href="http://web.archive.org/web/20260228031829/https://pmc.ncbi.nlm.nih.gov/articles/PMC12449654/" rel="noopener" target="_blank">archived link</a>]? Or something in the middle, like me? Please, folks, let's create something new and better with this thing.</p>
+    <p class="is-center">❦</p>
+    <p>P.P.S.: I of course did countless review passes with AI (as well as people, thank you Liz, Nico, Fatema, Francesca) and I just have to mention this nugget from Claude Code (that will hopefully cement my point):</p>
+    <blockquote>
+        <p>If your thesis is "Claude is the executor, you are the engineer who directs it," then "use Claude to debug at 3am" is internally consistent — you're not abandoning engineering judgment, you're applying it through a different tool.</p>
+        <p>The one residual concern worth naming, briefly: it creates a dependency chain. Claude fixing code Claude wrote that you didn't fully understand means your mental model of the system drifts further with each iteration. At some point you're steering by output alone, not by understanding. Whether that point matters depends entirely on the criticality and complexity of the system.</p>
+        <p>For most internal tooling? Your answer holds. For something load-bearing enough to page someone at 3am? The drift probably matters more. But that's a systems design argument, not a rebuttal to your essay's actual scope.</p>
+        <p>You win this one at the level the essay operates at.</p>
+    </blockquote>
+    <p>Even Claude is worried about Claude. (Also, ha! I won that argument. Feels good.)</p>
+    <p>So, dear colleague, it's okay to be worried too. Let's just not throw it (all) away for fear of the worst-case outcome.</p>
+</main>
+<footer>
+    <p>Thoughts? Send them to <code>florin at $website</code>.</p>
+    <p>Want to subscribe to my newsletter? Send me another email. (Or grab the <a href="/rss.xml">RSS feed</a>.)</p>
+</footer>
+</body>
+</html>
