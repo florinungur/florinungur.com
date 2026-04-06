@@ -7,10 +7,12 @@ on:
       - "CLAUDE.md"
       - "README.md"
       - "LICENSE"
+      - "Makefile"
       - ".claude/**"
+      - ".htmlvalidate.json"
       - ".pre-commit-config.yaml"
+      - ".stylelintrc.json"
       - ".gitignore"
-      - ".githooks/**"
   workflow_dispatch:
     inputs:
       ref:
