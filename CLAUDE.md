@@ -78,6 +78,10 @@ The RSS generator (`scripts/generate-rss.mjs`) reads `essays.html` using CSS sel
 </html>
 ```
 
+## Essay link conventions
+
+All links in essays use `target="_blank"` – including internal links to other florinungur.com pages. External links also get `rel="noopener"`. The archive-links script skips florinungur.com URLs (self-links), so internal links won't get `[archived link]` annotations.
+
 ## Essay "Updated on" convention
 
 When modifying an essay, add an update note in the datetime div:
