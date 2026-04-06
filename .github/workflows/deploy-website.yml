@@ -3,6 +3,14 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - "CLAUDE.md"
+      - "README.md"
+      - "LICENSE"
+      - ".claude/**"
+      - ".pre-commit-config.yaml"
+      - ".gitignore"
+      - ".githooks/**"
   workflow_dispatch:
     inputs:
       ref:
