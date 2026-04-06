@@ -17,7 +17,7 @@ try {
 
   if (htmlFiles.length === 0) {
     console.error(
-      "error: no HTML files found — something went wrong with the build",
+      "error: no HTML files found – something went wrong with the build",
     );
     process.exit(1);
   }

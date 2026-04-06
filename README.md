@@ -25,7 +25,7 @@ CI repeats the optimization pass on the built `_site/` to catch anything the hoo
 
 - `bunx stylelint` for CSS, config in `.stylelintrc.json`
 - `bunx html-validate` for HTML, config in `.htmlvalidate.json`
-- `resume.html` and `resume.css` are excluded — that file is optimized for print, not linting
+- `resume.html` and `resume.css` are excluded – that file is optimized for print, not linting
 
 `make validate` runs a full build + lint + output sanity checks (xmllint on RSS and sitemap, CSS size comparison, HTML file count).
 
@@ -33,9 +33,9 @@ CI repeats the optimization pass on the built `_site/` to catch anything the hoo
 
 GitHub Actions (`.github/workflows/deploy-website.yml`) builds `_site/` and deploys to GitHub Pages on every push to `main`. The workflow:
 
-- Caches the Bun binary (keyed on version `1.3.10`) and the Bun package cache (keyed on `bun.lock` hash) — both restored in under 2 seconds on warm runs
+- Caches the Bun binary (keyed on version `1.3.10`) and the Bun package cache (keyed on `bun.lock` hash) – both restored in under 2 seconds on warm runs
 - Caches apt packages (`optipng`, `webp`, `libxml2-utils`) as `.deb` files in a runner-writable directory; warm runs skip `apt-get` entirely and use `dpkg -i` directly (~3s vs ~16s cold)
-- Runs `bun install --production` in CI — dev dependencies (stylelint, html-validate) are not installed on the runner
+- Runs `bun install --production` in CI – dev dependencies (stylelint, html-validate) are not installed on the runner
 - Validates the build: xmllint checks RSS and sitemap XML, CSS minification is verified against source sizes, HTML file count is checked, SVGs are checked for unoptimized patterns
 
 **Prerequisites:** `brew install bun optipng webp`

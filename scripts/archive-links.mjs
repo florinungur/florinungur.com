@@ -80,7 +80,7 @@ async function savePageNow(url) {
       });
 
       if (res.status === 429) {
-        return { url: null, reason: "Save Page Now rate-limited (429) — try again in 5 minutes" };
+        return { url: null, reason: "Save Page Now rate-limited (429) – try again in 5 minutes" };
       }
       if (res.status === 509) {
         return { url: null, reason: "Save Page Now session limit reached (509)" };
@@ -223,7 +223,7 @@ for (const filePath of htmlFiles) {
       }
     } else {
       totalSkipped++;
-      console.log(`  ✗ skipped: ${href} — ${skipReason}`);
+      console.log(`  ✗ skipped: ${href} – ${skipReason}`);
     }
   }
 

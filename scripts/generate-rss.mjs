@@ -35,13 +35,13 @@ try {
 
   if (items.length === 0) {
     console.error(
-      "error: no essay items found — the HTML structure of essays.html may have changed",
+      "error: no essay items found – the HTML structure of essays.html may have changed",
     );
     process.exit(1);
   }
 
   const description =
-    "These words are my words. They are me — as much as I can make them and as much as words are people — and are intended for me and people like me, however you are.";
+    "These words are my words. They are me – as much as I can make them and as much as words are people – and are intended for me and people like me, however you are.";
 
   const rfc822 = (d) => {
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
