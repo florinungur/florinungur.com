@@ -1,5 +1,6 @@
 :root {
   --color-primary: #d1861f;
+  --color-primary-accessible: #966016;
   --color-lightGrey: #ddd;
   --color-grey: #747681;
   --grid-gutter: 2rem;
@@ -213,7 +214,7 @@ ul {
 .skip-link {
   position: absolute;
   left: -9999px;
-  background: #966016;
+  background: var(--color-primary-accessible);
   color: #fff;
   padding: 8px;
   z-index: 100;
