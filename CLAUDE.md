@@ -118,5 +118,6 @@ Links that fail archiving (Cloudflare-blocked sites, deleted pages) are logged a
 `make lint` runs Stylelint on CSS and html-validate on HTML. `make validate` does a full build + lint + output check.
 
 - `resume.html` and `resume.css` are excluded from linting (resume is optimized for printability, don't modify it)
+- `resume.html` has a `<time>` element at the top of the page – update it to the current date whenever resume content changes
 - Stylelint config: `.stylelintrc.json` – fix CSS issues instead of disabling rules; only disable rules that are genuinely not applicable
 - HTML validate config: `.htmlvalidate.json` – void elements use self-closing style (`<meta/>` not `<meta>`)
