@@ -31,7 +31,7 @@ Don't add anything that would violate this CSP.
 
 ## Image optimization
 
-Images are optimized locally via pre-commit hooks (`.pre-commit-config.yaml`) before they ever land in a commit. Run `make hooks` once after cloning to wire it up.
+Run `make hooks` once after cloning to enable pre-commit image optimization (`.pre-commit-config.yaml`).
 
 ## GitHub Actions
 
@@ -39,44 +39,11 @@ Images are optimized locally via pre-commit hooks (`.pre-commit-config.yaml`) be
 | ------------------ | ------------ | ------------------------------------------------------------------ |
 | deploy-website.yml | push to main | Builds `_site/` (CSS minification, RSS, sitemap), deploys to Pages |
 
-The RSS generator (`scripts/generate-rss.mjs`) reads `essays.html` using CSS selectors (`.content-list > a`, `h2`, `time`). If the structure of essay cards in `essays.html` changes, the RSS feed breaks.
-
 ## Key CSS variables (defined in main.css)
 
 - `--color-primary`: `#d1861f` (gold/amber – used for links, accents, logo mask)
 - `--color-lightGrey` / `--color-grey`
 - `--grid-gutter`: spacing unit
-
-## Essay HTML template structure
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Settings (CSP, viewport, charset) -->
-    <!-- Webpage info (title, og:*, canonical, author, description) -->
-    <!-- Favicons (4 links, paths relative: ../../../../img/favicon/...) -->
-    <!-- CSS: main.css + essays.css (paths: ../../../../css/...) -->
-    <!-- RSS alternate link -->
-  </head>
-  <body>
-    <a class="skip-link" href="#main-content">Skip to content</a>
-    <header><!-- logo --></header>
-    <nav aria-label="Back to essays"><a href="/essays">← Essays</a></nav>
-    <main id="main-content">
-      <h1>Essay title</h1>
-      <div class="datetime">
-        <time datetime="YYYY-MM-DD">Mon DD, YYYY</time>
-      </div>
-      <!-- essay body paragraphs -->
-    </main>
-    <footer>
-      <p>Thoughts? Send them to <code>florin at $website</code>.</p>
-      <p>Want to subscribe to my newsletter? Send me another email. (Or grab the <a href="/rss.xml">RSS feed</a>.)</p>
-    </footer>
-  </body>
-</html>
-```
 
 ## Essay link conventions
 
