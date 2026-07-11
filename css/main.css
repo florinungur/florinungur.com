@@ -191,6 +191,12 @@ ul {
   line-height: 1.9em;
 }
 
+/* Screen-reader-only warning for the site-wide new-tab link convention.
+   Empty visual content + alternative text; unsupporting browsers drop the declaration. */
+a[target="_blank"]::after {
+  content: "" / " (opens in a new tab)";
+}
+
 .content-list {
   margin-bottom: calc(var(--grid-gutter) / 2);
 }
