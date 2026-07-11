@@ -49,18 +49,18 @@ Run `make hooks` once after cloning to enable pre-commit image optimization (`.p
 
 All links in essays use `target="_blank"` – including internal links to other florinungur.com pages. External links also get `rel="noopener"`. The archive-links script skips florinungur.com URLs (self-links), so internal links won't get `[archived link]` annotations.
 
-## Essay "Updated on" convention
+## Essay "Last updated" convention
 
-When modifying an essay, add an update note in the datetime div:
+Each essay carries at most ONE update note in the datetime div – the most recent substantive update. A new update replaces the old note; the full changelog lives in git history. Trivial fixes (dead links, typos) don't bump the note.
 
 ```html
 <div class="datetime">
     <time datetime="YYYY-MM-DD">Mon DD, YYYY</time> |
-    <i>Updated on <time datetime="YYYY-MM-DD">Mon DD, YYYY</time>: short description of changes</i>
+    <i>Last updated <time datetime="YYYY-MM-DD">Mon DD, YYYY</time>: terse description</i>
 </div>
 ```
 
-Multiple updates are chained with ` | `. See `hello-world.html` for an example with two update notes.
+Never chain multiple update notes.
 
 ## Archive links
 
