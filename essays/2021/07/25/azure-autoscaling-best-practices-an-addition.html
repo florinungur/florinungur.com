@@ -59,14 +59,15 @@
     <h1>Azure autoscaling best practices: an addition</h1>
     <div class="datetime">
         <time datetime="2021-07-25">Jul 25, 2021</time> |
-        <i>Updated on <time datetime="2026-03-16">Mar 16, 2026</time>: added archived links and accessibility improvements</i>
+        <i>Updated on <time datetime="2026-03-16">Mar 16, 2026</time>: added archived links and accessibility improvements</i> |
+        <i>Updated on <time datetime="2026-07-11">Jul 11, 2026</time>: fixed image fallback and formula wording</i>
     </div>
     <p>If you don't use a scale-out and scale-in rule combination, then you might get flapping.</p>
     <figure>
         <picture>
             <source srcset="img1-abstract-painting.webp" type="image/webp"/>
             <source srcset="img1-abstract-painting.png" type="image/png"/>
-            <img alt="AI-generated abstract painting" height="742" loading="lazy" src="img1.png" width="742"/>
+            <img alt="AI-generated abstract painting" height="742" loading="lazy" src="img1-abstract-painting.png" width="742"/>
         </picture>
         <figcaption class="text-center">AI-generated abstract painting, courtesy of
             <cite>
@@ -138,7 +139,7 @@
         HTTP errors but not the flapping. Flapping should have no longer occurred, but, instead, the ASP was stuck with 2 instances.</p>
     <p>The autoscale engine determines when to scale-in based on this formula:</p>
     <pre>
-<!-- --><code>used scale-in metric types x current instance count / final number of instances when scaled down</code><!--
+<!-- --><code>used scale-in metric value x current instance count / final number of instances when scaled down</code><!--
  --></pre>
     <p>The reasoning behind this equation is simple: if you have a workload that is divided across N instances that is to be moved to, for example, N - 1
         instances, then the N - 1 instances should be able to handle the workload that was present on the N instances.</p>
