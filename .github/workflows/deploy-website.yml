@@ -27,8 +27,11 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-slim
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -63,24 +66,24 @@ jobs:
         uses: actions/cache@v4
         with:
           path: /tmp/apt-pkgs
-          key: apt-${{ runner.os }}-optipng-webp-libxml2-utils
+          key: apt-${{ runner.os }}-webp-libxml2-utils
       - name: Install system dependencies
         run: |
           if [ "${{ steps.apt-cache.outputs.cache-hit }}" = "true" ]; then
             sudo dpkg -i /tmp/apt-pkgs/*.deb
           else
             sudo apt-get update -qq
-            sudo apt-get install -y --no-install-recommends --download-only optipng webp libxml2-utils
+            sudo apt-get install -y --no-install-recommends --download-only webp libxml2-utils
             mkdir -p /tmp/apt-pkgs
             cp /var/cache/apt/archives/*.deb /tmp/apt-pkgs/
-            sudo apt-get install -y --no-install-recommends optipng webp libxml2-utils
+            sudo apt-get install -y --no-install-recommends webp libxml2-utils
           fi
       - name: Cache optimized images
         id: images-cache
         uses: actions/cache@v4
         with:
           path: /tmp/optimized-images
-          key: images-${{ runner.os }}-${{ hashFiles('essays/**/*.png', 'essays/**/*.webp', 'essays/**/*.svg', 'img/**/*.png', 'img/**/*.webp', 'img/**/*.svg') }}
+          key: images-${{ runner.os }}-${{ hashFiles('essays/**/*.webp', 'essays/**/*.svg', 'img/**/*.webp', 'img/**/*.svg') }}
       - name: Build site
         run: |
           rsync -a --delete \
@@ -109,12 +112,10 @@ jobs:
           if [ "${{ steps.images-cache.outputs.cache-hit }}" = "true" ]; then
             rsync -a /tmp/optimized-images/ _site/
           else
-            find _site -name '*.png' -exec optipng -quiet -clobber {} +
             find _site -name '*.webp' | while IFS= read -r f; do tmp="$(mktemp)"; cwebp -lossless -quiet "$f" -o "$tmp" && [ "$(wc -c < "$tmp")" -lt "$(wc -c < "$f")" ] && mv "$tmp" "$f" || rm -f "$tmp"; done
             find _site -name '*.svg' -exec bunx svgo --multipass --quiet {} +
             rsync -a \
               --include='*/' \
-              --include='*.png' \
               --include='*.webp' \
               --include='*.svg' \
               --exclude='*' \
@@ -156,13 +157,6 @@ jobs:
         uses: actions/upload-pages-artifact@v4
         with:
           path: _site
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-slim
-    needs: build
-    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

@@ -17,7 +17,7 @@ Pure HTML and CSS. No JavaScript, no external runtime dependencies, no framework
 
 **Image optimization:**
 
-Images are compressed before they ever land in a commit. A pre-commit hook (`.githooks/pre-commit`) runs `optipng` on PNGs, `cwebp` on WebP files, and `bunx svgo` on SVGs. The hook aborts the commit if any of these aren't installed. Run `make hooks` once after cloning to wire it up.
+Images are compressed before they ever land in a commit. Pre-commit hooks (`.pre-commit-config.yaml`) run `cwebp` on WebP files and `bunx svgo` on SVGs. Run `make hooks` once after cloning to wire it up.
 
 CI repeats the optimization pass on the built `_site/` to catch anything the hook missed.
 
@@ -34,8 +34,8 @@ CI repeats the optimization pass on the built `_site/` to catch anything the hoo
 GitHub Actions (`.github/workflows/deploy-website.yml`) builds `_site/` and deploys to GitHub Pages on every push to `main`. The workflow:
 
 - Caches the Bun binary (keyed on version `1.3.10`) and the Bun package cache (keyed on `bun.lock` hash) – both restored in under 2 seconds on warm runs
-- Caches apt packages (`optipng`, `webp`, `libxml2-utils`) as `.deb` files in a runner-writable directory; warm runs skip `apt-get` entirely and use `dpkg -i` directly (~3s vs ~16s cold)
+- Caches apt packages (`webp`, `libxml2-utils`) as `.deb` files in a runner-writable directory; warm runs skip `apt-get` entirely and use `dpkg -i` directly (~3s vs ~16s cold)
 - Runs `bun install --production` in CI – dev dependencies (stylelint, html-validate) are not installed on the runner
 - Validates the build: xmllint checks RSS and sitemap XML, CSS minification is verified against source sizes, HTML file count is checked, SVGs are checked for unoptimized patterns
 
-**Prerequisites:** `brew install bun optipng webp`
+**Prerequisites:** `brew install bun webp`

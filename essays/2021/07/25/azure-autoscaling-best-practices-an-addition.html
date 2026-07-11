@@ -28,7 +28,7 @@
           property="og:description"/>
     <link href="https://florinungur.com/essays/2021/07/25/azure-autoscaling-best-practices-an-addition" rel="canonical"/>
     <meta content="https://florinungur.com/essays/2021/07/25/azure-autoscaling-best-practices-an-addition" property="og:url"/>
-    <meta content="https://florinungur.com/essays/2021/07/25/img1-abstract-painting.png" property="og:image"/>
+    <meta content="https://florinungur.com/essays/2021/07/25/img1-abstract-painting.webp" property="og:image"/>
 
     <!-- Favicons -->
     <link href="../../../../img/favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
@@ -63,11 +63,7 @@
     </div>
     <p>If you don't use a scale-out and scale-in rule combination, then you might get flapping.</p>
     <figure>
-        <picture>
-            <source srcset="img1-abstract-painting.webp" type="image/webp"/>
-            <source srcset="img1-abstract-painting.png" type="image/png"/>
-            <img alt="AI-generated abstract painting" height="742" loading="lazy" src="img1-abstract-painting.png" width="742"/>
-        </picture>
+        <img alt="AI-generated abstract painting" height="742" loading="lazy" src="img1-abstract-painting.webp" width="742"/>
         <figcaption class="text-center">AI-generated abstract painting, courtesy of
             <cite>
                 <a href="https://1secondpaintingimages.s3.us-west-2.amazonaws.com/1677.png" rel="noopener" target="_blank">1SecondPainting</a>
@@ -115,21 +111,13 @@
         because of the sub-optimal scaling condition that had the scale-in threshold set at 60 and the scale-out at 80.</p>
     <p>The average CPU utilization of the ASP was between 23% - 30% while the average memory usage was between 63% - 78%.</p>
     <figure>
-        <picture>
-            <source srcset="img2-average-cpu-percentage-june-17.webp" type="image/webp"/>
-            <source srcset="img2-average-cpu-percentage-june-17.png" type="image/png"/>
-            <img alt="ASP average CPU percentage by instance on June 17" height="740" loading="lazy" src="img2-average-cpu-percentage-june-17.png"
-                 width="2127"/>
-        </picture>
+        <img alt="ASP average CPU percentage by instance on June 17" height="740" loading="lazy" src="img2-average-cpu-percentage-june-17.webp"
+             width="2127"/>
         <figcaption class="text-center">ASP average CPU percentage by instance on June 17</figcaption>
     </figure>
     <figure>
-        <picture>
-            <source srcset="img3-average-memory-percentage-june-17.webp" type="image/webp"/>
-            <source srcset="img3-average-memory-percentage-june-17.png" type="image/png"/>
-            <img alt="ASP average memory percentage by instance on June 17" height="742" loading="lazy" src="img3-average-memory-percentage-june-17.png"
-                 width="2105"/>
-        </picture>
+        <img alt="ASP average memory percentage by instance on June 17" height="742" loading="lazy" src="img3-average-memory-percentage-june-17.webp"
+             width="2105"/>
         <figcaption class="text-center">ASP average memory percentage by instance on June 17</figcaption>
     </figure>
     <p>The scale condition was based on the <code>CpuPercentage</code> metric, which was fine, but the scale-in and scale-out thresholds were too close to each
@@ -210,21 +198,13 @@
  --></pre>
     <p>Now the issue is closed:</p>
     <figure>
-        <picture>
-            <source srcset="img4-average-cpu-percentage-july-17.webp" type="image/webp"/>
-            <source srcset="img4-average-cpu-percentage-july-17.png" type="image/png"/>
-            <img alt="ASP average CPU percentage by instance on July 17" height="736" loading="lazy" src="img4-average-cpu-percentage-july-17.png"
-                 width="2127"/>
-        </picture>
+        <img alt="ASP average CPU percentage by instance on July 17" height="736" loading="lazy" src="img4-average-cpu-percentage-july-17.webp"
+             width="2127"/>
         <figcaption class="text-center">ASP average CPU percentage by instance on July 17</figcaption>
     </figure>
     <figure>
-        <picture>
-            <source srcset="img5-average-memory-percentage-july-17.webp" type="image/webp"/>
-            <source srcset="img5-average-memory-percentage-july-17.png" type="image/png"/>
-            <img alt="ASP average memory percentage by instance on July 17" height="745" loading="lazy" src="img5-average-memory-percentage-july-17.png"
-                 width="2108"/>
-        </picture>
+        <img alt="ASP average memory percentage by instance on July 17" height="745" loading="lazy" src="img5-average-memory-percentage-july-17.webp"
+             width="2108"/>
         <figcaption class="text-center">ASP average memory percentage by instance on July 17</figcaption>
     </figure>
     <p>But still, all of this is speculation and the only reason I'm explaining myself at length is to give context for the questions I am still left with.</p>
