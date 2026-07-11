@@ -1,4 +1,4 @@
-.PHONY: serve build hooks optimize-svg clean-png compress-webp archive-links help lint validate clean
+.PHONY: serve build hooks optimize-svg compress-webp archive-links help lint validate clean
 
 help:
 	@echo "serve        — build and serve on localhost:8080"
@@ -7,7 +7,6 @@ help:
 	@echo "lint         — run CSS linter and HTML validator (no build)"
 	@echo "hooks        — install git hooks"
 	@echo "optimize-svg — optimize all SVGs in repo"
-	@echo "clean-png    — losslessly optimize all PNGs"
 	@echo "compress-webp— re-encode all WebPs"
 	@echo "archive-links— check/add Wayback Machine archive links"
 	@echo "clean        — remove _site/ and node_modules/"
@@ -57,9 +56,6 @@ hooks:
 
 optimize-svg:
 	bunx svgo -r -f . --multipass --exclude=node_modules --exclude=_site
-
-clean-png:
-	find . -name '*.png' -not -path './.git/*' -not -path './_site/*' -not -path './node_modules/*' -exec optipng {} +
 
 compress-webp:
 	find . -name '*.webp' -not -path './.git/*' -not -path './_site/*' -not -path './node_modules/*' | \
