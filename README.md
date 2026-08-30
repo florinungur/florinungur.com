@@ -13,7 +13,7 @@ Pure HTML and CSS. No JavaScript, no external runtime dependencies, no framework
 3. `bun scripts/generate-rss.mjs` generates `_site/rss.xml` by parsing `essays.html`
 4. `bun scripts/generate-sitemap.mjs` generates `_site/sitemap.xml`
 
-`make serve` builds and serves `_site/` on `http://127.0.0.1:8080`.
+The `make serve` target builds and serves `_site/` on `http://127.0.0.1:8080`.
 
 **Image optimization:**
 
@@ -27,7 +27,7 @@ CI repeats the optimization pass on the built `_site/` to catch anything the hoo
 - `bunx html-validate` for HTML, config in `.htmlvalidate.json`
 - `resume.html` and `resume.css` are excluded – that file is optimized for print, not linting
 
-`make validate` runs a full build + lint + output sanity checks (xmllint on RSS and sitemap, CSS size comparison, HTML file count).
+The `make validate` target runs a full build + lint + output sanity checks (xmllint on RSS and sitemap, CSS size comparison, HTML file count).
 
 **Deployment:**
 
