@@ -1,4 +1,4 @@
-.PHONY: serve build hooks optimize-svg compress-webp archive-links help lint validate clean
+.PHONY: serve build hooks optimize-images archive-links help lint validate clean
 
 help:
 	@echo "serve        — build and serve on localhost:8080"
@@ -6,8 +6,7 @@ help:
 	@echo "validate     — build, then check outputs and run linters"
 	@echo "lint         — run CSS linter and HTML validator (no build)"
 	@echo "hooks        — install git hooks"
-	@echo "optimize-svg — optimize all SVGs in repo"
-	@echo "compress-webp— re-encode all WebPs"
+	@echo "optimize-images – re-encode every tracked WebP and SVG in place"
 	@echo "archive-links— check/add Wayback Machine archive links"
 	@echo "clean        — remove _site/ and node_modules/"
 
@@ -54,12 +53,8 @@ validate: build lint
 hooks:
 	pre-commit install
 
-optimize-svg:
-	bunx svgo -r -f . --multipass --exclude=node_modules --exclude=_site
-
-compress-webp:
-	find . -name '*.webp' -not -path './.git/*' -not -path './_site/*' -not -path './node_modules/*' | \
-	  while IFS= read -r f; do tmp="$$(mktemp)"; cwebp -lossless -quiet "$$f" -o "$$tmp" && [ "$$(wc -c < "$$tmp")" -lt "$$(wc -c < "$$f")" ] && mv "$$tmp" "$$f" || rm -f "$$tmp"; done
+optimize-images:
+	git ls-files -z -- '*.webp' '*.svg' | xargs -0 scripts/optimize-images.sh
 
 archive-links:
 	bun scripts/archive-links.mjs essays/
