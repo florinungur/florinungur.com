@@ -2,50 +2,70 @@ import { readFileSync, writeFileSync, statSync } from "fs";
 import { join } from "path";
 import * as cheerio from "cheerio";
 
-const rawArgs = process.argv.slice(2);
-
-// Parse --url <url> flag
-let targetUrl = null;
-const args = [];
-for (let i = 0; i < rawArgs.length; i++) {
-  if (rawArgs[i] === "--url" && i + 1 < rawArgs.length) {
-    targetUrl = rawArgs[++i];
-  } else {
-    args.push(rawArgs[i]);
-  }
-}
-
-if (args.length === 0) {
-  console.error(
-    "Usage: bun scripts/archive-links.mjs <file-or-directory> [...] [--url <url>]",
-  );
-  process.exit(1);
-}
-
-// Collect all HTML file paths from arguments
-const htmlFiles = [];
-for (const arg of args) {
-  const stat = statSync(arg, { throwIfNoEntry: false });
-  if (!stat) {
-    console.error(`warning: ${arg} does not exist, skipping`);
-    continue;
-  }
-  if (stat.isDirectory()) {
-    const glob = new Bun.Glob("**/*.html");
-    for (const file of glob.scanSync({ cwd: arg })) {
-      htmlFiles.push(join(arg, file));
-    }
-  } else {
-    htmlFiles.push(arg);
-  }
-}
-
-if (htmlFiles.length === 0) {
-  console.error("error: no HTML files found");
-  process.exit(1);
-}
-
 const SKIP_DOMAINS = ["florinungur.com", "web.archive.org"];
+
+function hostname(href) {
+  try {
+    return new URL(href).hostname;
+  } catch {
+    return null;
+  }
+}
+
+function isConsidered(href) {
+  if (!href?.startsWith("http://") && !href?.startsWith("https://")) return false;
+  const host = hostname(href);
+  return host !== null && !SKIP_DOMAINS.some((d) => host === d || host.endsWith(`.${d}`));
+}
+
+// Already archived: a Wayback <a> follows the link, or the elements the link closes, with at most
+// whitespace and a "[" between.
+function isArchived(el) {
+  let node = el;
+  while (!node.nextSibling && node.parent?.type === "tag") node = node.parent;
+  let next = node.nextSibling;
+  if (next?.type === "text" && /^\s*\[?\s*$/.test(next.data)) next = next.nextSibling;
+  return next?.type === "tag" && next.name === "a" && hostname(next.attribs.href) === "web.archive.org";
+}
+
+// Returns the page with an archive link after every considered link that lacks one, and one outcome
+// per considered link in document order. Every byte outside the inserted links is left as it was.
+// Lookups are cached by URL in `results`, which a caller can share across pages.
+export async function annotate(html, lookup, { only, results = new Map() } = {}) {
+  const $ = cheerio.load(html, { sourceCodeLocationInfo: true });
+  const outcomes = [];
+  const insertions = [];
+
+  for (const el of $("a[href]").toArray()) {
+    const href = el.attribs.href;
+    if (!isConsidered(href) || (only && href !== only)) continue;
+
+    if (isArchived(el)) {
+      outcomes.push({ href, status: "already" });
+      continue;
+    }
+
+    if (!results.has(href)) results.set(href, await lookup(href));
+    const { archiveUrl, reason } = results.get(href);
+    if (!archiveUrl) {
+      outcomes.push({ href, status: "skipped", reason });
+      continue;
+    }
+
+    const url = archiveUrl.replace(/^http:\/\/web\.archive\.org\//, "https://web.archive.org/");
+    outcomes.push({ href, status: "archived", archiveUrl: url });
+    const attr = url.replaceAll("&", "&amp;").replaceAll('"', "&quot;");
+    insertions.push({
+      offset: el.sourceCodeLocation.endOffset,
+      text: `\n            [<a href="${attr}" rel="noopener" target="_blank">archived link</a>]`,
+    });
+  }
+
+  for (const { offset, text } of insertions.reverse()) {
+    html = html.slice(0, offset) + text + html.slice(offset);
+  }
+  return { html, outcomes };
+}
 
 async function checkAvailability(url) {
   try {
@@ -55,10 +75,14 @@ async function checkAvailability(url) {
     if (!res.ok)
       return { url: null, reason: `availability check failed (${res.status})` };
     const data = await res.json();
-    const archiveUrl = data?.archived_snapshots?.closest?.url || null;
+    // Only a 200 capture shows the page, and the closest capture can have any status.
+    const closest = data?.archived_snapshots?.closest;
+    if (closest?.status === "200") return { url: closest.url, reason: null };
     return {
-      url: archiveUrl,
-      reason: archiveUrl ? null : "no snapshot found in Wayback Machine",
+      url: null,
+      reason: closest
+        ? `closest snapshot has status ${closest.status}`
+        : "no snapshot found in Wayback Machine",
     };
   } catch (e) {
     return { url: null, reason: `availability check error: ${e.message}` };
@@ -117,129 +141,88 @@ function delay(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
-let totalChecked = 0;
-let totalAlreadyArchived = 0;
-let totalNewlyArchived = 0;
-let totalSkipped = 0;
+// The production lookup: an existing Wayback snapshot, else a fresh Save Page Now capture.
+export async function waybackLookup(url) {
+  const availability = await checkAvailability(url);
+  await delay(1000);
+  if (availability.url) return { archiveUrl: availability.url };
 
-for (const filePath of htmlFiles) {
-  console.log(`\nProcessing ${filePath}...`);
-  let html = readFileSync(filePath, "utf8");
-  const $ = cheerio.load(html, { decodeEntities: false });
-
-  // Collect insertions: {position in original string, archive link HTML}
-  // We'll insert in reverse order so positions don't shift
-  const insertions = [];
-
-  const links = [];
-  $("a[href]").each((_, el) => {
-    const href = $(el).attr("href");
-    if (!href || (!href.startsWith("http://") && !href.startsWith("https://")))
-      return;
-
-    // Skip self-links and existing archive links
-    try {
-      const hostname = new URL(href).hostname;
-      if (SKIP_DOMAINS.some((d) => hostname === d || hostname.endsWith(`.${d}`)))
-        return;
-    } catch {
-      return;
-    }
-
-    if (targetUrl && href !== targetUrl) return;
-
-    links.push(el);
-  });
-
-  for (const el of links) {
-    const $el = $(el);
-    const href = $el.attr("href");
-    totalChecked++;
-
-    // Check if already followed by an archive link
-    const nextSibling = el.nextSibling;
-    if (nextSibling) {
-      const nextText =
-        nextSibling.type === "text" ? nextSibling.data || "" : "";
-      if (nextText.match(/^\s*\[/)) {
-        const nextA = $el.next("a");
-        if (
-          nextA.length &&
-          (nextA.attr("href") || "").includes("web.archive.org")
-        ) {
-          totalAlreadyArchived++;
-          continue;
-        }
-      }
-    }
-
-    // Check Wayback Machine availability
-    let availability = await checkAvailability(href);
-    await delay(1000);
-
-    let archiveUrl = availability.url;
-    let skipReason = availability.reason;
-
-    if (!archiveUrl) {
-      const save = await savePageNow(href);
-      archiveUrl = save.url;
-      skipReason = save.reason;
-      if (archiveUrl) {
-        await delay(1000);
-      }
-    }
-
-    if (archiveUrl) {
-      // Find the closing </a> tag position for this link in the original HTML.
-      // We search for the href to locate the right <a> tag, then find its </a>.
-      const escapedHref = href.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-      const linkPattern = new RegExp(
-        `<a\\b[^>]*href="${escapedHref}"[^>]*>[\\s\\S]*?</a>`,
-        "g",
-      );
-
-      let match;
-      let found = false;
-      while ((match = linkPattern.exec(html)) !== null) {
-        const endPos = match.index + match[0].length;
-        // Check this isn't already followed by an archive link
-        const after = html.slice(endPos, endPos + 100);
-        if (after.match(/^\s*\[?\s*<a[^>]*web\.archive\.org/)) {
-          continue; // Already archived, try next match
-        }
-        insertions.push({
-          position: endPos,
-          text: `\n            [<a href="${archiveUrl}" rel="noopener" target="_blank">archived link</a>]`,
-        });
-        found = true;
-        totalNewlyArchived++;
-        console.log(`  ✓ archived: ${href}`);
-        break;
-      }
-
-      if (!found) {
-        totalSkipped++;
-        console.log(`  ✗ skipped (could not locate in source): ${href}`);
-      }
-    } else {
-      totalSkipped++;
-      console.log(`  ✗ skipped: ${href} – ${skipReason}`);
-    }
-  }
-
-  if (insertions.length > 0) {
-    // Sort by position descending so insertions don't shift earlier positions
-    insertions.sort((a, b) => b.position - a.position);
-    for (const ins of insertions) {
-      html = html.slice(0, ins.position) + ins.text + html.slice(ins.position);
-    }
-    writeFileSync(filePath, html, "utf8");
-    console.log(`  wrote ${insertions.length} archive links to ${filePath}`);
-  }
+  const save = await savePageNow(url);
+  if (!save.url) return { reason: save.reason };
+  await delay(1000);
+  return { archiveUrl: save.url };
 }
 
-console.log(`\nSummary:`);
-console.log(`  checked:          ${totalChecked}`);
-console.log(`  already archived: ${totalAlreadyArchived}`);
-console.log(`  newly archived:   ${totalNewlyArchived}`);
-console.log(`  skipped:          ${totalSkipped}`);
+async function main() {
+  const rawArgs = process.argv.slice(2);
+
+  // Parse --url <url> flag
+  let targetUrl = null;
+  const args = [];
+  for (let i = 0; i < rawArgs.length; i++) {
+    if (rawArgs[i] === "--url" && i + 1 < rawArgs.length) {
+      targetUrl = rawArgs[++i];
+    } else {
+      args.push(rawArgs[i]);
+    }
+  }
+
+  if (args.length === 0) {
+    console.error(
+      "Usage: bun scripts/archive-links.mjs <file-or-directory> [...] [--url <url>]",
+    );
+    process.exit(1);
+  }
+
+  // Collect all HTML file paths from arguments
+  const htmlFiles = [];
+  for (const arg of args) {
+    const stat = statSync(arg, { throwIfNoEntry: false });
+    if (!stat) {
+      console.error(`warning: ${arg} does not exist, skipping`);
+      continue;
+    }
+    if (stat.isDirectory()) {
+      const glob = new Bun.Glob("**/*.html");
+      for (const file of glob.scanSync({ cwd: arg })) {
+        htmlFiles.push(join(arg, file));
+      }
+    } else {
+      htmlFiles.push(arg);
+    }
+  }
+
+  if (htmlFiles.length === 0) {
+    console.error("error: no HTML files found");
+    process.exit(1);
+  }
+
+  const totals = { already: 0, archived: 0, skipped: 0 };
+  const results = new Map();
+
+  for (const filePath of htmlFiles) {
+    console.log(`\nProcessing ${filePath}...`);
+    const before = readFileSync(filePath, "utf8");
+    const { html, outcomes } = await annotate(before, waybackLookup, { only: targetUrl, results });
+
+    for (const { href, status, reason } of outcomes) {
+      totals[status]++;
+      if (status === "archived") console.log(`  ✓ archived: ${href}`);
+      if (status === "skipped") console.log(`  ✗ skipped: ${href} – ${reason}`);
+    }
+
+    if (html !== before) {
+      writeFileSync(filePath, html, "utf8");
+      const written = outcomes.filter((o) => o.status === "archived").length;
+      console.log(`  wrote ${written} archive links to ${filePath}`);
+    }
+  }
+
+  console.log(`\nSummary:`);
+  console.log(`  checked:          ${totals.already + totals.archived + totals.skipped}`);
+  console.log(`  already archived: ${totals.already}`);
+  console.log(`  newly archived:   ${totals.archived}`);
+  console.log(`  skipped:          ${totals.skipped}`);
+}
+
+if (import.meta.main) await main();
