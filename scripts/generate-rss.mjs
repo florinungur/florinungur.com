@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 import * as cheerio from "cheerio";
+import { readEssay, readCards, checkCards } from "./essays.mjs";
 
 const [outPath, srcDir] = process.argv.slice(2);
 if (!outPath || !srcDir) {
@@ -9,39 +10,28 @@ if (!outPath || !srcDir) {
 }
 
 try {
-  const html = readFileSync(join(srcDir, "essays.html"), "utf8");
-  const $ = cheerio.load(html);
+  const read = (file) => readFileSync(join(srcDir, file), "utf8");
+  const files = [...new Bun.Glob("essays/**/*.html").scanSync({ cwd: srcDir })];
+  if (files.length === 0) {
+    console.error(`error: no essay pages under ${join(srcDir, "essays")}`);
+    process.exit(1);
+  }
+  const essays = files.map((file) => readEssay(read(file), file));
 
-  const items = [];
-
-  $(".content-list > a").each((_, el) => {
-    const $el = $(el);
-    const url = $el.attr("href");
-    const title = $el.find("h2").text().trim();
-    const excerpt = $el.find("p").text().trim().replace(/\s+/g, " ");
-    const timeText = $el.find("time").text().trim();
-
-    // Parse date from text content (e.g. "Jul 25, 2021") using "%b %d, %Y" format
-    // Append "UTC" so the date is parsed as UTC, avoiding timezone offset issues
-    const date = new Date(timeText + " UTC");
-
-    if (isNaN(date.getTime())) {
-      console.error(`error: invalid date "${timeText}" in essay "${title}"`);
-      process.exit(1);
-    }
-
-    items.push({ url, title, excerpt, date });
-  });
-
-  if (items.length === 0) {
-    console.error(
-      "error: no essay items found – the HTML structure of essays.html may have changed",
-    );
+  const indexHtml = read("essays.html");
+  const problems = checkCards(essays, readCards(indexHtml));
+  if (problems.length > 0) {
+    for (const p of problems) console.error(`error: ${p}`);
     process.exit(1);
   }
 
-  const description =
-    "These words are my words. They are me – as much as I can make them and as much as words are people – and are intended for me and people like me, however you are.";
+  const items = essays.sort((a, b) => b.published.localeCompare(a.published));
+  const description = cheerio
+    .load(indexHtml)('meta[name="description"]')
+    .attr("content")
+    ?.replace(/\s+/g, " ")
+    .trim();
+  if (!description) throw new Error("essays.html: missing meta description");
 
   const rfc822 = (d) => {
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -75,8 +65,8 @@ try {
       (item) => `    <item>
       <title>${escapeXml(item.title)}</title>
       <link>${escapeXml(item.url)}</link>
-      <description>${escapeXml(item.excerpt)}</description>
-      <pubDate>${rfc822(item.date)}</pubDate>
+      <description>${escapeXml(item.description)}</description>
+      <pubDate>${rfc822(new Date(item.published))}</pubDate>
     </item>`,
     )
     .join("\n");

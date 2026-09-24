@@ -11,10 +11,10 @@ The `make build` target produces `_site/` matching what CI deploys (minified CSS
 ## Adding a new essay
 
 1. Create `essays/YYYY/MM/DD/slug.html` – copy the structure from an existing essay (e.g., `essays/2024/10/06/what-are-we-doing.html`). Favicon and CSS paths are relative (`../../../../`).
-2. Add a card entry to `essays.html` at the top of the list – this is what the RSS generator reads. The card must use `.content-list > a` for the URL, `h2` for the title, `time` for the date (format: "Mon DD, YYYY"), and a `<p>` for the description.
+2. Add a card to the top of `essays.html`, copying an existing one. Its URL, title, description, and date must match the essay page's canonical link, `og:title`, meta description, and first `.datetime` date. Every `<time>` reads like its `datetime` in the short form (`Oct 6, 2024`).
 3. Push. RSS and sitemap are generated at build time into `_site/` – nothing is committed back to `main`.
 
-The `generate-rss.mjs` script exits 1 on an unparseable date or an empty item list, so a malformed card fails the deploy rather than shipping a broken feed.
+The `generate-rss.mjs` script builds the feed from the essay pages themselves and checks every card against its essay. It exits 1 on a missing or malformed field, a card that disagrees with its essay, an essay without a card, or cards out of date order, so a mistake fails the deploy rather than shipping a broken feed.
 
 ## CSS
 
@@ -65,8 +65,8 @@ Each essay carries at most ONE update note in the datetime div – the most rece
 
 ```html
 <div class="datetime">
-    <time datetime="YYYY-MM-DD">Mon DD, YYYY</time> |
-    <i>Last updated <time datetime="YYYY-MM-DD">Mon DD, YYYY</time>: terse description</i>
+    <time datetime="YYYY-MM-DD">Mon D, YYYY</time> |
+    <i>Last updated <time datetime="YYYY-MM-DD">Mon D, YYYY</time>: terse description</i>
 </div>
 ```
 
