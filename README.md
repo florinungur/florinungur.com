@@ -6,28 +6,23 @@ This is the source code for my personal website at https://florinungur.com.
 
 Pure HTML and CSS. No JavaScript, no external runtime dependencies, no framework. Pages are written by hand.
 
-**Build pipeline** (`make build`):
-
-1. `rsync` copies source files into `_site/`, excluding dev artifacts and config files
-2. `bunx postcss` with cssnano minifies the CSS in place inside `_site/css/`
-3. `bun scripts/generate-rss.mjs` generates `_site/rss.xml` from the essay pages
-4. `bun scripts/generate-sitemap.mjs` generates `_site/sitemap.xml`
+**Build** (`make build`): `scripts/build.sh` copies the site's files into `_site/`, minifies the CSS, builds the RSS feed from the essay pages, generates the sitemap, optimises images, and checks the output. CI runs the same script.
 
 The `make serve` target builds and serves `_site/` on `http://127.0.0.1:8080`.
 
-**Image optimization:**
+**Image optimisation:**
 
-Images are compressed before they ever land in a commit. Pre-commit hooks (`.pre-commit-config.yaml`) run `cwebp` on WebP files and `bunx svgo` on SVGs. Run `make hooks` once after cloning to wire it up.
+Images are compressed before they ever land in a commit. A pre-commit hook runs `scripts/optimize-images.sh`: `cwebp` on WebP files and `svgo` on SVGs. Run `make hooks` once after cloning to wire it up.
 
-CI repeats the optimization pass on the built `_site/` to catch anything the hook missed.
+The build repeats the pass on `_site/` to catch anything the hook missed.
 
 **Linting** (`make lint`, local only):
 
 - `bunx stylelint` for CSS, config in `.stylelintrc.json`
 - `bunx html-validate` for HTML, config in `.htmlvalidate.json`
-- `resume.html` and `resume.css` are excluded – that file is optimized for print, not linting
+- `resume.html` and `resume.css` are excluded – that file is optimised for print, not linting
 
-The `make validate` target runs a full build + lint + output sanity checks (xmllint on RSS and sitemap, CSS size comparison, HTML file count).
+The `make validate` target runs the build, which ends with its own output checks (xmllint on RSS and sitemap, CSS size comparison), then the linters.
 
 **Deployment:**
 
@@ -36,6 +31,6 @@ GitHub Actions (`.github/workflows/deploy-website.yml`) builds `_site/` and depl
 - Caches the Bun binary (keyed on version `1.3.10`) and the Bun package cache (keyed on `bun.lock` hash) – both restored in under 2 seconds on warm runs
 - Caches apt packages (`webp`, `libxml2-utils`) as `.deb` files in a runner-writable directory; warm runs skip `apt-get` entirely and use `dpkg -i` directly (~3s vs ~16s cold)
 - Runs `bun install --production` in CI – dev dependencies (stylelint, html-validate) are not installed on the runner
-- Validates the build: xmllint checks RSS and sitemap XML, CSS minification is verified against source sizes, HTML file count is checked, SVGs are checked for unoptimized patterns
+- Runs `scripts/build.sh`, whose output checks (xmllint on RSS and sitemap, CSS minification against source sizes) gate the deploy
 
 **Prerequisites:** `brew install bun webp`

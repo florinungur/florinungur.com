@@ -6,7 +6,7 @@ A static personal website (florinungur.com) hosted on GitHub Pages. Pure HTML an
 
 ## Local development
 
-The `make build` target produces `_site/` matching what CI deploys (minified CSS, RSS, sitemap). The `make serve` target runs build then serves `_site/` on port 8080. The `make hooks` target installs pre-commit hooks. Prerequisites: `bun install`, `uv tool install pre-commit`.
+The `scripts/build.sh` script builds `_site/` and checks it, and `make build` and CI both run it, so a local build is the deploy build. What ships is the allowlist at the top of that script; a new top-level directory has to be added there. The `make serve` target runs build then serves `_site/` on port 8080. The `make hooks` target installs pre-commit hooks. Prerequisites: `bun install`, `uv tool install pre-commit`, `brew install webp`.
 
 ## Adding a new essay
 
@@ -32,17 +32,17 @@ style-src 'self'
 
 No JavaScript ever, no external fonts, no forms, no third-party anything. Don't add something that needs a new directive – add the feature a different way, or don't add it.
 
-## Image optimization
+## Image optimisation
 
-Run `make hooks` once after cloning to enable pre-commit image optimization (`.pre-commit-config.yaml`): `svgo` on SVGs, `cwebp` on WebPs, both re-encoding in place and keeping the result only when it's smaller. CI repeats the pass over `_site/` and caches the output, so a hook that was never installed costs a slower deploy rather than a fat image on the live site.
+Run `make hooks` once after cloning to enable pre-commit image optimisation. The hook and the build both run `scripts/optimize-images.sh`: `cwebp` re-encodes each WebP losslessly and keeps the result only when it's smaller, and `svgo` rewrites each SVG. The build repeats the pass over `_site/`, so a hook that was never installed costs a slower build rather than a fat image on the live site.
 
 ## GitHub Actions
 
 | Workflow           | Trigger      | What it does                                                                          |
 | ------------------ | ------------ | --------------------------------------------------------------------------------------- |
-| deploy-website.yml | push to main | Builds `_site/`, optimizes images, validates the output, deploys to Pages in one job |
+| deploy-website.yml | push to main | Runs `scripts/build.sh`, then deploys `_site/` to Pages in one job |
 
-The `paths-ignore` filter keeps a docs-only or config-only commit from redeploying. The validation step is the deploy's own gate: `xmllint` on the RSS and sitemap, every minified CSS file compared against its source size, and a non-zero HTML count. It does not lint – see below.
+The `paths-ignore` filter keeps a docs-only or config-only commit from redeploying. The build script ends with the deploy's gate: `xmllint` on the RSS and sitemap, and every minified CSS file compared against its source size. It does not lint – see below.
 
 ## Key CSS variables (defined in main.css)
 
@@ -100,7 +100,7 @@ The `make lint` target runs Stylelint on CSS and html-validate on HTML. The `mak
 
 Linting is local only. CI installs with `bun install --production`, so stylelint and html-validate aren't on the runner at all – the pre-commit hooks are what actually gate a bad file, and skipping `make hooks` means nothing checks CSS or HTML before it deploys.
 
-- `resume.html` and `resume.css` are excluded from linting (resume is optimized for printability, don't modify it)
+- `resume.html` and `resume.css` are excluded from linting (resume is optimised for printability, don't modify it)
 - `resume.html` has a `<time>` element at the top of the page – update it to the current date whenever resume content changes
 - Stylelint config: `.stylelintrc.json` – fix CSS issues instead of disabling rules; only disable rules that are genuinely not applicable
 - HTML validate config: `.htmlvalidate.json` – void elements use self-closing style (`<meta/>` not `<meta>`)
