@@ -84,7 +84,7 @@ test("changes nothing but the inserted archive link", async () => {
   expect(html.replace(archiveLink(SNAPSHOT), "")).toBe(input);
 });
 
-test("own-site, Wayback, mailto, and anchor links are not considered", async () => {
+test("own-site, own-repo, Wayback, mailto, and anchor links are not considered", async () => {
   const lookup = fakeLookup({});
   const { outcomes } = await annotate(fixture("ignored.html"), lookup);
   expect(outcomes).toEqual([]);

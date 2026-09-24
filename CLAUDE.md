@@ -57,7 +57,7 @@ Links in an essay's body open in a new tab: `target="_blank"`, plus `rel="noopen
 
 The `main.css` file announces the convention to screen readers with `a[target="_blank"]::after { content: "" / " (opens in a new tab)" }` – empty visual content, alt text only. That means the attribute alone carries the accessibility hint; don't add a visible marker or a per-link label.
 
-The archive-links script skips florinungur.com and web.archive.org URLs, so internal links won't get `[archived link]` annotations.
+The archive-links script skips florinungur.com, web.archive.org, and the site's own GitHub repo (`github.com/florinungur/florinungur.com`), so those links won't get `[archived link]` annotations.
 
 ## Essay "Last updated" convention
 
