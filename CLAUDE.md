@@ -92,6 +92,8 @@ Use `--url` whenever you only changed one link – it skips every other link in 
 
 Links that fail archiving (Cloudflare-blocked sites, deleted pages) are logged as skipped but leave no annotation – they'll be re-tried on every full pass. That's expected; don't try to force them.
 
+Its tests run with `bun test scripts/`, and a pre-commit hook runs them on any commit that touches `scripts/`.
+
 ## Linting
 
 The `make lint` target runs Stylelint on CSS and html-validate on HTML. The `make validate` target does a full build + lint + output check.
