@@ -3,6 +3,8 @@ import { join } from "path";
 import * as cheerio from "cheerio";
 
 const SKIP_DOMAINS = ["florinungur.com", "web.archive.org"];
+// The site's own GitHub repo, which only disappears if it's deleted from here, like the site itself.
+const OWN_REPO = "/florinungur/florinungur.com";
 
 function hostname(href) {
   try {
@@ -15,7 +17,9 @@ function hostname(href) {
 function isConsidered(href) {
   if (!href?.startsWith("http://") && !href?.startsWith("https://")) return false;
   const host = hostname(href);
-  return host !== null && !SKIP_DOMAINS.some((d) => host === d || host.endsWith(`.${d}`));
+  if (host === null || SKIP_DOMAINS.some((d) => host === d || host.endsWith(`.${d}`))) return false;
+  const { pathname } = new URL(href);
+  return !(host === "github.com" && (pathname === OWN_REPO || pathname.startsWith(`${OWN_REPO}/`)));
 }
 
 // Already archived: a Wayback <a> follows the link, or the elements the link closes, with at most
