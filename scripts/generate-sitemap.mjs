@@ -1,6 +1,6 @@
-import { writeFileSync } from "fs";
-import { join, relative } from "path";
-import { globSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
+import { join } from "path";
+import { lastModified } from "./essays.mjs";
 
 const [outPath, srcDir] = process.argv.slice(2);
 if (!outPath || !srcDir) {
@@ -23,8 +23,6 @@ try {
   }
 
   const baseUrl = "https://florinungur.com";
-  const lastmod = new Date().toISOString().split("T")[0];
-
   const urls = htmlFiles.map((file) => {
     let path = file;
     // index.html → /
@@ -36,9 +34,10 @@ try {
       path = path.slice(0, -".html".length);
     }
     const loc = path ? `${baseUrl}/${path}` : `${baseUrl}/`;
+    const lastmod = lastModified(readFileSync(join(srcDir, file), "utf8"));
+    const lastmodXml = lastmod ? `\n    <lastmod>${lastmod}</lastmod>` : "";
     return `  <url>
-    <loc>${loc}</loc>
-    <lastmod>${lastmod}</lastmod>
+    <loc>${loc}</loc>${lastmodXml}
   </url>`;
   });
 
