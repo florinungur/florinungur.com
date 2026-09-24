@@ -31,6 +31,13 @@ repos:
         types: [html]
         exclude: ^resume\.html$
 
+      - id: bun-test
+        name: bun test (scripts)
+        entry: bun test scripts/
+        language: system
+        files: ^scripts/
+        pass_filenames: false
+
       - id: optimize-svg
         name: optimize SVG
         entry: bunx svgo --multipass --quiet
