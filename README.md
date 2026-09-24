@@ -10,7 +10,7 @@ Pure HTML and CSS. No JavaScript, no external runtime dependencies, no framework
 
 1. `rsync` copies source files into `_site/`, excluding dev artifacts and config files
 2. `bunx postcss` with cssnano minifies the CSS in place inside `_site/css/`
-3. `bun scripts/generate-rss.mjs` generates `_site/rss.xml` by parsing `essays.html`
+3. `bun scripts/generate-rss.mjs` generates `_site/rss.xml` from the essay pages
 4. `bun scripts/generate-sitemap.mjs` generates `_site/sitemap.xml`
 
 The `make serve` target builds and serves `_site/` on `http://127.0.0.1:8080`.
