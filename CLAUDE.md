@@ -98,7 +98,7 @@ Its tests run with `bun test scripts/`, and a pre-commit hook runs them on any c
 
 The `make lint` target runs Stylelint on CSS and html-validate on HTML. The `make validate` target does a full build + lint + output check.
 
-Linting is local only. CI installs with `bun install --production`, so stylelint and html-validate aren't on the runner at all – the pre-commit hooks are what actually gate a bad file, and skipping `make hooks` means nothing checks CSS or HTML before it deploys.
+Linting and tests are local only, by design. I'm the site's only maintainer and I run the checks before every push. I want CI fast and lean, so it spends no compute on checks that already ran. CI installs with `bun install --production`, so stylelint and html-validate aren't on the runner at all – the pre-commit hooks are what actually gate a bad file, and skipping `make hooks` means nothing checks CSS or HTML before it deploys. Don't propose a CI step for either.
 
 - `resume.html` and `resume.css` are excluded from linting (resume is optimised for printability, don't modify it)
 - `resume.html` has a `<time>` element at the top of the page – update it to the current date whenever resume content changes
