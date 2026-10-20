@@ -33,4 +33,4 @@ GitHub Actions (`.github/workflows/deploy-website.yml`) builds `_site/` and depl
 - Runs `bun install --production` in CI – dev dependencies (stylelint, html-validate) are not installed on the runner
 - Runs `scripts/build.sh`, whose output checks (xmllint on RSS and sitemap, CSS minification against source sizes) gate the deploy
 
-**Prerequisites:** `brew install bun webp`
+**Prerequisites:** `brew install bun webp gitleaks`, `uv tool install pre-commit`, then `bun install` in the repo.

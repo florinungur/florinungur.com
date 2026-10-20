@@ -6,7 +6,7 @@ A static personal website (florinungur.com) hosted on GitHub Pages. Pure HTML an
 
 ## Local development
 
-The `scripts/build.sh` script builds `_site/` and checks it, and `make build` and CI both run it, so a local build is the deploy build. What ships is the allowlist at the top of that script; a new top-level directory has to be added there. The `make serve` target runs build then serves `_site/` on port 8080. The `make hooks` target installs pre-commit hooks. Prerequisites: `bun install`, `uv tool install pre-commit`, `brew install webp`.
+The `scripts/build.sh` script builds `_site/` and checks it, and `make build` and CI both run it, so a local build is the deploy build. What ships is the allowlist at the top of that script; a new top-level directory has to be added there. The `make serve` target runs build then serves `_site/` on port 8080. The `make hooks` target installs pre-commit hooks. Prerequisites are listed at the end of `README.md`.
 
 ## Adding a new essay
 
