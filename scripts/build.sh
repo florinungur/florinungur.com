@@ -3,6 +3,11 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+if [[ ! -d node_modules ]]; then
+  echo "error: node_modules/ is missing; run bun install" >&2
+  exit 1
+fi
+
 # What ships: tracked and untracked-but-not-ignored files under these pathspecs.
 site=(':(glob)*.html' 'css/**' 'img/**' 'essays/**' CNAME robots.txt ':(exclude,glob)**/*.psd')
 
