@@ -33,25 +33,6 @@ try {
     .trim();
   if (!description) throw new Error("essays.html: missing meta description");
 
-  const rfc822 = (d) => {
-    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    return `${days[d.getUTCDay()]}, ${String(d.getUTCDate()).padStart(2, "0")} ${months[d.getUTCMonth()]} ${d.getUTCFullYear()} 00:00:00 +0000`;
-  };
-
   const escapeXml = (s) =>
     s
       .replace(/&/g, "&amp;")
@@ -65,8 +46,9 @@ try {
       (item) => `    <item>
       <title>${escapeXml(item.title)}</title>
       <link>${escapeXml(item.url)}</link>
+      <guid isPermaLink="true">${escapeXml(item.url)}</guid>
       <description>${escapeXml(item.description)}</description>
-      <pubDate>${rfc822(new Date(item.published))}</pubDate>
+      <pubDate>${new Date(item.published).toUTCString()}</pubDate>
     </item>`,
     )
     .join("\n");
@@ -76,8 +58,9 @@ try {
   <channel>
     <title>Florin Ungur&apos;s Essays</title>
     <link>https://florinungur.com</link>
+    <atom:link href="https://florinungur.com/rss.xml" rel="self" type="application/rss+xml"/>
     <description>${escapeXml(description)}</description>
-    <lastBuildDate>${rfc822(new Date())}</lastBuildDate>
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
 ${itemsXml}
   </channel>
 </rss>
