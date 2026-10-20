@@ -1,4 +1,5 @@
-// Serves _site/ the way GitHub Pages does: the path itself, then with .html, then as a directory's index.html.
+// Serves _site/ the way GitHub Pages does: the path itself, then with .html, then as a directory's index.html,
+// and 404.html for a miss.
 import { join, sep } from "path";
 
 const root = join(import.meta.dir, "..", "_site");

@@ -4,8 +4,9 @@ import * as cheerio from "cheerio";
 
 const SITE = "https://florinungur.com";
 
-// Lists every href and src on the site's own pages that GitHub Pages wouldn't serve, one line per
-// problem. Pages serves a path as the file itself, then with .html, then as a directory's index.html.
+// Lists every href and src on the site's own pages that GitHub Pages wouldn't serve, or whose #fragment
+// names no id on the page it reaches, one line per problem. Pages serves a path as the file itself, then
+// with .html, then as a directory's index.html.
 export function brokenLinks(pages, isFile) {
   const docs = new Map([...pages].map(([file, html]) => [file, cheerio.load(html)]));
   const problems = [];
