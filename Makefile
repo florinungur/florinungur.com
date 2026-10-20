@@ -11,7 +11,7 @@ help:
 	@echo "clean           – remove _site/ and node_modules/"
 
 serve: build
-	python3 -m http.server 8080 --bind 127.0.0.1 --directory _site
+	bun scripts/serve.mjs
 
 build:
 	scripts/build.sh
