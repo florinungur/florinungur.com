@@ -42,7 +42,7 @@ Run `make hooks` once after cloning to enable pre-commit image optimisation. The
 | ------------------ | ------------ | --------------------------------------------------------------------------------------- |
 | deploy-website.yml | push to main | Runs `scripts/build.sh`, then deploys `_site/` to Pages in one job |
 
-The `paths-ignore` filter keeps a docs-only or config-only commit from redeploying. The build script ends with the deploy's gate: `xmllint` on the RSS and sitemap, and every minified CSS file compared against its source size. It does not lint – see below.
+The `paths-ignore` filter keeps a docs-only or config-only commit from redeploying. The build script ends with the deploy's gate: a check that Pages serves every internal link and asset, `xmllint` on the RSS and sitemap, and every minified CSS file compared against its source size. It does not lint – see below.
 
 ## Key CSS variables (defined in main.css)
 
