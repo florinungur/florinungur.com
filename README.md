@@ -22,7 +22,7 @@ The build repeats the pass on `_site/` to catch anything the hook missed.
 - `bunx html-validate` for HTML, config in `.htmlvalidate.json`
 - `resume.html` and `resume.css` are excluded – that file is optimised for print, not linting
 
-The `make validate` target runs the build, which ends with its own output checks (xmllint on RSS and sitemap, CSS size comparison), then the linters.
+The `make validate` target runs the build, then the linters.
 
 **Deployment:**
 
@@ -31,6 +31,6 @@ GitHub Actions (`.github/workflows/deploy-website.yml`) builds `_site/` and depl
 - Caches the Bun binary (keyed on version `1.3.10`) and the Bun package cache (keyed on `bun.lock` hash) – both restored in under 2 seconds on warm runs
 - Caches apt packages (`webp`, `libxml2-utils`) as `.deb` files in a runner-writable directory; warm runs skip `apt-get` entirely and use `dpkg -i` directly (~3s vs ~16s cold)
 - Runs `bun install --production` in CI – dev dependencies (stylelint, html-validate) are not installed on the runner
-- Runs `scripts/build.sh`, whose output checks (xmllint on RSS and sitemap, CSS minification against source sizes) gate the deploy
+- Runs `scripts/build.sh`, whose output checks (internal links, xmllint on RSS and sitemap, CSS minification against source sizes) gate the deploy
 
 **Prerequisites:** `brew install bun webp gitleaks`, `uv tool install pre-commit`, then `bun install` in the repo.

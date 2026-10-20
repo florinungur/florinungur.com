@@ -30,6 +30,7 @@ for f in "${files[@]}"; do
 done
 scripts/optimize-images.sh "${images[@]}"
 
+bun scripts/check-links.mjs _site
 xmllint --noout _site/rss.xml _site/sitemap.xml
 for src in css/*.css; do
   if (($(wc -c <"_site/$src") >= $(wc -c <"$src"))); then
