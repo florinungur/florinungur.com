@@ -11,9 +11,9 @@ if (!outPath || !srcDir) {
 }
 
 try {
-  // Use Bun's glob to find all .html files
+  // GitHub Pages serves 404.html at every missing path, so it has no URL of its own.
   const glob = new Bun.Glob("**/*.html");
-  const htmlFiles = [...glob.scanSync({ cwd: srcDir })].sort();
+  const htmlFiles = [...glob.scanSync({ cwd: srcDir })].filter((file) => file !== "404.html").sort();
 
   if (htmlFiles.length === 0) {
     console.error(
