@@ -44,6 +44,15 @@ repos:
         language: system
         files: \.(svg|webp)$
 
+      # The prettier version and options every repo of mine takes from
+      # portable-dotfiles' bin/prettier-markdown.
+      - id: prettier-markdown
+        name: prettier (markdown tables)
+        entry: bash -c '"${REPOS_DIR:-$HOME/Code}"/mine/portable-dotfiles/bin/prettier-markdown "$@"' prettier-markdown
+        language: system
+        types: [markdown]
+        require_serial: true
+
       - id: gitleaks
         name: gitleaks
         entry: gitleaks protect --staged --verbose
