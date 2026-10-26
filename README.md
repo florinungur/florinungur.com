@@ -12,7 +12,7 @@ The `make serve` target builds and serves `_site/` on `http://127.0.0.1:8080`.
 
 **Image optimisation:**
 
-Images are compressed before they ever land in a commit. A pre-commit hook runs `scripts/optimize-images.sh`: `cwebp` on WebP files and `svgo` on SVGs. Run `make hooks` once after cloning to wire it up.
+Images are compressed before they ever land in a commit. A pre-commit hook runs `scripts/optimize-images.sh`: `cwebp` on WebP files and `svgo` on SVGs.
 
 The build repeats the pass on `_site/` to catch anything the hook missed.
 
@@ -28,4 +28,4 @@ The `make validate` target runs the build, then the linters.
 
 GitHub Actions (`.github/workflows/deploy-website.yml`) runs `scripts/build.sh`, whose output checks gate the deploy, and deploys `_site/` to GitHub Pages on every push to `main`. It installs with `bun install --production`, so the linters never reach the runner.
 
-**Prerequisites:** `brew install bun webp uv`, `uv tool install pre-commit`, then `bun install` in the repo.
+**Prerequisites:** `brew install bun webp uv`, `uv tool install pre-commit`, then `bun install` and `make hooks` in the repo.

@@ -34,7 +34,7 @@ No JavaScript ever, no external fonts, no forms, no third-party anything. Don't 
 
 ## Image optimisation
 
-Run `make hooks` once after cloning to enable pre-commit image optimisation. The hook and the build both run `scripts/optimize-images.sh`: `cwebp` re-encodes each WebP losslessly and keeps the result only when it's smaller, and `svgo` rewrites each SVG. The build repeats the pass over `_site/`, so a hook that was never installed costs a slower build rather than a fat image on the live site.
+The pre-commit hook and the build both run `scripts/optimize-images.sh`: `cwebp` re-encodes each WebP losslessly and keeps the result only when it's smaller, and `svgo` rewrites each SVG. The build repeats the pass over `_site/`, so a hook that was never installed costs a slower build rather than a fat image on the live site.
 
 ## GitHub Actions
 
