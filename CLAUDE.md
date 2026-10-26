@@ -59,7 +59,6 @@ The archive-links script skips florinungur.com, web.archive.org, and the site's 
 
 Each essay carries at most ONE update note in the datetime div – the most recent substantive update. A new update replaces the old note; the full changelog lives in git history. Trivial fixes (dead links, typos) don't bump the note.
 
-<!-- prettier-ignore -->
 ```html
 <div class="datetime">
     <time datetime="YYYY-MM-DD">Mon D, YYYY</time> |
