@@ -14,7 +14,7 @@ The `scripts/build.sh` script builds `_site/` and checks it, and `make build` an
 2. Add a card to the top of `essays.html`, copying an existing one. Its URL, title, description, and date must match the essay page's canonical link, `og:title`, meta description, and first `.datetime` date. Every `<time>` reads like its `datetime` in the short form (`Oct 6, 2024`).
 3. Push. RSS and sitemap are generated at build time into `_site/` – nothing is committed back to `main`.
 
-The `generate-rss.mjs` script builds the feed from the essay pages themselves and checks every card against its essay. It exits 1 on a missing or malformed field, a card that disagrees with its essay, an essay without a card, or cards out of date order, so a mistake fails the deploy rather than shipping a broken feed.
+The `generate-rss.mjs` script builds the feed from the essay pages themselves and checks every card against its essay. It exits 1 on anything wrong with an essay page or its card, so a mistake fails the deploy rather than shipping a broken feed.
 
 ## CSS
 
