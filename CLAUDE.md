@@ -6,7 +6,7 @@ A static personal website (florinungur.com) hosted on GitHub Pages. Pure HTML an
 
 ## Local development
 
-The `scripts/build.sh` script builds `_site/` and checks it, and `make build` and CI both run it, so a local build is the deploy build. What ships is the allowlist at the top of that script; a new top-level directory has to be added there. The `make serve` target runs build then serves `_site/` on port 8080. The `make hooks` target installs pre-commit hooks. Prerequisites are listed at the end of `README.md`.
+`README.md` covers the build, which CI runs as well, the local server, the image pass, linting, the deploy, and the prerequisites. What ships is the allowlist at the top of `scripts/build.sh`, so a new top-level file or directory that isn't an HTML page has to be added there.
 
 ## Adding a new essay
 
@@ -14,11 +14,7 @@ The `scripts/build.sh` script builds `_site/` and checks it, and `make build` an
 2. Add a card to the top of `essays.html`, copying an existing one. Its URL, title, description, and date must match the essay page's canonical link, `og:title`, meta description, and first `.datetime` date. Every `<time>` reads like its `datetime` in the short form (`Oct 6, 2024`).
 3. Push. RSS and sitemap are generated at build time into `_site/` – nothing is committed back to `main`.
 
-The `generate-rss.mjs` script builds the feed from the essay pages themselves and checks every card against its essay. It exits 1 on anything wrong with an essay page or its card, so a mistake fails the deploy rather than shipping a broken feed.
-
-## CSS
-
-CSS files in `css/` are stored unminified (readable source). Minification happens at deploy time into `_site/` via postcss/cssnano. Edit CSS directly.
+The `generate-rss.mjs` script builds the feed from the essay pages themselves and checks every card against its essay. It exits 1 when an essay or its card breaks a rule in step 2, so a mistake fails the deploy rather than shipping a broken feed.
 
 ## Content Security Policy
 
@@ -32,24 +28,13 @@ style-src 'self'
 
 No JavaScript ever, no external fonts, no forms, no third-party anything. Don't add something that needs a new directive – add the feature a different way, or don't add it.
 
-## Image optimisation
+## CSS variables
 
-The pre-commit hook and the build both run `scripts/optimize-images.sh`: `cwebp` re-encodes each WebP losslessly and keeps the result only when it's smaller, and `svgo` rewrites each SVG. The build repeats the pass over `_site/`, so a hook that was never installed costs a slower build rather than a fat image on the live site.
-
-## GitHub Actions
-
-The one workflow, `.github/workflows/deploy-website.yml`, deploys on every push to `main`, and its `paths-ignore` filter keeps a docs-only or config-only commit from redeploying. The checks at the end of `scripts/build.sh` are the deploy's gate. The script does not lint – see below.
-
-## Key CSS variables (defined in main.css)
-
-- `--color-primary`: `#d1861f` (gold/amber – links, accents, logo mask)
-- `--color-primary-accessible`: `#966016` – the same hue darkened to clear contrast ratios. Use it wherever the colour carries meaning against white rather than decorating.
-- `--color-lightGrey` / `--color-grey`
-- `--grid-gutter`: spacing unit
+The colour and spacing variables sit at the top of `css/main.css`. Use `--color-primary-accessible`, the primary hue darkened to clear contrast ratios, wherever the colour carries meaning against white rather than decorating.
 
 ## Essay link conventions
 
-Links in an essay's body open in a new tab: `target="_blank"`, plus `rel="noopener"` when the destination is external. Internal florinungur.com links get `target="_blank"` too and skip `rel="noopener"`. The header nav (`/`, `/essays`, `/rss.xml`) and the skip-link are the exception – they navigate in place.
+Links in an essay's body, its `<main>`, open in a new tab: `target="_blank"`, plus `rel="noopener"` when the link leaves florinungur.com. A link outside `<main>`, such as the header nav, the footer, or the skip-link, navigates in place.
 
 The `main.css` file announces the convention to screen readers with `a[target="_blank"]::after { content: "" / " (opens in a new tab)" }` – empty visual content, alt text only. That means the attribute alone carries the accessibility hint; don't add a visible marker or a per-link label.
 
@@ -65,8 +50,6 @@ Each essay carries at most ONE update note in the datetime div – the most rece
     <i>Last updated <time datetime="YYYY-MM-DD">Mon D, YYYY</time>: terse description</i>
 </div>
 ```
-
-Never chain multiple update notes.
 
 ## Archive links
 
@@ -92,11 +75,8 @@ Its tests run with `bun test scripts/`, and a pre-commit hook runs them on any c
 
 ## Linting
 
-The `make lint` target runs Stylelint on CSS and html-validate on HTML. The `make validate` target does a full build + lint + output check.
+Linting and tests run locally only, so the pre-commit hooks `make hooks` installs are what gate a bad file, and skipping them means nothing checks CSS or HTML before it deploys. `ADR.md` says why; don't propose a CI step for either.
 
-Linting and tests are local only, by design. I'm the site's only maintainer and I run the checks before every push. I want CI fast and lean, so it spends no compute on checks that already ran. CI installs with `bun install --production`, so stylelint and html-validate aren't on the runner at all – the pre-commit hooks are what actually gate a bad file, and skipping `make hooks` means nothing checks CSS or HTML before it deploys. Don't propose a CI step for either.
-
-- `resume.html` and `resume.css` are excluded from linting (resume is optimised for printability, don't modify it)
 - `resume.html` has a `<time>` element at the top of the page – update it to the current date whenever resume content changes
-- Stylelint config: `.stylelintrc.json` – fix CSS issues instead of disabling rules; only disable rules that are genuinely not applicable
-- HTML validate config: `.htmlvalidate.json` – void elements use self-closing style (`<meta/>` not `<meta>`)
+- Fix a Stylelint or html-validate finding rather than disable its rule, unless the rule doesn't apply
+- Void elements take the self-closing form, `<meta/>` not `<meta>`

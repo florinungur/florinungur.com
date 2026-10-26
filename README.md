@@ -26,6 +26,6 @@ The `make validate` target runs the build, then the linters.
 
 **Deployment:**
 
-GitHub Actions (`.github/workflows/deploy-website.yml`) runs `scripts/build.sh`, whose output checks gate the deploy, and deploys `_site/` to GitHub Pages on every push to `main`. It installs with `bun install --production`, so the linters never reach the runner.
+GitHub Actions (`.github/workflows/deploy-website.yml`) runs `scripts/build.sh`, whose output checks gate the deploy, and deploys `_site/` to GitHub Pages on a push to `main`, unless the push touches only files its `paths-ignore` lists. It installs with `bun install --production`, so the linters never reach the runner.
 
 **Prerequisites:** `brew install bun webp uv`, `uv tool install pre-commit`, then `bun install` and `make hooks` in the repo.
