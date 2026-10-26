@@ -4,6 +4,7 @@ on:
     branches:
       - main
     paths-ignore:
+      - "ADR.md"
       - "CLAUDE.md"
       - "README.md"
       - "LICENSE"
