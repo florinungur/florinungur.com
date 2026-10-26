@@ -38,11 +38,7 @@ Run `make hooks` once after cloning to enable pre-commit image optimisation. The
 
 ## GitHub Actions
 
-| Workflow           | Trigger      | What it does                                                       |
-| ------------------ | ------------ | ------------------------------------------------------------------ |
-| deploy-website.yml | push to main | Runs `scripts/build.sh`, then deploys `_site/` to Pages in one job |
-
-The `paths-ignore` filter keeps a docs-only or config-only commit from redeploying. The checks at the end of `scripts/build.sh` are the deploy's gate. The script does not lint – see below.
+The one workflow, `.github/workflows/deploy-website.yml`, deploys on every push to `main`, and its `paths-ignore` filter keeps a docs-only or config-only commit from redeploying. The checks at the end of `scripts/build.sh` are the deploy's gate. The script does not lint – see below.
 
 ## Key CSS variables (defined in main.css)
 
