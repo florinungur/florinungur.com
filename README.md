@@ -26,11 +26,6 @@ The `make validate` target runs the build, then the linters.
 
 **Deployment:**
 
-GitHub Actions (`.github/workflows/deploy-website.yml`) builds `_site/` and deploys to GitHub Pages on every push to `main`. The workflow:
-
-- Caches the Bun binary (keyed on version `1.3.10`) and the Bun package cache (keyed on `bun.lock` hash) – both restored in under 2 seconds on warm runs
-- Caches apt packages (`webp`, `libxml2-utils`) as `.deb` files in a runner-writable directory; warm runs skip `apt-get` entirely and use `dpkg -i` directly (~3s vs ~16s cold)
-- Runs `bun install --production` in CI – dev dependencies (stylelint, html-validate) are not installed on the runner
-- Runs `scripts/build.sh`, whose output checks (internal links, xmllint on RSS and sitemap, CSS minification against source sizes) gate the deploy
+GitHub Actions (`.github/workflows/deploy-website.yml`) runs `scripts/build.sh`, whose output checks gate the deploy, and deploys `_site/` to GitHub Pages on every push to `main`. It installs with `bun install --production`, so the linters never reach the runner.
 
 **Prerequisites:** `brew install bun webp uv`, `uv tool install pre-commit`, then `bun install` in the repo.
