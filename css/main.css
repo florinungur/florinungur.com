@@ -37,10 +37,7 @@ body {
 
 h1,
 h2,
-h3,
-h4,
-h5,
-h6 {
+h3 {
   font-weight: 500;
   margin: 0.2em 0;
 }
@@ -57,18 +54,6 @@ h3 {
   font-size: 1.5em;
 }
 
-h4 {
-  font-size: 1.25em;
-}
-
-h5 {
-  font-size: 1em;
-}
-
-h6 {
-  font-size: 0.85em;
-}
-
 p {
   margin-top: 0;
 }
@@ -78,8 +63,7 @@ blockquote {
   padding: 1rem 2rem;
 }
 
-code,
-kbd {
+code {
   overflow-wrap: break-word;
   font-size: 90%;
 }
@@ -103,40 +87,10 @@ pre code::before {
   user-select: none;
 }
 
-dl dt {
-  font-weight: 700;
-}
-
 footer {
   border-top: 1px solid var(--color-primary);
   margin: 1em 0;
   padding-top: 1em;
-}
-
-table {
-  border: none;
-  border-collapse: collapse;
-  border-spacing: 0;
-  text-align: left;
-  width: 100%;
-}
-
-table.striped tr:nth-of-type(2n) {
-  background-color: var(--color-lightGrey);
-}
-
-td,
-th {
-  padding: 1.2rem 0.4rem;
-  vertical-align: middle;
-}
-
-thead {
-  border-bottom: 2px solid var(--color-lightGrey);
-}
-
-tfoot {
-  border-top: 2px solid var(--color-lightGrey);
 }
 
 img {
@@ -158,16 +112,8 @@ img {
   text-align: center;
 }
 
-.text-left {
-  text-align: left;
-}
-
 .text-right {
   text-align: right;
-}
-
-.text-justify {
-  text-align: justify;
 }
 
 .is-center {
