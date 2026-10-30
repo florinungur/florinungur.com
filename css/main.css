@@ -1,7 +1,7 @@
 :root {
   --color-primary: #d1861f;
   --color-primary-accessible: #966016;
-  --color-lightGrey: #ddd;
+  --color-light-grey: #ddd;
   --color-grey: #747681;
   --grid-gutter: 2rem;
 }
@@ -59,7 +59,7 @@ p {
 }
 
 blockquote {
-  border-left: 3px solid var(--color-lightGrey);
+  border-left: 3px solid var(--color-light-grey);
   padding: 1rem 2rem;
 }
 
@@ -69,7 +69,7 @@ code {
 }
 
 pre {
-  border: 1px solid var(--color-lightGrey);
+  border: 1px solid var(--color-light-grey);
   counter-reset: line;
   line-height: 1.6;
   padding: 0.6em;
