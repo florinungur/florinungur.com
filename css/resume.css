@@ -189,7 +189,7 @@ body {
     margin-top: 0;
   }
   body {
-    color-adjust: exact !important;
+    print-color-adjust: exact !important;
     color: #000 !important;
     -webkit-print-color-adjust: exact !important;
   }
