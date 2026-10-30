@@ -75,10 +75,12 @@ pre {
   white-space: pre-wrap;
 }
 
+/* Empty alternative text keeps screen readers from reading the line numbers;
+   browsers that can't parse it drop the declaration and show none. */
 pre code::before {
   border-right: 1px solid var(--color-light-grey);
   color: #888;
-  content: counter(line, decimal-leading-zero);
+  content: counter(line, decimal-leading-zero) / "";
   counter-increment: line;
   display: inline-block;
   margin-right: 0.5em;
