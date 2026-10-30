@@ -57,18 +57,9 @@ jobs:
         uses: actions/cache@v6
         with:
           path: /tmp/apt-pkgs
-          key: apt-${{ runner.os }}-webp-libxml2-utils
+          key: apt-${{ runner.os }}-${{ hashFiles('scripts/install-system-deps.sh') }}
       - name: Install system dependencies
-        run: |
-          if [ "${{ steps.apt-cache.outputs.cache-hit }}" = "true" ]; then
-            sudo dpkg -i /tmp/apt-pkgs/*.deb
-          else
-            sudo apt-get update -qq
-            sudo apt-get install -y --no-install-recommends --download-only webp libxml2-utils
-            mkdir -p /tmp/apt-pkgs
-            cp /var/cache/apt/archives/*.deb /tmp/apt-pkgs/
-            sudo apt-get install -y --no-install-recommends webp libxml2-utils
-          fi
+        run: scripts/install-system-deps.sh "${{ steps.apt-cache.outputs.cache-hit }}"
       - name: Build site
         run: scripts/build.sh
       - name: Upload artifact
