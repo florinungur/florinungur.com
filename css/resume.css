@@ -67,6 +67,10 @@ a {
   color: inherit;
   text-decoration: underline;
 }
+/* Repeats main.css's screen-reader-only new-tab hint, since resume.html loads only this stylesheet. */
+a[target="_blank"]::after {
+  content: "" / " (opens in a new tab)";
+}
 body {
   -webkit-font-smoothing: subpixel-antialiased;
 }
