@@ -75,9 +75,9 @@ Its tests run with `bun test scripts/`, and a pre-commit hook runs them on any c
 
 ## Linting
 
-Linting and tests run locally only, so the pre-commit hooks `make hooks` installs are what gate a bad file, and skipping them means nothing checks CSS or HTML before it deploys. `ADR.md` says why; don't propose a CI step for either.
+Linting and tests run locally only, so the pre-commit hooks `make hooks` installs are what gate a bad file, and skipping them means nothing checks CSS or HTML before it deploys. Don't propose a CI step for either.
 
 - `resume.html` has a `<time>` element at the top of the page – update it to the current date whenever resume content changes
 - Fix a Stylelint or html-validate finding rather than disable its rule, unless the rule doesn't apply
-- Don't add browser-specific CSS: vendor prefixes, autoprefixer, or fallback declarations for browsers that lack a feature; `ADR.md` says why
+- Don't add browser-specific CSS: vendor prefixes, autoprefixer, or fallback declarations for browsers that lack a feature
 - Void elements take the self-closing form, `<meta/>` not `<meta>`
