@@ -22,8 +22,7 @@ Every HTML page embeds the same CSP in `<head>`. The `default-src 'none'` direct
 
 ```
 base-uri 'none'; default-src 'none'; font-src 'self'; form-action 'none';
-img-src 'self'; manifest-src 'self'; object-src 'none'; script-src 'none';
-style-src 'self'
+img-src 'self'; object-src 'none'; script-src 'none'; style-src 'self'
 ```
 
 No JavaScript ever, no external fonts, no forms, no third-party anything. Don't add something that needs a new directive – add the feature a different way, or don't add it.
